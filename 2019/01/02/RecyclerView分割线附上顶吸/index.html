@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="android,recyclerview,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="参考:RecyclerView 自定义ItemDecoration从入门到实现吸顶效果Solartisan/WaveSideBar 简单分割线实现分割线要继承RecyclerView.ItemDecoration，重写三个方法1234567891011121314151617public class MyItemDecoration extends RecyclerView.ItemDecorat">
+<meta name="keywords" content="android,recyclerview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RecyclerView分割线附上顶吸">
+<meta property="og:url" content="https://xwmm.github.io/2019/01/02/RecyclerView分割线附上顶吸/index.html">
+<meta property="og:site_name" content="菜鸟小码农">
+<meta property="og:description" content="参考:RecyclerView 自定义ItemDecoration从入门到实现吸顶效果Solartisan/WaveSideBar 简单分割线实现分割线要继承RecyclerView.ItemDecoration，重写三个方法1234567891011121314151617public class MyItemDecoration extends RecyclerView.ItemDecorat">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://xwmm.github.io/upload/S90102-20335121.jpg">
+<meta property="og:image" content="https://xwmm.github.io/upload/S90102-21344726.jpg">
+<meta property="og:updated_time" content="2019-06-22T23:02:49.477Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RecyclerView分割线附上顶吸">
+<meta name="twitter:description" content="参考:RecyclerView 自定义ItemDecoration从入门到实现吸顶效果Solartisan/WaveSideBar 简单分割线实现分割线要继承RecyclerView.ItemDecoration，重写三个方法1234567891011121314151617public class MyItemDecoration extends RecyclerView.ItemDecorat">
+<meta name="twitter:image" content="https://xwmm.github.io/upload/S90102-20335121.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键词搜索","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"共找到 ${hits} 篇文章,花了 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xwmm.github.io/2019/01/02/RecyclerView分割线附上顶吸/">
+
+
+
+
+
+  <title>RecyclerView分割线附上顶吸 | 菜鸟小码农</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3ef70ce895a5b3a5f9eae294ced01ec5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">菜鸟小码农</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快写一行代码雅俗共赏</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xwmm.github.io/2019/01/02/RecyclerView分割线附上顶吸/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xwmm">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="菜鸟小码农">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RecyclerView分割线附上顶吸</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-02T17:17:35+08:00">
+                2019-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/01/02/RecyclerView分割线附上顶吸/" class="leancloud_visitors" data-flag-title="RecyclerView分割线附上顶吸">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考:<a href="https://www.jianshu.com/p/ce78da3e0ff6" target="_blank" rel="noopener">RecyclerView 自定义ItemDecoration从入门到实现吸顶效果</a><br><a href="https://github.com/Solartisan/WaveSideBar" target="_blank" rel="noopener">Solartisan/WaveSideBar</a></p>
+<h2 id="简单分割线"><a href="#简单分割线" class="headerlink" title="简单分割线"></a>简单分割线</h2><p>实现分割线要继承RecyclerView.ItemDecoration，重写三个方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyItemDecoration</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ItemDecoration</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyItemDecoration</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas c, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDraw(c, parent, state);<span class="keyword">int</span> count=parent.getChildCount();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawOver</span><span class="params">(Canvas c, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDrawOver(c, parent, state);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getItemOffsets</span><span class="params">(Rect outRect, View view, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.getItemOffsets(outRect, view, parent, state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>onDraw方法和自定义View中的onDraw方法一样，是用来在屏幕上画东西的</li>
+<li>onDrawOver 英文Over的意思在…的上面 ,可以理解成是图层关系,item的内容和分割线是第一层(要在第一层画东西要调用onDraw),而onDrawOver是第二层,位于onDraw的上面</li>
+<li>getItemOffsets 看名字可以知道是设置item的偏移值,其实效果和padding一样</li>
+<li><font color="red">注意：</font>三个方法中都有一个RecyclerView类型的parent，这个不是整个RecyclerView，而是当前屏幕显示的那几个RecyclerView，所以当滚动屏幕的时候会重新调用此类来绘制分割线。同理调用parent.getChildCount()获取到的时当前屏幕上显示的item个数</li>
+</ul>
+<h3 id="一条简单的红色分割线"><a href="#一条简单的红色分割线" class="headerlink" title="一条简单的红色分割线"></a>一条简单的红色分割线</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyItemDecoration</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ItemDecoration</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> width;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> height;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> item_height;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> item_padding;</span><br><span class="line">    <span class="keyword">private</span> Paint paint;</span><br><span class="line">    <span class="keyword">private</span> Context context;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyItemDecoration</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.context = context;</span><br><span class="line">        width=context.getResources().getDisplayMetrics().widthPixels;</span><br><span class="line">        height=context.getResources().getDisplayMetrics().heightPixels;</span><br><span class="line">        paint=<span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);</span><br><span class="line">        paint.setColor(Color.RED);</span><br><span class="line">        item_height=DensityUtil.dip2px(context, <span class="number">1</span>);</span><br><span class="line">        item_padding=DensityUtil.dip2px(context, <span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas c, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDraw(c, parent, state);<span class="keyword">int</span> count=parent.getChildCount();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">            View view=parent.getChildAt(i);</span><br><span class="line">            <span class="keyword">int</span> top=view.getBottom();</span><br><span class="line">            <span class="keyword">int</span> bottom=top+item_height;</span><br><span class="line">            c.drawRect(<span class="number">0</span>,top,width,bottom,paint);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawOver</span><span class="params">(Canvas c, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDrawOver(c, parent, state);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getItemOffsets</span><span class="params">(Rect outRect, View view, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.getItemOffsets(outRect, view, parent, state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>以上是实现item底部的分割线</li>
+<li>主要是调用onDraw方法画分割线，c.drawRect是画矩形，参数分别是左上右下和画笔对象</li>
+<li>设置分割线左右边距就改成c.drawRect(0+padding,top,width-padding,bottom,paint);</li>
+<li><p>因为onDraw和item内容处于一个图层，所以把分割线画的比较粗的话会和item内容重合，此时第三个方法就派上用场了，设置一个偏移值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getItemOffsets</span><span class="params">(Rect outRect, View view, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.getItemOffsets(outRect, view, parent, state);</span><br><span class="line">    outRect.bottom=item_height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>该偏移值的意思是让列表中每一个item的底部向下空出一个item_height的宽度用来绘制分割线</p>
+</li>
+</ul>
+<h2 id="实现顶吸"><a href="#实现顶吸" class="headerlink" title="实现顶吸"></a>实现顶吸</h2><h3 id="顶部绘制一个固定的区域"><a href="#顶部绘制一个固定的区域" class="headerlink" title="顶部绘制一个固定的区域"></a>顶部绘制一个固定的区域</h3><p><img src="/upload/S90102-20335121.jpg" alt="顶部固定"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyItemDecoration</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ItemDecoration</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> width;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> item_height;</span><br><span class="line">    <span class="keyword">private</span> Paint paint;</span><br><span class="line">    <span class="keyword">private</span> Paint paint2;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyItemDecoration</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        width=context.getResources().getDisplayMetrics().widthPixels;</span><br><span class="line">        paint=<span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);</span><br><span class="line">        paint.setColor(Color.GRAY);</span><br><span class="line">        item_height=DensityUtil.dip2px(context, <span class="number">20</span>);</span><br><span class="line">        paint2=<span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);</span><br><span class="line">        paint2.setColor(Color.parseColor(<span class="string">"#52ff0000"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas c, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDraw(c, parent, state);<span class="keyword">int</span> count=parent.getChildCount();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">            View view=parent.getChildAt(i);</span><br><span class="line">            <span class="keyword">int</span> bottom=view.getTop();</span><br><span class="line">            <span class="keyword">int</span> top=bottom-item_height;</span><br><span class="line">            c.drawRect(<span class="number">0</span>,top,width,bottom,paint);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawOver</span><span class="params">(Canvas c, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDrawOver(c, parent, state);</span><br><span class="line">        c.drawRect(<span class="number">0</span>,<span class="number">0</span>,width,item_height,paint2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getItemOffsets</span><span class="params">(Rect outRect, View view, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.getItemOffsets(outRect, view, parent, state);</span><br><span class="line">        outRect.top=item_height;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>先把分隔条写到每一个item的上面，修改了onDraw和getItemOffsets</li>
+<li><p>实现每一个间隔把顶部固定区域顶上去</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawOver</span><span class="params">(Canvas c, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onDrawOver(c, parent, state);</span><br><span class="line">    <span class="comment">//获取屏幕上的第一个item</span></span><br><span class="line">    View child0 = parent.getChildAt(<span class="number">0</span>);</span><br><span class="line">    <span class="comment">//如果第一个item的Bottom&lt;=分割线的高度</span></span><br><span class="line">    <span class="keyword">if</span> (child0.getBottom() &lt;= item_height) &#123;</span><br><span class="line">        <span class="comment">//随着RecyclerView滑动 分割线的top=固定为0不动,bottom则赋值为child0的bottom值.</span></span><br><span class="line">        c.drawRect(<span class="number">0</span>, <span class="number">0</span>, width,child0.getBottom() , paint2);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//固定不动</span></span><br><span class="line">        c.drawRect(<span class="number">0</span>, <span class="number">0</span>, width, item_height, paint2);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现方法是获取屏幕第一个recyclerview的item，看他底部的距离，如果小于一个分割线的高度，那就把分割线高度弄成第一个item到底部的距离</p>
+</li>
+</ul>
+<h2 id="一个简单完整的吸顶，用Canvas绘制"><a href="#一个简单完整的吸顶，用Canvas绘制" class="headerlink" title="一个简单完整的吸顶，用Canvas绘制"></a>一个简单完整的吸顶，用Canvas绘制</h2><p>参考:<a href="https://www.jianshu.com/p/ce78da3e0ff6" target="_blank" rel="noopener">RecyclerView 自定义ItemDecoration从入门到实现吸顶效果</a><br>效果:<br><img src="/upload/S90102-21344726.jpg" alt="一个完整顶吸"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyItemDecoration</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ItemDecoration</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Paint.FontMetrics fontMetrics;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> wight;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> itemDecorationHeight;</span><br><span class="line">    <span class="keyword">private</span> Paint paint;</span><br><span class="line">    <span class="keyword">private</span> ObtainTextCallback callback;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> itemDecorationPadding;</span><br><span class="line">    <span class="keyword">private</span> TextPaint textPaint;</span><br><span class="line">    <span class="keyword">private</span> Rect text_rect=<span class="keyword">new</span> Rect();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyItemDecoration</span><span class="params">(Context context, ObtainTextCallback callback)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//获取item宽度</span></span><br><span class="line">        wight=context.getResources().getDisplayMetrics().widthPixels;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//绘制间隔背景为红色</span></span><br><span class="line">        paint=<span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);</span><br><span class="line">        paint.setColor(Color.RED);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//间隔高度</span></span><br><span class="line">        itemDecorationHeight=DensityUtil.dip2px(context, <span class="number">30</span>);</span><br><span class="line">        <span class="comment">//间隔左右padding</span></span><br><span class="line">        itemDecorationPadding=DensityUtil.dip2px(context, <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">this</span>.callback = callback;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//绘制间隔上的文字</span></span><br><span class="line">        textPaint = <span class="keyword">new</span> TextPaint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);</span><br><span class="line">        textPaint.setColor(Color.WHITE);</span><br><span class="line">        textPaint.setTextAlign(Paint.Align.LEFT);</span><br><span class="line">        textPaint.setTextSize(DensityUtil.dip2px(context, <span class="number">25</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//绘制文字相关的参数</span></span><br><span class="line">        fontMetrics = <span class="keyword">new</span> Paint.FontMetrics();</span><br><span class="line">        textPaint.getFontMetrics(fontMetrics);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas c, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDraw(c, parent, state);</span><br><span class="line">        <span class="keyword">int</span> count=parent.getChildCount();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">            View view=parent.getChildAt(i);</span><br><span class="line">            <span class="keyword">int</span> top=view.getTop()-itemDecorationHeight;</span><br><span class="line">            <span class="keyword">int</span> bottom=top+itemDecorationHeight;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//获取该item在总列表里是第几个</span></span><br><span class="line">            <span class="keyword">int</span> position = parent.getChildAdapterPosition(view);</span><br><span class="line">            <span class="comment">//通过callback获取到这个item的第一个字</span></span><br><span class="line">            String content = callback.getText(position);</span><br><span class="line"></span><br><span class="line">            textPaint.getTextBounds(content,<span class="number">0</span>, content.length(),text_rect);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//如果需要画分割线</span></span><br><span class="line">            <span class="keyword">if</span>(isFirstInGroup(position)) &#123;</span><br><span class="line">                c.drawRect(<span class="number">0</span>,top,wight,bottom,paint);</span><br><span class="line">                c.drawText(content, itemDecorationPadding, bottom-fontMetrics.descent, textPaint);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawOver</span><span class="params">(Canvas c, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDrawOver(c, parent, state);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取到屏幕上第一个item</span></span><br><span class="line">        View child0=parent.getChildAt(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//获取到屏幕上第一个item是总列表中第几个</span></span><br><span class="line">        <span class="keyword">int</span> position = parent.getChildAdapterPosition(child0);</span><br><span class="line">        <span class="comment">//获取到这个item的第一个字</span></span><br><span class="line">        String content = callback.getText(position);</span><br><span class="line">        <span class="comment">//如果已经重合了并且第一个item前需要画分割线，那么就按照第一个item的底部高度来画分割线</span></span><br><span class="line">        <span class="keyword">if</span>(child0.getBottom()&lt;=itemDecorationHeight&amp;&amp;isFirstInGroup(position+<span class="number">1</span>))&#123;</span><br><span class="line">            c.drawRect(<span class="number">0</span>, <span class="number">0</span>, wight, child0.getBottom(), paint);</span><br><span class="line">            c.drawText(content, itemDecorationPadding, child0.getBottom()-fontMetrics.descent, textPaint);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//否则就按照一个完整的分割线来画，这里通过textPaint来写不同的字</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            c.drawRect(<span class="number">0</span>, <span class="number">0</span>, wight, itemDecorationHeight, paint);</span><br><span class="line">            c.drawText(content, itemDecorationPadding, itemDecorationHeight-fontMetrics.descent, textPaint);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getItemOffsets</span><span class="params">(Rect outRect, View view, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.getItemOffsets(outRect, view, parent, state);</span><br><span class="line">        <span class="keyword">int</span> position= parent.getChildAdapterPosition(view);</span><br><span class="line">        <span class="comment">//如果不是在同一组就腾出分割线需要的高度</span></span><br><span class="line">        <span class="keyword">if</span>(isFirstInGroup(position))&#123;</span><br><span class="line">            outRect.top=itemDecorationHeight;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//回调接口,通过该回调获取item的内容的第一个文字</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ObtainTextCallback</span> </span>&#123;</span><br><span class="line">        <span class="function">String <span class="title">getText</span><span class="params">(<span class="keyword">int</span> position)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断当前item和下一个item的第一个文字是否相同,如果相同说明是同一组,不需要画分割线</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isFirstInGroup</span><span class="params">(<span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//如果是adapter的第一个position直接return,因为第一个item必须有分割线</span></span><br><span class="line">        <span class="keyword">if</span> (pos == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//否者判断前一个item的字符串 与 当前item字符串 是否相同</span></span><br><span class="line">            String prevGroupId = callback.getText(pos - <span class="number">1</span>);</span><br><span class="line">            String groupId = callback.getText(pos);</span><br><span class="line">            <span class="comment">//如果前一个item和这个item的第一个字相同那就不用画分割线</span></span><br><span class="line">            <span class="keyword">if</span> (prevGroupId.equals(groupId)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Activity<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">recyclerView = (RecyclerView)findViewById(R.id.recycler_view);</span><br><span class="line">LinearLayoutManager layoutManager = <span class="keyword">new</span> LinearLayoutManager(<span class="keyword">this</span>);</span><br><span class="line">recyclerView.setLayoutManager(layoutManager);</span><br><span class="line"><span class="keyword">final</span> List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">initList(list);</span><br><span class="line">Adapter adapter = <span class="keyword">new</span> Adapter(list);</span><br><span class="line">recyclerView.setAdapter(adapter);</span><br><span class="line"><span class="comment">//通过每一个item内容的第一个字进行分类</span></span><br><span class="line">recyclerView.addItemDecoration(<span class="keyword">new</span> MyItemDecoration(<span class="keyword">this</span>, <span class="keyword">new</span> MyItemDecoration.ObtainTextCallback() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getText</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.get(position).substring(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure></p>
+<h2 id="附上一个更完整的吸顶，用布局绘制"><a href="#附上一个更完整的吸顶，用布局绘制" class="headerlink" title="附上一个更完整的吸顶，用布局绘制"></a>附上一个更完整的吸顶，用布局绘制</h2><p>参考：<a href="https://github.com/Solartisan/WaveSideBar" target="_blank" rel="noopener">Solartisan/WaveSideBar</a><a href="https://github.com/Solartisan/TurboRecyclerViewHelper" target="_blank" rel="noopener">https://github.com/Solartisan/TurboRecyclerViewHelper</a>)</p>
+<ol>
+<li>首先是bean<br>Fruit.java<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fruit</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> type;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Fruit</span><span class="params">(String name, <span class="keyword">int</span> type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.type = type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setType</span><span class="params">(<span class="keyword">int</span> type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.type = type;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这个bean包含了item和分割线的内容，用type区分</p>
+<ol start="2">
+<li>适配器<br>FruitAdapter.java<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FruitAdapter</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">Adapter</span>&lt;<span class="title">FruitAdapter</span>.<span class="title">BaseHolder</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Fruit&gt; mFruitList;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"FruitAdapter"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//重写区分不同的元素，不同的type</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemViewType</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mFruitList.get(position).getType();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//不同的type创建不同的布局 </span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseHolder <span class="title">onCreateViewHolder</span><span class="params">(@NonNull ViewGroup viewGroup, <span class="keyword">int</span> type)</span> </span>&#123;</span><br><span class="line">        View view;</span><br><span class="line">        <span class="keyword">final</span> BaseHolder holder;</span><br><span class="line">        <span class="keyword">if</span> (type== <span class="number">1</span>) &#123;</span><br><span class="line">            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fruit_item, viewGroup, <span class="keyword">false</span>);</span><br><span class="line">            holder = <span class="keyword">new</span> ItemHolder(view);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.head_item, viewGroup, <span class="keyword">false</span>);</span><br><span class="line">            holder = <span class="keyword">new</span> HeadHolder(view);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> holder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//填充不同的数据</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(@NonNull BaseHolder viewHolder, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        Fruit fruit = mFruitList.get(i);</span><br><span class="line">        viewHolder.setData(fruit);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mFruitList.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//不同布局的Viewholder，先创建一个baseHolder，然后item和顶吸的分别继承</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseHolder</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Fruit fruit)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">BaseHolder</span><span class="params">(@NonNull View itemView)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(itemView);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItemHolder</span> <span class="keyword">extends</span> <span class="title">BaseHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> TextView textView;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Fruit fruit)</span> </span>&#123;</span><br><span class="line">            textView.setText(fruit.getName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ItemHolder</span><span class="params">(@NonNull View itemView)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(itemView);</span><br><span class="line">            textView = (TextView) itemView.findViewById(R.id.fruit_name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeadHolder</span> <span class="keyword">extends</span> <span class="title">BaseHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> TextView textView;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Fruit fruit)</span> </span>&#123;</span><br><span class="line">            textView.setText(fruit.getName().substring(<span class="number">0</span>,<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">HeadHolder</span><span class="params">(@NonNull View itemView)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(itemView);</span><br><span class="line">            textView = (TextView) itemView.findViewById(R.id.head_name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FruitAdapter</span><span class="params">(List&lt;Fruit&gt; fruitList)</span> </span>&#123;</span><br><span class="line">        mFruitList = fruitList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>这个adapter中提供了两个viewholder，一个是普通item，另一个是分割线</li>
+<li>重写getItemViewType方法定义区分两种holder的方法，上面的区分方法是通过bean的type区分</li>
+<li>onCreateViewHolder通过上面的方法判定不同的viewtype构造不同的holder</li>
+<li>onBindViewHolder填充数据</li>
+</ul>
+<ol start="3">
+<li><p>分割线<br>PinnedHeaderDecoration.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PinnedHeaderDecoration</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ItemDecoration</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mHeaderPosition;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mPinnedHeaderTop;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"PinnedHeaderDecoration"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> mIsAdapterDataChanged;</span><br><span class="line">    <span class="keyword">private</span> Rect mClipBounds;</span><br><span class="line">    <span class="comment">//是在顶部固定的那个框框</span></span><br><span class="line">    <span class="keyword">private</span> View mPinnedHeaderView;</span><br><span class="line">    <span class="comment">//父布局的整个adapter</span></span><br><span class="line">    <span class="keyword">private</span> RecyclerView.Adapter mAdapter;</span><br><span class="line">    <span class="comment">//一个安卓特有的稀疏数组，取代hashmap，key-value保存值，只需要指定value的类型即可</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> SparseArray&lt;PinnedHeaderCreator&gt; mTypePinnedHeaderFactories = <span class="keyword">new</span> SparseArray&lt;&gt;();</span><br><span class="line">    <span class="comment">//recyclerview适配器的监听</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RecyclerView.AdapterDataObserver mAdapterDataObserver = <span class="keyword">new</span> RecyclerView.AdapterDataObserver() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            mIsAdapterDataChanged = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">//初始化</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PinnedHeaderDecoration</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mHeaderPosition = -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas c, <span class="keyword">final</span> RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        createPinnedHeader(parent);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//mPinnedHeaderView是顶部固定的框框</span></span><br><span class="line">        <span class="keyword">if</span> (mPinnedHeaderView != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> headerEndAt = mPinnedHeaderView.getTop() + mPinnedHeaderView.getHeight();</span><br><span class="line">            <span class="comment">//获取列表可见部分的第一个view</span></span><br><span class="line">            View v = parent.findChildViewUnder(c.getWidth() / <span class="number">2</span>, headerEndAt + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//判断这个v是不是分隔，如果是分割那么顶部的框框的顶要向上移动，否则就在0处，即最顶端</span></span><br><span class="line">            <span class="keyword">if</span> (isPinnedView(parent, v)) &#123;</span><br><span class="line">                mPinnedHeaderTop = v.getTop() - mPinnedHeaderView.getHeight();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                mPinnedHeaderTop = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//开始画分隔线，分隔线的头部就是顶部框框的底部</span></span><br><span class="line">            mClipBounds = c.getClipBounds();</span><br><span class="line">            mClipBounds.top = mPinnedHeaderTop + mPinnedHeaderView.getHeight();</span><br><span class="line">            c.clipRect(mClipBounds);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawOver</span><span class="params">(Canvas c, RecyclerView parent, RecyclerView.State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mPinnedHeaderView != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//先保存c的状态</span></span><br><span class="line">            c.save();</span><br><span class="line"></span><br><span class="line">            mClipBounds.top = <span class="number">0</span>;</span><br><span class="line">            c.clipRect(mClipBounds, Region.Op.UNION);</span><br><span class="line">            <span class="comment">//平移到框框顶部</span></span><br><span class="line">            c.translate(<span class="number">0</span>, mPinnedHeaderTop);</span><br><span class="line">            <span class="comment">//绘制出顶部的框框</span></span><br><span class="line">            mPinnedHeaderView.draw(c);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//把c还原到save的状态</span></span><br><span class="line">            c.restore();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">createPinnedHeader</span><span class="params">(RecyclerView parent)</span> </span>&#123;</span><br><span class="line">        updatePinnedHeader(parent);</span><br><span class="line"></span><br><span class="line">        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();</span><br><span class="line">        <span class="keyword">if</span> (layoutManager == <span class="keyword">null</span> || layoutManager.getChildCount() &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取第一个元素在整个recyclerview中是第几个</span></span><br><span class="line">        <span class="keyword">int</span> firstVisiblePosition = ((RecyclerView.LayoutParams) layoutManager.getChildAt(<span class="number">0</span>).getLayoutParams()).getViewAdapterPosition();</span><br><span class="line">        <span class="keyword">int</span> headerPosition = findPinnedHeaderPosition(parent, firstVisiblePosition);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (headerPosition &gt;= <span class="number">0</span> &amp;&amp; mHeaderPosition != headerPosition) &#123;</span><br><span class="line">            mHeaderPosition = headerPosition;</span><br><span class="line">            <span class="keyword">int</span> viewType = mAdapter.getItemViewType(headerPosition);</span><br><span class="line"></span><br><span class="line">            RecyclerView.ViewHolder pinnedViewHolder = mAdapter.createViewHolder(parent, viewType);</span><br><span class="line">            mAdapter.bindViewHolder(pinnedViewHolder, headerPosition);</span><br><span class="line">            mPinnedHeaderView = pinnedViewHolder.itemView;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// read layout parameters</span></span><br><span class="line">            ViewGroup.LayoutParams layoutParams = mPinnedHeaderView.getLayoutParams();</span><br><span class="line">            <span class="keyword">if</span> (layoutParams == <span class="keyword">null</span>) &#123;</span><br><span class="line">                layoutParams = <span class="keyword">new</span> ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);</span><br><span class="line">                mPinnedHeaderView.setLayoutParams(layoutParams);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> heightMode = View.MeasureSpec.getMode(layoutParams.height);</span><br><span class="line">            <span class="keyword">int</span> heightSize = View.MeasureSpec.getSize(layoutParams.height);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (heightMode == View.MeasureSpec.UNSPECIFIED) &#123;</span><br><span class="line">                heightMode = View.MeasureSpec.EXACTLY;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> maxHeight = parent.getHeight() - parent.getPaddingTop() - parent.getPaddingBottom();</span><br><span class="line">            <span class="keyword">if</span> (heightSize &gt; maxHeight) &#123;</span><br><span class="line">                heightSize = maxHeight;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// measure &amp; layout</span></span><br><span class="line">            <span class="keyword">int</span> ws = View.MeasureSpec.makeMeasureSpec(parent.getWidth() - parent.getPaddingLeft() - parent.getPaddingRight(), View.MeasureSpec.EXACTLY);</span><br><span class="line">            <span class="keyword">int</span> hs = View.MeasureSpec.makeMeasureSpec(heightSize, heightMode);</span><br><span class="line">            mPinnedHeaderView.measure(ws, hs);</span><br><span class="line">            mPinnedHeaderView.layout(<span class="number">0</span>, <span class="number">0</span>, mPinnedHeaderView.getMeasuredWidth(), mPinnedHeaderView.getMeasuredHeight());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">findPinnedHeaderPosition</span><span class="params">(RecyclerView parent, <span class="keyword">int</span> fromPosition)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (fromPosition &gt; mAdapter.getItemCount() || fromPosition &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> position = fromPosition; position &gt;= <span class="number">0</span>; position--) &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> viewType = mAdapter.getItemViewType(position);</span><br><span class="line">            <span class="keyword">if</span> (isPinnedViewType(parent, position, viewType)) &#123;</span><br><span class="line">                <span class="keyword">return</span> position;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isPinnedViewType</span><span class="params">(RecyclerView parent, <span class="keyword">int</span> adapterPosition, <span class="keyword">int</span> viewType)</span> </span>&#123;</span><br><span class="line">        PinnedHeaderCreator pinnedHeaderCreator =  mTypePinnedHeaderFactories.get(viewType);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> pinnedHeaderCreator != <span class="keyword">null</span> &amp;&amp; pinnedHeaderCreator.create(parent, adapterPosition);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isPinnedView</span><span class="params">(RecyclerView parent, View v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> position = parent.getChildAdapterPosition(v);</span><br><span class="line">        <span class="comment">//如果获取的是非法值</span></span><br><span class="line">        <span class="keyword">if</span> (position == RecyclerView.NO_POSITION) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> isPinnedViewType(parent, position, mAdapter.getItemViewType(position));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updatePinnedHeader</span><span class="params">(RecyclerView parent)</span> </span>&#123;</span><br><span class="line">        RecyclerView.Adapter adapter = parent.getAdapter();</span><br><span class="line">        <span class="comment">//获取的是recyclerview所有的adapter，如果adapter发生改变或者监听到内容发生改变执行</span></span><br><span class="line">        <span class="comment">//重新绘制</span></span><br><span class="line">        <span class="keyword">if</span> (mAdapter != adapter || mIsAdapterDataChanged) &#123;</span><br><span class="line">            <span class="comment">//重置</span></span><br><span class="line">            resetPinnedHeader();</span><br><span class="line">            <span class="keyword">if</span> (mAdapter != <span class="keyword">null</span>) &#123;</span><br><span class="line">                mAdapter.unregisterAdapterDataObserver(mAdapterDataObserver);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            mAdapter = adapter;</span><br><span class="line">            <span class="keyword">if</span> (mAdapter != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">//设置监听</span></span><br><span class="line">                mAdapter.registerAdapterDataObserver(mAdapterDataObserver);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//重置header</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">resetPinnedHeader</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mHeaderPosition = -<span class="number">1</span>;</span><br><span class="line">        mPinnedHeaderView = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerTypePinnedHeader</span><span class="params">(<span class="keyword">int</span> itemType, PinnedHeaderCreator pinnedHeaderCreator)</span> </span>&#123;</span><br><span class="line">        mTypePinnedHeaderFactories.put(itemType, pinnedHeaderCreator);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PinnedHeaderCreator</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">boolean</span> <span class="title">create</span><span class="params">(RecyclerView parent, <span class="keyword">int</span> adapterPosition)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<br>MainActivity.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> PinnedHeaderDecoration decoration = <span class="keyword">new</span> PinnedHeaderDecoration();</span><br><span class="line">decoration.registerTypePinnedHeader(<span class="number">1</span>, <span class="keyword">new</span> PinnedHeaderDecoration.PinnedHeaderCreator() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">create</span><span class="params">(RecyclerView parent, <span class="keyword">int</span> adapterPosition)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">mRecyclerView.addItemDecoration(decoration);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>registerTypePinnedHeader传的参数1是当adapter那个getviewtype中返回的是1的时候调用create方法，如果返回的是true，那就让他顶吸</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/recyclerview/" rel="tag"># recyclerview</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/28/android逐帧动画/" rel="next" title="android逐帧动画">
+                <i class="fa fa-chevron-left"></i> android逐帧动画
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/10/android属性动画/" rel="prev" title="android属性动画">
+                android属性动画 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="xwmm">
+            
+              <p class="site-author-name" itemprop="name">xwmm</p>
+              <p class="site-description motion-element" itemprop="description">快写一行代码雅俗共赏</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xwmm" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/xwmdream" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xwmdream@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单分割线"><span class="nav-number">1.</span> <span class="nav-text">简单分割线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一条简单的红色分割线"><span class="nav-number">1.1.</span> <span class="nav-text">一条简单的红色分割线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现顶吸"><span class="nav-number">2.</span> <span class="nav-text">实现顶吸</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#顶部绘制一个固定的区域"><span class="nav-number">2.1.</span> <span class="nav-text">顶部绘制一个固定的区域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个简单完整的吸顶，用Canvas绘制"><span class="nav-number">3.</span> <span class="nav-text">一个简单完整的吸顶，用Canvas绘制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附上一个更完整的吸顶，用布局绘制"><span class="nav-number">4.</span> <span class="nav-text">附上一个更完整的吸顶，用布局绘制</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 1998 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xwmm</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("qk1gLKS0AJOBMCXNfEzeI1It-gzGzoHsz", "frKNCpELR6p7InuJcNh9XQD3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

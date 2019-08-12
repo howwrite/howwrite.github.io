@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,android,ndk,c++,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="慕课网  基本知识交叉编译简单地说，就是在一个平台上生成另一个平台上可执行的代码比如在windows生成Android的arm平台的可执行代码 jni是什么Java native interface(JNI)标准成为Java平台的一部分，它允许Java代码和其他语言写的代码进行交互 jni的实现流程 链接库 静态链接库 动态链接库静态链接库静态链接库就是把所有用到的依赖都包含进去，比如写一个c语">
+<meta name="keywords" content="java,android,ndk,c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android使用ndk">
+<meta property="og:url" content="https://xwmm.github.io/2018/11/12/android使用ndk/index.html">
+<meta property="og:site_name" content="菜鸟小码农">
+<meta property="og:description" content="慕课网  基本知识交叉编译简单地说，就是在一个平台上生成另一个平台上可执行的代码比如在windows生成Android的arm平台的可执行代码 jni是什么Java native interface(JNI)标准成为Java平台的一部分，它允许Java代码和其他语言写的代码进行交互 jni的实现流程 链接库 静态链接库 动态链接库静态链接库静态链接库就是把所有用到的依赖都包含进去，比如写一个c语">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://xwmm.github.io/upload/jni的实现流程.png">
+<meta property="og:updated_time" content="2019-06-22T23:02:49.480Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android使用ndk">
+<meta name="twitter:description" content="慕课网  基本知识交叉编译简单地说，就是在一个平台上生成另一个平台上可执行的代码比如在windows生成Android的arm平台的可执行代码 jni是什么Java native interface(JNI)标准成为Java平台的一部分，它允许Java代码和其他语言写的代码进行交互 jni的实现流程 链接库 静态链接库 动态链接库静态链接库静态链接库就是把所有用到的依赖都包含进去，比如写一个c语">
+<meta name="twitter:image" content="https://xwmm.github.io/upload/jni的实现流程.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键词搜索","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"共找到 ${hits} 篇文章,花了 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xwmm.github.io/2018/11/12/android使用ndk/">
+
+
+
+
+
+  <title>android使用ndk | 菜鸟小码农</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3ef70ce895a5b3a5f9eae294ced01ec5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">菜鸟小码农</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快写一行代码雅俗共赏</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xwmm.github.io/2018/11/12/android使用ndk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xwmm">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="菜鸟小码农">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">android使用ndk</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-12T11:57:08+08:00">
+                2018-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/12/android使用ndk/" class="leancloud_visitors" data-flag-title="android使用ndk">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><a href="https://www.imooc.com/video/8021" target="_blank" rel="noopener">慕课网</a></p>
+</blockquote>
+<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="交叉编译"><a href="#交叉编译" class="headerlink" title="交叉编译"></a>交叉编译</h3><p>简单地说，就是在一个平台上生成另一个平台上可执行的代码<br>比如在windows生成Android的arm平台的可执行代码</p>
+<h3 id="jni是什么"><a href="#jni是什么" class="headerlink" title="jni是什么"></a>jni是什么</h3><p>Java native interface(JNI)标准成为Java平台的一部分，它允许Java代码和其他语言写的代码进行交互</p>
+<h3 id="jni的实现流程"><a href="#jni的实现流程" class="headerlink" title="jni的实现流程"></a>jni的实现流程</h3><p><img src="/upload/jni的实现流程.png" alt="jni的实现流程"></p>
+<h3 id="链接库"><a href="#链接库" class="headerlink" title="链接库"></a>链接库</h3><ul>
+<li>静态链接库</li>
+<li>动态链接库<h4 id="静态链接库"><a href="#静态链接库" class="headerlink" title="静态链接库"></a>静态链接库</h4>静态链接库就是把所有用到的依赖都包含进去，比如写一个c语言helloworld，他会把stdio.h的所有都包含进去</li>
+</ul>
+<ul>
+<li>优点：这个库拿到各个地方都能用</li>
+<li>缺点：库体积非常大，只需要一个print但是吧stdio的所有内容都包含进去了<h4 id="动态链接库"><a href="#动态链接库" class="headerlink" title="动态链接库"></a>动态链接库</h4>动态链接库是只包含自己写的那部分东西，别的都不包含，在别的地方用的时候动态的去找需要的依赖</li>
+<li>优点：文件体积小，只包含了printf</li>
+<li>缺点：可能出现找不到依赖的情况<br>ndk的链接库大多数是动态链接库</li>
+</ul>
+<hr>
+<h2 id="NDK知识"><a href="#NDK知识" class="headerlink" title="NDK知识"></a>NDK知识</h2><p>android studio现在已经默认支持ndk，只需要创建项目的时候勾选include c++即可，运行的时候没有ndk和cmake就按照提示下载即可<br>我使用的环境是Android studio3.1</p>
+<h3 id="默认生成的文件"><a href="#默认生成的文件" class="headerlink" title="默认生成的文件"></a>默认生成的文件</h3><p>创建一个支持c++的项目以后会给一个cpp文件和一个默认的Mainactivity的Java文件</p>
+<blockquote>
+<p>native-lib.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> JNIEXPORT jstring</span><br><span class="line"></span><br><span class="line">JNICALL</span><br><span class="line">Java_cn_xwmdream_ndktest_MainActivity_stringFromJNI(</span><br><span class="line">        JNIEnv *env,</span><br><span class="line">        jobject <span class="comment">/* this */</span>) &#123;</span><br><span class="line">    <span class="built_in">string</span> hello = <span class="string">"Hello from C++"</span>;</span><br><span class="line">    <span class="keyword">return</span> env-&gt;NewStringUTF(hello.c_str());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看上面的那个方法名Java_cn_xwmdream_ndktest_MainActivity_stringFromJNI<br>意思应该是Java语言，包名是cn.xwmdream.ndktest类名是MainActivity，方法名是stringFromJNI<br>他有两个参数，还不懂什么意思，他创建了一个string类型的hello，赋值为’hello from c++’,然后调用NewStringUTF方法把c语言的字符串转化成Java能用的字符串，返回给Java程序<br>上面的 extern “C” JNIEXPORT jstring应该是指定这个方法的返回值是一个jstring类型</p>
+<blockquote>
+<p>MainActivity.java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    <span class="comment">//静态代码块，说明要用哪个文件，这里调用的是native-lib.cpp文件</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.loadLibrary(<span class="string">"native-lib"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView tv = (TextView) findViewById(R.id.sample_text);</span><br><span class="line">        <span class="comment">//调用这个方法，输出hello from c++，写到那个textView上</span></span><br><span class="line">        tv.setText(stringFromJNI());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//声明一个native类型的方法，静态代码块说的那个cpp文件里面的方法对应</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">stringFromJNI</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="JNI交互处理"><a href="#JNI交互处理" class="headerlink" title="JNI交互处理"></a>JNI交互处理</h2><h3 id="jni的一些基本知识"><a href="#jni的一些基本知识" class="headerlink" title="jni的一些基本知识"></a>jni的一些基本知识</h3><p>基本类型<br>基本类型和本地等效类型表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Java类型</th>
+<th style="text-align:center">对应的jni类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">boolean</td>
+<td style="text-align:center">jboolean</td>
+<td style="text-align:center">无符号，8位</td>
+</tr>
+<tr>
+<td style="text-align:center">byte</td>
+<td style="text-align:center">jbyte</td>
+<td style="text-align:center">无符号，8位</td>
+</tr>
+<tr>
+<td style="text-align:center">char</td>
+<td style="text-align:center">jchar</td>
+<td style="text-align:center">无符号，16位</td>
+</tr>
+<tr>
+<td style="text-align:center">short</td>
+<td style="text-align:center">jshort</td>
+<td style="text-align:center">有符号，16位</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">jint</td>
+<td style="text-align:center">有符号，32位</td>
+</tr>
+<tr>
+<td style="text-align:center">long</td>
+<td style="text-align:center">jlong</td>
+<td style="text-align:center">有符号，64位</td>
+</tr>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">jfloat</td>
+<td style="text-align:center">32位</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">jdouble</td>
+<td style="text-align:center">64位</td>
+</tr>
+<tr>
+<td style="text-align:center">void</td>
+<td style="text-align:center">void</td>
+<td style="text-align:center">N/A</td>
+</tr>
+<tr>
+<td style="text-align:center">String</td>
+<td style="text-align:center">jstring</td>
+<td style="text-align:center">我自己加的，不知道</td>
+</tr>
+</tbody>
+</table>
+<p>处理方式就是Java类型<->jni类型<->c语言类型<br>上面的例子就是c语言的char *(string.c_str())类型通过NewStringUTF转化成jni的jstring类型，然后传递到Java代码里通过String类型输出出来</-></-></p>
+<h3 id="Java和native层进行字符串交互处理"><a href="#Java和native层进行字符串交互处理" class="headerlink" title="Java和native层进行字符串交互处理"></a>Java和native层进行字符串交互处理</h3><h4 id="java向c语言传递一个字符串"><a href="#java向c语言传递一个字符串" class="headerlink" title="java向c语言传递一个字符串"></a>java向c语言传递一个字符串</h4><p>还是上面的那个例子改改</p>
+<blockquote>
+<p>native-lib.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Java_cn_xwmdream_ndktest_MainActivity_stringFromJNI(JNIEnv *env, jobject <span class="comment">/* this */</span>jclas, jstring path) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *c = env-&gt;GetStringUTFChars(path, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">char</span> d[<span class="number">50</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(d,c);</span><br><span class="line">    d[<span class="number">0</span>]=<span class="string">'7'</span>;</span><br><span class="line">    <span class="comment">//对指针进行释放</span></span><br><span class="line">    env-&gt;ReleaseStringUTFChars(path,c);</span><br><span class="line">    <span class="keyword">return</span> env-&gt;NewStringUTF(d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参数由原来的两个增加了一个jstring类型,这个值就是Java层传进来的一个String类型的参数，然后通过GetStringUTFChars(jstring,jboolean)把jstring类型的参数转化成一个char类型的指针，通过strcpy复制给d，然后改第一位字符为’7’然后通过上面的把d给返回回去,其中用ReleaseStringUTFChars方法释放资源c</p>
+<blockquote>
+<p>在调用 GetStringUTFChars 函数从 JVM 内部获取一个字符串之后，JVM 内部会分配一块新的内存，用于存储源字符串的拷贝，以便本地代码访问和修改。即然有内存分配，用完之后马上释放是一个编程的好习惯。通过调用ReleaseStringUTFChars 函数通知 JVM 这块内存已经不使用了，你可以清除了。注意：这两个函数是配对使用的，用了 GetXXX 就必须调用 ReleaseXXX，而且这两个函数的命名也有规律，除了前面的 Get 和 Release 之外，后面的都一样。<br>MainActivity.java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明方法中增加了一个String类型的参数，对应cpp中的jstring</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">stringFomJNI</span><span class="params">(String a)</span></span>;</span><br><span class="line"><span class="comment">//调用函数</span></span><br><span class="line">tv.setText(stringFromJNI(<span class="string">"hello"</span>));</span><br></pre></td></tr></table></figure>
+<p>结果就是在屏幕上显示了”7ello”</p>
+<h4 id="Java向jni传递一个数组"><a href="#Java向jni传递一个数组" class="headerlink" title="Java向jni传递一个数组"></a>Java向jni传递一个数组</h4><h5 id="第一种方法是生成native层数组的拷贝"><a href="#第一种方法是生成native层数组的拷贝" class="headerlink" title="第一种方法是生成native层数组的拷贝"></a>第一种方法是生成native层数组的拷贝</h5><p>首先Java层先声明一个返回int[]的一个native的方法，然后调用它<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明这个方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span>[] updatearrayJNI(<span class="keyword">int</span>[] a);</span><br><span class="line">    <span class="comment">//调用，并打印他的值</span></span><br><span class="line">    <span class="keyword">int</span>[] a= updatearrayJNI(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;a.length;i++) &#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"onCreate: "</span>+a[i]);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>native层实现一个jintArray返回值的方法<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> JNIEXPORT jintArray</span><br><span class="line"></span><br><span class="line">JNICALL</span><br><span class="line">Java_cn_xwmdream_ndktest_MainActivity_updatearrayJNI(JNIEnv *env, jobject <span class="comment">/* this */</span>jclas, jintArray <span class="built_in">array</span>) &#123;</span><br><span class="line">    jint nativeArray[<span class="number">5</span>];</span><br><span class="line">    env-&gt;GetIntArrayRegion(<span class="built_in">array</span>,<span class="number">0</span>,<span class="number">5</span>,nativeArray);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">        nativeArray[i]+=<span class="number">6</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    env-&gt;SetIntArrayRegion(<span class="built_in">array</span>,<span class="number">0</span>,<span class="number">5</span>,nativeArray);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">array</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过GetIntArrayRegion把从Java层传递进来的array的[0,5)赋值给nativeArray这个创建的数组，然后对nativeArray进行运算，最后通过SetIntArrayRegion把nativeArray的值放回array的[0,5)的位置,结果是Java收到的数组是7,8,9,10,11</p>
+<h5 id="第二种方法是直接调用数组指针操作"><a href="#第二种方法是直接调用数组指针操作" class="headerlink" title="第二种方法是直接调用数组指针操作"></a>第二种方法是直接调用数组指针操作</h5><p>java层和上面一样<br>native层先获取一个int指针，获取他的长度，然后操作指针，最后释放指针，返回数组<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> JNIEXPORT jintArray</span><br><span class="line"></span><br><span class="line">JNICALL</span><br><span class="line">Java_cn_xwmdream_ndktest_MainActivity_updatearrayJNI(JNIEnv *env, jobject <span class="comment">/* this */</span>jclas, jintArray <span class="built_in">array</span>) &#123;</span><br><span class="line">    <span class="comment">//获取一个int型的指针</span></span><br><span class="line">    jint* data=env-&gt;GetIntArrayElements(<span class="built_in">array</span>,<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    jsize len = env-&gt;GetArrayLength(<span class="built_in">array</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        data[i]+=<span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//释放data指针</span></span><br><span class="line">    env-&gt;ReleaseIntArrayElements(<span class="built_in">array</span>,data,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">array</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>data是一个int类型的指针，通过GetIntArrayElements获取传入array的指针，jsize就是一个jint，通过GetArrayLength获取到传入数组的长度，然后操作指针，最后通过ReleaseIntArrayElements释放data指针，返回数组<br>这样在Java层返回的结果是4,5,6,7,8</p>
+<p>更多jni提供的方法在jni.h这个头文件里可以看到</p>
+<h3 id="自己创建一个cpp文件"><a href="#自己创建一个cpp文件" class="headerlink" title="自己创建一个cpp文件"></a>自己创建一个cpp文件</h3><ol>
+<li>在cpp文件夹下创建一个c或者cpp文件写上代码<blockquote>
+<p>test.cpp</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> JNIEXPORT jstring</span><br><span class="line"></span><br><span class="line">JNICALL</span><br><span class="line">Java_cn_xwmdream_ndktest_MainActivity_stringFromJNI(</span><br><span class="line">        JNIEnv *env,</span><br><span class="line">        jobject <span class="comment">/* this */</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> env-&gt;NewStringUTF(<span class="string">"hello c++"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ol>
+<p>这个是默认生成的一个代码，函数名不用说了</p>
+<ol start="2">
+<li>在app/CMakeLists.txt文件中添加链接库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">add_library( # Sets the name of the library.</span><br><span class="line">        testt</span><br><span class="line"></span><br><span class="line">        # Sets the library as a shared library.</span><br><span class="line">        SHARED</span><br><span class="line"></span><br><span class="line">        # Provides a relative path to your source file(s).</span><br><span class="line">        src/main/cpp/test.cpp)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>第二行是动态链接的名称，也就是Java中 System.loadLibrary(“testt”)的名称<br>最后那个是文件地址</p>
+<h3 id="android-studio添加log"><a href="#android-studio添加log" class="headerlink" title="android studio添加log"></a>android studio添加log</h3><p>首先先在CMakeLists.txt文件中添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">target_link_libraries( # Specifies the target library.</span><br><span class="line">        native-lib</span><br><span class="line"></span><br><span class="line">        # Links the target library to the log library</span><br><span class="line">        # included in the NDK.</span><br><span class="line">        $&#123;log-lib&#125; )</span><br></pre></td></tr></table></figure></p>
+<p>上面那个native-lib是add_library中指定的那个名字，下面是他引用的ndk链接库，这句话就是引入lib的链接库<br>然后在要调用的cpp文件中引入android/log.h<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;android/log.h&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>然后就能调用log了，有五个级别的log，和Java层一样，写法是<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">__android_log_print(ANDROID_LOG_ERROR,<span class="string">"JNITag"</span>,<span class="string">"content"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//其他的等级</span></span><br><span class="line">ANDROID_LOG_VERBOSE</span><br><span class="line">ANDROID_LOG_DEBUG</span><br><span class="line">ANDROID_LOG_INFO</span><br><span class="line">ANDROID_LOG_WARN</span><br><span class="line">ANDROID_LOG_ERROR</span><br></pre></td></tr></table></figure></p>
+<p>define优化<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//define指定</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGE(...) ((void)__android_log_print(ANDROID_LOG_ERROR,<span class="meta-string">"JNITag"</span>,__VA_ARGS__))</span></span><br><span class="line"><span class="comment">//此时只用调用LOGE就行，tag是在define中指定</span></span><br><span class="line">LOGE(<span class="string">"你好"</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="jni调用Java静态资源"><a href="#jni调用Java静态资源" class="headerlink" title="jni调用Java静态资源"></a>jni调用Java静态资源</h3><h4 id="jni调用Java静态方法"><a href="#jni调用Java静态方法" class="headerlink" title="jni调用Java静态方法"></a>jni调用Java静态方法</h4><blockquote>
+<p><a href="https://www.cnblogs.com/CCBB/p/3978847.html" target="_blank" rel="noopener">对于JNI方法名，数据类型和方法签名的一些认识</a></p>
+</blockquote>
+<p>首先写一个Java的静态方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">h</span><span class="params">(String a)</span></span>&#123;</span><br><span class="line">    Log.e(TAG, <span class="string">"h:"</span>+a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>c++代码</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span></span><br><span class="line">JNIEXPORT <span class="keyword">void</span> JNICALL</span><br><span class="line">Java_cn_xwmdream_ndktest_MainActivity_testStaticMethod(JNIEnv *env, jobject instance) &#123;</span><br><span class="line">    <span class="comment">//先获取那个类名，就是包名.类名，只不过点都改成除号</span></span><br><span class="line">    jclass cls_hello = env-&gt;FindClass(<span class="string">"cn/xwmdream/ndktest/MainActivity"</span>);</span><br><span class="line">    <span class="keyword">if</span>(cls_hello==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        LOGE(<span class="string">"类获取失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//获取一个cls_hello指定那个类中一个名字为h，签名是(Ljava/lang/String;)V的静态方法，签名看前面的那个超链接</span></span><br><span class="line">        jmethodID mth_static_method=env-&gt;GetStaticMethodID(cls_hello,<span class="string">"h"</span>,<span class="string">"(Ljava/lang/String;)V"</span>);</span><br><span class="line">        <span class="keyword">if</span>(mth_static_method==<span class="literal">NULL</span>)&#123;</span><br><span class="line">            LOGE(<span class="string">"静态方法获取错误"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//创建一个String类型的参数，用于传回Java层的h方法的string类型的参数</span></span><br><span class="line">            jstring ab=env-&gt;NewStringUTF(<span class="string">"i m c"</span>);</span><br><span class="line">            <span class="comment">//调用Java的静态方法，是cls_hello指定的类中的mth_static方法，参数是ab</span></span><br><span class="line">            env-&gt;CallStaticVoidMethod(cls_hello,mth_static_method,ab);</span><br><span class="line">            <span class="comment">//释放资源ab</span></span><br><span class="line">            env-&gt;DeleteLocalRef(ab);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//资源回收</span></span><br><span class="line">    env-&gt;DeleteLocalRef(cls_hello);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果是</p>
+<blockquote>
+<p>cn.xwmdream.ndktest E/JNITag: h:i m c<br>c++代码中先使用findclass通过Java类的包名获取到类，然后通过getstaticmethodid的方法获取那个类中名字为h，签名为(Ljava/lang/String;)V的方法，签名的使用看上面引用的超链接，都获取到了以后，因为Java的h方法需要传递一个string类型的参数，所以要先创建一个jstring的对象，然后用env的callstaticvoidmethod方法调用Java层的那个静态没有返回值的方法，参数是刚创建的jstring对象。</p>
+</blockquote>
+<h4 id="jni修改Java静态属性"><a href="#jni修改Java静态属性" class="headerlink" title="jni修改Java静态属性"></a>jni修改Java静态属性</h4><p>定义一个Java静态属性<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String name=<span class="string">"aaa"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>c++和上面调用静态方法类似，都是先获取类，然后通过签名获取静态实例<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先获取那个类名，就是包名.类名，只不过点都改成除号</span></span><br><span class="line">    jclass cls_hello = env-&gt;FindClass(<span class="string">"cn/xwmdream/ndktest/MainActivity"</span>);</span><br><span class="line">    <span class="keyword">if</span>(cls_hello==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        LOGE(<span class="string">"类获取失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//找到cls_hello中一个属性名为name的，类型签名是Ljava/lang/String;的一个静态成员属性</span></span><br><span class="line">        jfieldID  field_name = env-&gt;GetStaticFieldID(cls_hello,<span class="string">"name"</span>,<span class="string">"Ljava/lang/String;"</span>);</span><br><span class="line">        <span class="keyword">if</span>(field_name==<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            LOGE(<span class="string">"静态属性获取失败"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            jstring n = env-&gt;NewStringUTF(<span class="string">"bbb"</span>);</span><br><span class="line">            <span class="comment">//设置cls_hello类的field_name的静态属性值为n(bbb)</span></span><br><span class="line">            env-&gt;SetStaticObjectField(cls_hello,field_name,n);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//资源回收</span></span><br><span class="line">    env-&gt;DeleteLocalRef(cls_hello);</span><br></pre></td></tr></table></figure></p>
+<p>以上代码就能通过c++把Java的那个静态属性name的值从aaa变成bbb</p>
+<h3 id="jni调用Java实例资源"><a href="#jni调用Java实例资源" class="headerlink" title="jni调用Java实例资源"></a>jni调用Java实例资源</h3><h4 id="jni调用Java实例方法"><a href="#jni调用Java实例方法" class="headerlink" title="jni调用Java实例方法"></a>jni调用Java实例方法</h4><p>先创建一个hello类，然后写一个sayhello方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">(String a)</span></span>&#123;</span><br><span class="line">    Log.e(TAG, <span class="string">"sayHello: "</span>+a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>c++</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先获取那个类名，就是包名.类名，只不过点都改成除号，获取hello类</span></span><br><span class="line">jclass cls_hello = env-&gt;FindClass(<span class="string">"cn/xwmdream/ndktest/Hello"</span>);</span><br><span class="line"><span class="keyword">if</span> (cls_hello == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    LOGE(<span class="string">"类获取失败"</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取sayhello方法</span></span><br><span class="line">jmethodID sayhello = env-&gt;GetMethodID(cls_hello, <span class="string">"sayHello"</span>, <span class="string">"(Ljava/lang/String;)V"</span>);</span><br><span class="line"><span class="keyword">if</span> (sayhello == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    LOGE(<span class="string">"实例方法获取失败"</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取Hello的构造方法，第二个参数是构造方法的标识，第三个参数是构造方法的签名</span></span><br><span class="line">jmethodID method_gouzao = env-&gt;GetMethodID(cls_hello, <span class="string">"&lt;init&gt;"</span>, <span class="string">"()V"</span>);</span><br><span class="line"><span class="keyword">if</span>(method_gouzao==<span class="literal">NULL</span>)&#123;</span><br><span class="line">    LOGE(<span class="string">"构造方法获取失败"</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过类和构造方法创建出一个对象，第三个参数应该是构造方法传入的参数</span></span><br><span class="line">jobject hello_obj = env-&gt;NewObject(cls_hello, method_gouzao, <span class="literal">NULL</span>);</span><br><span class="line"><span class="keyword">if</span> (hello_obj == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    LOGE(<span class="string">"new对象失败"</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//因为Java的sayhello中有一个参数，创建一个jstring当作传入的参数</span></span><br><span class="line">jstring message = env-&gt;NewStringUTF(<span class="string">"hello abc"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用hello_obj的sayhello方法，参数是上面的jstring</span></span><br><span class="line">env-&gt;CallVoidMethod(hello_obj, sayhello, message);</span><br><span class="line"><span class="comment">//回收资源</span></span><br><span class="line">env-&gt;DeleteLocalRef(message);</span><br><span class="line">env-&gt;DeleteLocalRef(hello_obj);</span><br><span class="line">env-&gt;DeleteLocalRef(cls_hello);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>11-14 12:54:48.721 21647-21647/? E/JNITag: sayHello: hello abc</p>
+</blockquote>
+<p>首先先获取类，然后获取sayhello这个实例方法，然后获取Hello的构造方法，通过构造方法构造一个对象，然后调用sayhello方法</p>
+<h4 id="jni修改实例属性"><a href="#jni修改实例属性" class="headerlink" title="jni修改实例属性"></a>jni修改实例属性</h4><p>Hello类增加一个属性<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String num=<span class="string">"100"</span>;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">jfieldID field = env-&gt;GetFieldID(cls_hello,<span class="string">"num"</span>,<span class="string">"Ljava/lang/String;"</span>);</span><br><span class="line"><span class="keyword">if</span>(field==<span class="literal">NULL</span>)&#123;</span><br><span class="line">    LOGE(<span class="string">"成员属性获取失败"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//同上获取创建对象......</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个新的值</span></span><br><span class="line">jstring newvalue = env-&gt;NewStringUTF(<span class="string">"50"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//把hello_obj的field属性的值改成newvalue</span></span><br><span class="line">env-&gt;SetObjectField(hello_obj, field, newvalue);</span><br><span class="line"><span class="comment">//.....调用成员方法</span></span><br></pre></td></tr></table></figure>
+<p>以上就能修改实例的属性</p>
+<h2 id="jni异常处理"><a href="#jni异常处理" class="headerlink" title="jni异常处理"></a>jni异常处理</h2><ul>
+<li>如果jni调用Java程序出现异常的话ndk还是可以继续执行下面的程序<br>可以在调用可能出现异常Java方法的语句下面写一下方法<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///env-&gt;CallVoidMethod(hello_obj, sayhello, message);调用了可能出现异常的Java方法</span></span><br><span class="line"><span class="keyword">if</span>(env-&gt;ExceptionCheck())&#123;</span><br><span class="line">    env-&gt;ExceptionDescribe();</span><br><span class="line">    env-&gt;ExceptionClear();</span><br><span class="line">    LOGE(<span class="string">"出现了异常"</span>);</span><br><span class="line">    <span class="comment">//抛出一个异常</span></span><br><span class="line">    jclass cls_exception = env-&gt;FindClass(<span class="string">"java/lang/Exception"</span>);</span><br><span class="line">    env-&gt;ThrowNew(cls_exception,<span class="string">"call java method ndk error"</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/ndk/" rel="tag"># ndk</a>
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/22/android的广播/" rel="next" title="android的广播">
+                <i class="fa fa-chevron-left"></i> android的广播
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/20/centos7最小安装版安装完操作/" rel="prev" title="centos7最小安装版安装完操作">
+                centos7最小安装版安装完操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="xwmm">
+            
+              <p class="site-author-name" itemprop="name">xwmm</p>
+              <p class="site-description motion-element" itemprop="description">快写一行代码雅俗共赏</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xwmm" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/xwmdream" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xwmdream@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本知识"><span class="nav-number">1.</span> <span class="nav-text">基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#交叉编译"><span class="nav-number">1.1.</span> <span class="nav-text">交叉编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jni是什么"><span class="nav-number">1.2.</span> <span class="nav-text">jni是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jni的实现流程"><span class="nav-number">1.3.</span> <span class="nav-text">jni的实现流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接库"><span class="nav-number">1.4.</span> <span class="nav-text">链接库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态链接库"><span class="nav-number">1.4.1.</span> <span class="nav-text">静态链接库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态链接库"><span class="nav-number">1.4.2.</span> <span class="nav-text">动态链接库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NDK知识"><span class="nav-number">2.</span> <span class="nav-text">NDK知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认生成的文件"><span class="nav-number">2.1.</span> <span class="nav-text">默认生成的文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JNI交互处理"><span class="nav-number">3.</span> <span class="nav-text">JNI交互处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jni的一些基本知识"><span class="nav-number">3.1.</span> <span class="nav-text">jni的一些基本知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java和native层进行字符串交互处理"><span class="nav-number">3.2.</span> <span class="nav-text">Java和native层进行字符串交互处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java向c语言传递一个字符串"><span class="nav-number">3.2.1.</span> <span class="nav-text">java向c语言传递一个字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java向jni传递一个数组"><span class="nav-number">3.2.2.</span> <span class="nav-text">Java向jni传递一个数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一种方法是生成native层数组的拷贝"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">第一种方法是生成native层数组的拷贝</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二种方法是直接调用数组指针操作"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">第二种方法是直接调用数组指针操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自己创建一个cpp文件"><span class="nav-number">3.3.</span> <span class="nav-text">自己创建一个cpp文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#android-studio添加log"><span class="nav-number">3.4.</span> <span class="nav-text">android studio添加log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jni调用Java静态资源"><span class="nav-number">3.5.</span> <span class="nav-text">jni调用Java静态资源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jni调用Java静态方法"><span class="nav-number">3.5.1.</span> <span class="nav-text">jni调用Java静态方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jni修改Java静态属性"><span class="nav-number">3.5.2.</span> <span class="nav-text">jni修改Java静态属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jni调用Java实例资源"><span class="nav-number">3.6.</span> <span class="nav-text">jni调用Java实例资源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jni调用Java实例方法"><span class="nav-number">3.6.1.</span> <span class="nav-text">jni调用Java实例方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jni修改实例属性"><span class="nav-number">3.6.2.</span> <span class="nav-text">jni修改实例属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jni异常处理"><span class="nav-number">4.</span> <span class="nav-text">jni异常处理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 1998 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xwmm</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("qk1gLKS0AJOBMCXNfEzeI1It-gzGzoHsz", "frKNCpELR6p7InuJcNh9XQD3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

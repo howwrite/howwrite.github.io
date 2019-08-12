@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,spring,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是springmvc springmvc是spring框架的一个模块，springmvc和spring无需通过中间整合层进行整合。 springmvc是一个基于mvc的web框架。  springmvc框架  用户发送请求至前端控制器DispatcherServlet。 DispatcherServlet收到请求调用HandlerMapping处理器映射器。 处理器映射器找到具体的处理器(可以">
+<meta name="keywords" content="java,spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring_mvc">
+<meta property="og:url" content="https://xwmm.github.io/2019/03/05/spring-mvc/index.html">
+<meta property="og:site_name" content="菜鸟小码农">
+<meta property="og:description" content="什么是springmvc springmvc是spring框架的一个模块，springmvc和spring无需通过中间整合层进行整合。 springmvc是一个基于mvc的web框架。  springmvc框架  用户发送请求至前端控制器DispatcherServlet。 DispatcherServlet收到请求调用HandlerMapping处理器映射器。 处理器映射器找到具体的处理器(可以">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://xwmm.github.io/upload/springmvc01.png">
+<meta property="og:image" content="https://xwmm.github.io/upload/QQ截图20190307092847.png">
+<meta property="og:image" content="https://xwmm.github.io/upload/QQ截图20190310101534.png">
+<meta property="og:updated_time" content="2019-06-22T23:02:49.508Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring_mvc">
+<meta name="twitter:description" content="什么是springmvc springmvc是spring框架的一个模块，springmvc和spring无需通过中间整合层进行整合。 springmvc是一个基于mvc的web框架。  springmvc框架  用户发送请求至前端控制器DispatcherServlet。 DispatcherServlet收到请求调用HandlerMapping处理器映射器。 处理器映射器找到具体的处理器(可以">
+<meta name="twitter:image" content="https://xwmm.github.io/upload/springmvc01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键词搜索","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"共找到 ${hits} 篇文章,花了 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xwmm.github.io/2019/03/05/spring-mvc/">
+
+
+
+
+
+  <title>spring_mvc | 菜鸟小码农</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3ef70ce895a5b3a5f9eae294ced01ec5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">菜鸟小码农</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快写一行代码雅俗共赏</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xwmm.github.io/2019/03/05/spring-mvc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xwmm">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="菜鸟小码农">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spring_mvc</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T17:13:21+08:00">
+                2019-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/05/spring-mvc/" class="leancloud_visitors" data-flag-title="spring_mvc">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是springmvc"><a href="#什么是springmvc" class="headerlink" title="什么是springmvc"></a>什么是springmvc</h2><ul>
+<li>springmvc是spring框架的一个模块，springmvc和spring无需通过中间整合层进行整合。</li>
+<li>springmvc是一个基于mvc的web框架。<br><img src="/upload/springmvc01.png" alt="图片丢失"></li>
+</ul>
+<h3 id="springmvc框架"><a href="#springmvc框架" class="headerlink" title="springmvc框架"></a>springmvc框架</h3><p><img src="/upload/QQ截图20190307092847.png" alt="图片丢失"></p>
+<ol>
+<li>用户发送请求至前端控制器DispatcherServlet。</li>
+<li>DispatcherServlet收到请求调用HandlerMapping处理器映射器。</li>
+<li>处理器映射器找到具体的处理器(可以根据xml配置、注解进行查找)，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet。</li>
+<li>DispatcherServlet调用HandlerAdapter处理器适配器。</li>
+<li>HandlerAdapter经过适配调用具体的处理器(Controller，也叫后端控制器)。</li>
+<li>Controller执行完成返回ModelAndView。</li>
+<li>HandlerAdapter将controller执行结果ModelAndView返回给DispatcherServlet。</li>
+<li>DispatcherServlet将ModelAndView传给ViewReslover视图解析器。</li>
+<li>ViewReslover解析后返回具体View。</li>
+<li>DispatcherServlet根据View进行渲染视图（即将模型数据填充至视图中）。</li>
+<li>DispatcherServlet响应用户。</li>
+</ol>
+<h4 id="组件："><a href="#组件：" class="headerlink" title="组件："></a>组件：</h4><ol>
+<li><p>前端控制器DispatcherServlet（不需要程序员开发）<br>作用接收请求，响应结果，相当于转发器，中央处理器。<br>有了DispatcherServlet减少了其它组件之间的耦合度。</p>
+</li>
+<li><p>处理器映射器HandlerMapping(不需要程序员开发)<br>作用：根据请求的url查找Handler</p>
+</li>
+<li><p>处理器适配器HandlerAdapter<br>作用：按照特定规则（HandlerAdapter要求的规则）去执行Handler</p>
+</li>
+<li><p>处理器Handler(需要程序员开发)<br>注意：编写Handler时按照HandlerAdapter的要求去做，这样适配器才可以去正确执行Handler</p>
+</li>
+<li><p>视图解析器View resolver(不需要程序员开发)<br>作用：进行视图解析，根据逻辑视图名解析成真正的视图（view）</p>
+</li>
+<li><p>视图View(需要程序员开发jsp)<br>View是一个接口，实现类支持不同的View类型（jsp、freemarker、pdf…）</p>
+</li>
+</ol>
+<p>前端控制器（DispatcherServlet）：接收请求，响应结果，相当于电脑的CPU。<br>处理器映射器（HandlerMapping）：根据URL去查找处理器<br>处理器（Handler）：（需要程序员去写代码处理逻辑的）<br>处理器适配器（HandlerAdapter）：会把处理器包装成适配器，这样就可以支持多种类型的处理器，类比笔记本的适配器（适配器模式的应用）<br>视图解析器（ViewResovler）：进行视图解析，多返回的字符串，进行处理，可以解析成对应的页面</p>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>spring mvc+mybatis(商品订单管理)。</li>
+<li>商品列表查询</li>
+</ul>
+<p>###　依赖</p>
+<ul>
+<li>spring所有的jar包（一定包括spring-webmvc-3.2.0.RELEASE.jar）</li>
+<li>mybatis以及数据库相关的jar</li>
+<li><a href="http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/" target="_blank" rel="noopener">jstl.jar</a></li>
+</ul>
+<h3 id="配置前端控制器"><a href="#配置前端控制器" class="headerlink" title="配置前端控制器"></a>配置前端控制器</h3><p>在web.xml中配置前端控制器<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- springmvc前端控制器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springmvc<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- contextConfigLocation配置springmvc加载的配置文件（配置处理器映射器、适配器等等） 如果不配置contextConfigLocation，默认加载的是/WEB-INF/servlet名称-serlvet.xml（springmvc-servlet.xml） --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:springmvc.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springmvc<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 第一种：*.action，访问以.action结尾 由DispatcherServlet进行解析</span></span><br><span class="line"><span class="comment">        第二种：/，所以访问的地址都由DispatcherServlet进行解析，对于静态文件的解析需要配置不让DispatcherServlet进行解析</span></span><br><span class="line"><span class="comment">            使用此种方式可以实现 RESTful风格的url</span></span><br><span class="line"><span class="comment">        第三种：/*，这样配置不对，使用这种配置，最终要转发到一个jsp页面时， 仍然会由DispatcherServlet解析jsp地址，不能根据jsp页面找到handler，会报错。 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.action<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>load-on-startup：表示servlet随服务启动；</li>
+<li>url-pattern：*.action的请交给DispatcherServlet处理。</li>
+<li>contextConfigLocation：指定springmvc配置的加载位置，如果不指定则默认加载WEB-INF/[DispatcherServlet 的Servlet 名字]-servlet.xml。</li>
+</ul>
+<h3 id="配置处理器适配器"><a href="#配置处理器适配器" class="headerlink" title="配置处理器适配器"></a>配置处理器适配器</h3><p>在classpath的springmvc.xml中配置处理器适配器<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:mvc</span>=<span class="string">"http://www.springframework.org/schema/mvc"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span> <span class="attr">xmlns:tx</span>=<span class="string">"http://www.springframework.org/schema/tx"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/mvc</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context/spring-context-3.2.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/aop</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/tx</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd "</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>适配器都继承HandlerAdapter</li>
+<li>适配器中有一个supports方法是判断这个适配器是执行哪个接口的handle</li>
+</ul>
+<h3 id="开发Handler-处理request"><a href="#开发Handler-处理request" class="headerlink" title="开发Handler(处理request)"></a>开发Handler(处理request)</h3><ul>
+<li>需要实现 controller接口，才能由org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter适配器执行。</li>
+<li>cn.xwmdream.ssm.controller.ItemsController1<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItemsController1</span> <span class="keyword">implements</span> <span class="title">Controller</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">handleRequest</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//调用service查找 数据库，查询商品列表，这里使用静态数据模拟</span></span><br><span class="line">                List&lt;Items&gt; itemsList = <span class="keyword">new</span> ArrayList&lt;Items&gt;();</span><br><span class="line">                <span class="comment">//向list中填充静态数据</span></span><br><span class="line">                Items items_1 = <span class="keyword">new</span> Items();</span><br><span class="line">                items_1.setName(<span class="string">"联想笔记本"</span>);</span><br><span class="line">                items_1.setPrice(<span class="number">6000f</span>);</span><br><span class="line">                items_1.setDetail(<span class="string">"ThinkPad T430 联想笔记本电脑！"</span>);</span><br><span class="line"></span><br><span class="line">                Items items_2 = <span class="keyword">new</span> Items();</span><br><span class="line">                items_2.setName(<span class="string">"苹果手机"</span>);</span><br><span class="line">                items_2.setPrice(<span class="number">5000f</span>);</span><br><span class="line">                items_2.setDetail(<span class="string">"iphone6苹果手机！"</span>);</span><br><span class="line"></span><br><span class="line">                itemsList.add(items_1);</span><br><span class="line">                itemsList.add(items_2);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//返回ModelAndView</span></span><br><span class="line">                ModelAndView modelAndView =  <span class="keyword">new</span> ModelAndView();</span><br><span class="line">                <span class="comment">//相当 于request的setAttribut，在jsp页面中通过itemsList取数据</span></span><br><span class="line">                modelAndView.addObject(<span class="string">"itemsList"</span>, itemsList);</span><br><span class="line">                <span class="comment">//指定视图</span></span><br><span class="line">                modelAndView.setViewName(<span class="string">"/WEB-INF/jsp/item/itemsList.jsp"</span>);</span><br><span class="line">                <span class="keyword">return</span> modelAndView;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="视图编写"><a href="#视图编写" class="headerlink" title="视图编写"></a>视图编写</h3><ul>
+<li>使用了jstl解析器，一定要引入这个jar包</li>
+<li><p>/WEB-INF/jsp/item/itemsList.jsp</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">"java"</span> contentType=<span class="string">"text/html; charset=UTF-8"</span></span><br><span class="line">    pageEncoding=<span class="string">"UTF-8"</span>%&gt;</span><br><span class="line">&lt;%@ taglib uri=<span class="string">"http://java.sun.com/jsp/jstl/core"</span> prefix=<span class="string">"c"</span>%&gt;</span><br><span class="line">&lt;%@ taglib uri=<span class="string">"http://java.sun.com/jsp/jstl/fmt"</span> prefix=<span class="string">"fmt"</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html PUBLIC <span class="string">"-//W3C//DTD HTML 4.01 Transitional//EN"</span> <span class="string">"http://www.w3.org/TR/html4/loose.dtd"</span>&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span><br><span class="line">&lt;title&gt;查询商品列表&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form</span><br><span class="line">        action=<span class="string">"$&#123;pageContext.request.contextPath &#125;/item/queryItem.action"</span></span><br><span class="line">        method=<span class="string">"post"</span>&gt;</span><br><span class="line">        查询条件：</span><br><span class="line">        &lt;table width=<span class="string">"100%"</span> border=<span class="number">1</span>&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;&lt;input type="submit" value="查询" /&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">        商品列表：</span><br><span class="line">        &lt;table width=<span class="string">"100%"</span> border=<span class="number">1</span>&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;商品名称&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;商品价格&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;生产日期&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;商品描述&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;操作&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;c:forEach items=<span class="string">"$&#123;itemsList &#125;"</span> <span class="keyword">var</span>=<span class="string">"item"</span>&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td&gt;$&#123;item.name &#125;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;$&#123;item.price &#125;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&lt;fmt:formatDate value=<span class="string">"$&#123;item.createtime&#125;"</span></span><br><span class="line">                            pattern="yyyy-MM-dd HH:mm:ss" /&gt;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;$&#123;item.detail &#125;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">                    &lt;td&gt;&lt;a</span><br><span class="line">                        href="$&#123;pageContext.request.contextPath &#125;/item/editItem.action?id=$&#123;item.id&#125;"&gt;修改&lt;/a&gt;&lt;/td&gt;</span><br><span class="line"></span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">            &lt;/c:forEach&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>一个foreach遍历传入的itemsList</p>
+</li>
+</ul>
+<h3 id="配置Handler"><a href="#配置Handler" class="headerlink" title="配置Handler"></a>配置Handler</h3><p>将编写Handler在spring容器加载<br>springmvc.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置Handler --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"/queryItems_test.action"</span> <span class="attr">class</span>=<span class="string">"cn.xwmdream.ssm.controller.ItemsController1"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="配置处理器映射器"><a href="#配置处理器映射器" class="headerlink" title="配置处理器映射器"></a>配置处理器映射器</h3><p>在classpath下的springmvc.xml中配置处理器映射器<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 处理器映射器 将bean的name作为url进行查找 ，需要在配置Handler时指定beanname（就是url）</span></span><br><span class="line"><span class="comment">所有的映射器都实现 HandlerMapping接口。</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>此时handler需要配置路径<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置Handler --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"/queryItems_test.action"</span> <span class="attr">class</span>=<span class="string">"cn.xwmdream.ssm.controller.ItemsController1"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="配置视图解析器"><a href="#配置视图解析器" class="headerlink" title="配置视图解析器"></a>配置视图解析器</h3><p>在classpath下的springmvc.xml中配置视图解析器</p>
+<p>需要配置解析jsp的视图解析器。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 视图解析器</span></span><br><span class="line"><span class="comment">    解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ul>
+<li>运行<a href="http://localhost:8080/TestSpringMvc/queryItems_test.action" target="_blank" rel="noopener">http://localhost:8080/TestSpringMvc/queryItems_test.action</a></li>
+<li>前面是项目地址，后面是配置的handler的地址</li>
+</ul>
+<h2 id="非注解的处理器映射器和适配器"><a href="#非注解的处理器映射器和适配器" class="headerlink" title="非注解的处理器映射器和适配器"></a>非注解的处理器映射器和适配器</h2><h3 id="非注解的处理器映射器"><a href="#非注解的处理器映射器" class="headerlink" title="非注解的处理器映射器"></a>非注解的处理器映射器</h3><h4 id="BeanNameUrlHandlerMapping"><a href="#BeanNameUrlHandlerMapping" class="headerlink" title="BeanNameUrlHandlerMapping"></a>BeanNameUrlHandlerMapping</h4><ul>
+<li>这个映射器是通过handler的name设置映射路径，所以handler的bean需要配置name属性(见hello world)</li>
+</ul>
+<h4 id="SimpleUrlHandlerMapping"><a href="#SimpleUrlHandlerMapping" class="headerlink" title="SimpleUrlHandlerMapping"></a>SimpleUrlHandlerMapping</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--简单url映射  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappings"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 对itemsController1进行url映射，url是/queryItems1.action --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"/queryItems1.action"</span>&gt;</span>itemsController1Id<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"/queryItems2.action"</span>&gt;</span>itemsController1Id<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>这个映射器是通过参数的方式配置路径，值是handler的id，所以handler需要配置id</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置Handler --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"itemsController1Id"</span> <span class="attr">class</span>=<span class="string">"cn.xwmdream.ssm.controller.ItemsController1"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>多个映射器可以并存，前端控制器判断url能让哪些映射器映射，就让正确的映射器处理。</li>
+</ul>
+<h3 id="非注解的处理器适配器"><a href="#非注解的处理器适配器" class="headerlink" title="非注解的处理器适配器"></a>非注解的处理器适配器</h3><h4 id="SimpleControllerHandlerAdapter"><a href="#SimpleControllerHandlerAdapter" class="headerlink" title="SimpleControllerHandlerAdapter"></a>SimpleControllerHandlerAdapter</h4><ul>
+<li><p>配置适配器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>要求编写的Handler实现 Controller接口(见hello world)</p>
+</li>
+</ul>
+<h4 id="HttpRequestHandlerAdapter"><a href="#HttpRequestHandlerAdapter" class="headerlink" title="HttpRequestHandlerAdapter"></a>HttpRequestHandlerAdapter</h4><ul>
+<li><p>配置适配器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>要求编写的Handler实现 HttpRequestHandler接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleRequest</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    <span class="comment">//调用service查找 数据库，查询商品列表，这里使用静态数据模拟</span></span><br><span class="line">            List&lt;Items&gt; itemsList = <span class="keyword">new</span> ArrayList&lt;Items&gt;();</span><br><span class="line">            <span class="comment">//向list中填充静态数据</span></span><br><span class="line">            Items items_1 = <span class="keyword">new</span> Items();</span><br><span class="line">            items_1.setName(<span class="string">"联想笔记本"</span>);</span><br><span class="line">            items_1.setPrice(<span class="number">6000f</span>);</span><br><span class="line">            items_1.setDetail(<span class="string">"ThinkPad T430 联想笔记本电脑！"</span>);</span><br><span class="line"></span><br><span class="line">            Items items_2 = <span class="keyword">new</span> Items();</span><br><span class="line">            items_2.setName(<span class="string">"苹果手机"</span>);</span><br><span class="line">            items_2.setPrice(<span class="number">5000f</span>);</span><br><span class="line">            items_2.setDetail(<span class="string">"iphone6苹果手机！"</span>);</span><br><span class="line"></span><br><span class="line">            itemsList.add(items_1);</span><br><span class="line">            itemsList.add(items_2);</span><br><span class="line">            <span class="comment">//转发数据</span></span><br><span class="line">            request.setAttribute(<span class="string">"itemsList"</span>,itemsList);</span><br><span class="line">            request.getRequestDispatcher(<span class="string">"/WEB-INF/jsp/item/itemsList.jsp"</span>).forward(request,response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用此方法可以通过修改response，设置响应的数据格式，比如响应json数据(通过getWriter，类似servlet)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line">response.setContentType(<span class="string">"application/json;charset=utf-8"</span>);</span><br><span class="line">response.getWriter().write(<span class="string">"json串"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="DispatcherSerlvet-properties"><a href="#DispatcherSerlvet-properties" class="headerlink" title="DispatcherSerlvet.properties"></a>DispatcherSerlvet.properties</h2><ul>
+<li>如果不在springmvc.xml中配置处理映射器、适配器、视图解析器等组件，使用默认加载的。</li>
+<li>默认加载的文件<br><img src="/upload/QQ截图20190310101534.png" alt="图片丢失"></li>
+<li>这里面配置了多个映射器适配器视图解析器等组件，如果项目中没有指定会对应不同版本加载不同的默认组件</li>
+</ul>
+<h2 id="注解的处理器映射器和适配器"><a href="#注解的处理器映射器和适配器" class="headerlink" title="注解的处理器映射器和适配器"></a>注解的处理器映射器和适配器</h2><h3 id="默认映射器"><a href="#默认映射器" class="headerlink" title="默认映射器"></a>默认映射器</h3><p>在spring3.1之前使用org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping注解映射器。<br>在spring3.1之后使用org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping注解映射器。</p>
+<h3 id="默认适配器"><a href="#默认适配器" class="headerlink" title="默认适配器"></a>默认适配器</h3><p>在spring3.1之前使用org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter注解适配器。<br>在spring3.1之后使用org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter注解适配器。</p>
+<h3 id="配置注解映射器和适配器"><a href="#配置注解映射器和适配器" class="headerlink" title="配置注解映射器和适配器"></a>配置注解映射器和适配器</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--注解映射器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--注解适配器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>当然也可以换一种方式加载<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置</span></span><br><span class="line"><span class="comment">mvc:annotation-driven默认加载很多的参数绑定方法，</span></span><br><span class="line"><span class="comment">比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter</span></span><br><span class="line"><span class="comment">实际开发时使用mvc:annotation-driven</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span>&gt;</span><span class="tag">&lt;/<span class="name">mvc:annotation-driven</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="开发注解Handler"><a href="#开发注解Handler" class="headerlink" title="开发注解Handler"></a>开发注解Handler</h3><ul>
+<li>cn.xwmdream.ssm.controller.ItemsController1<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用Controller标识 它是一个控制器</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItemsController1</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 商品查询列表</span></span><br><span class="line">    <span class="comment">// @RequestMapping实现 对queryItems方法和url进行映射，一个方法对应一个url</span></span><br><span class="line">    <span class="comment">// 一般建议将url和方法写成一样</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/queryItems"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">queryItems</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 调用service查找 数据库，查询商品列表，这里使用静态数据模拟</span></span><br><span class="line">        List&lt;Items&gt; itemsList = <span class="keyword">new</span> ArrayList&lt;Items&gt;();</span><br><span class="line">        <span class="comment">// 向list中填充静态数据</span></span><br><span class="line">        Items items_1 = <span class="keyword">new</span> Items();</span><br><span class="line">        items_1.setName(<span class="string">"联想笔记本"</span>);</span><br><span class="line">        items_1.setPrice(<span class="number">6000f</span>);</span><br><span class="line">        items_1.setDetail(<span class="string">"ThinkPad T430 联想笔记本电脑！"</span>);</span><br><span class="line"></span><br><span class="line">        Items items_2 = <span class="keyword">new</span> Items();</span><br><span class="line">        items_2.setName(<span class="string">"苹果手机"</span>);</span><br><span class="line">        items_2.setPrice(<span class="number">5000f</span>);</span><br><span class="line">        items_2.setDetail(<span class="string">"iphone6苹果手机！"</span>);</span><br><span class="line"></span><br><span class="line">        itemsList.add(items_1);</span><br><span class="line">        itemsList.add(items_2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回ModelAndView</span></span><br><span class="line">        ModelAndView modelAndView = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">        <span class="comment">// 相当 于request的setAttribut，在jsp页面中通过itemsList取数据</span></span><br><span class="line">        modelAndView.addObject(<span class="string">"itemsList"</span>, itemsList);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 指定视图</span></span><br><span class="line">        modelAndView.setViewName(<span class="string">"/WEB-INF/jsp/item/itemsList.jsp"</span>);</span><br><span class="line">        <span class="keyword">return</span> modelAndView;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="加载注解handler"><a href="#加载注解handler" class="headerlink" title="加载注解handler"></a>加载注解handler</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 对于注解的Handler可以单个配置</span></span><br><span class="line"><span class="comment">实际开发中建议使用组件扫描</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;bean class="cn.itcast.ssm.controller.ItemsController3" /&gt; --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 可以扫描controller、service、...</span></span><br><span class="line"><span class="comment">这里让扫描controller，指定controller的包</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"cn.xwmdream.ssm.controller"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p>访问:<a href="http://localhost:8080/TestSpringMvc/queryItems.action" target="_blank" rel="noopener">http://localhost:8080/TestSpringMvc/queryItems.action</a></p>
+<ul>
+<li>记得后面的.action</li>
+</ul>
+<h2 id="视图解析器"><a href="#视图解析器" class="headerlink" title="视图解析器"></a>视图解析器</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 视图解析器</span></span><br><span class="line"><span class="comment">解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置jsp路径的前缀 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span> <span class="attr">value</span>=<span class="string">"/WEB-INF/jsp/"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置jsp路径的后缀 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span> <span class="attr">value</span>=<span class="string">".jsp"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以配置前缀和后缀,比如要访问/WEB-INF/jsp/item/itemsList.jsp时候，只需要指定item/itemsList即可</li>
+</ul>
+<h2 id="源码分析（了解）"><a href="#源码分析（了解）" class="headerlink" title="源码分析（了解）"></a>源码分析（了解）</h2><p>通过前端控制器源码分析springmvc的执行过程。</p>
+<ol>
+<li><p>前端控制器接收请求<br>调用doDiapatch</p>
+</li>
+<li><p>前端控制器调用处理器映射器查找 Handler</p>
+</li>
+<li><p>调用处理器适配器执行Handler，得到执行结果ModelAndView</p>
+</li>
+<li><p>视图渲染，将model数据填充到request域。<br>视图解析，得到view:<br>调用view的渲染方法，将model数据填充到request域</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/01/log4j的使用/" rel="next" title="log4j的使用">
+                <i class="fa fa-chevron-left"></i> log4j的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/11/springboot入门/" rel="prev" title="springboot入门">
+                springboot入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="xwmm">
+            
+              <p class="site-author-name" itemprop="name">xwmm</p>
+              <p class="site-description motion-element" itemprop="description">快写一行代码雅俗共赏</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xwmm" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/xwmdream" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xwmdream@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是springmvc"><span class="nav-number">1.</span> <span class="nav-text">什么是springmvc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#springmvc框架"><span class="nav-number">1.1.</span> <span class="nav-text">springmvc框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#组件："><span class="nav-number">1.1.1.</span> <span class="nav-text">组件：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">2.</span> <span class="nav-text">Hello World</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">2.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置前端控制器"><span class="nav-number">2.2.</span> <span class="nav-text">配置前端控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置处理器适配器"><span class="nav-number">2.3.</span> <span class="nav-text">配置处理器适配器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发Handler-处理request"><span class="nav-number">2.4.</span> <span class="nav-text">开发Handler(处理request)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图编写"><span class="nav-number">2.5.</span> <span class="nav-text">视图编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Handler"><span class="nav-number">2.6.</span> <span class="nav-text">配置Handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置处理器映射器"><span class="nav-number">2.7.</span> <span class="nav-text">配置处理器映射器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置视图解析器"><span class="nav-number">2.8.</span> <span class="nav-text">配置视图解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-number">2.9.</span> <span class="nav-text">运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非注解的处理器映射器和适配器"><span class="nav-number">3.</span> <span class="nav-text">非注解的处理器映射器和适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非注解的处理器映射器"><span class="nav-number">3.1.</span> <span class="nav-text">非注解的处理器映射器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BeanNameUrlHandlerMapping"><span class="nav-number">3.1.1.</span> <span class="nav-text">BeanNameUrlHandlerMapping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SimpleUrlHandlerMapping"><span class="nav-number">3.1.2.</span> <span class="nav-text">SimpleUrlHandlerMapping</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非注解的处理器适配器"><span class="nav-number">3.2.</span> <span class="nav-text">非注解的处理器适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SimpleControllerHandlerAdapter"><span class="nav-number">3.2.1.</span> <span class="nav-text">SimpleControllerHandlerAdapter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HttpRequestHandlerAdapter"><span class="nav-number">3.2.2.</span> <span class="nav-text">HttpRequestHandlerAdapter</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DispatcherSerlvet-properties"><span class="nav-number">4.</span> <span class="nav-text">DispatcherSerlvet.properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解的处理器映射器和适配器"><span class="nav-number">5.</span> <span class="nav-text">注解的处理器映射器和适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认映射器"><span class="nav-number">5.1.</span> <span class="nav-text">默认映射器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#默认适配器"><span class="nav-number">5.2.</span> <span class="nav-text">默认适配器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置注解映射器和适配器"><span class="nav-number">5.3.</span> <span class="nav-text">配置注解映射器和适配器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发注解Handler"><span class="nav-number">5.4.</span> <span class="nav-text">开发注解Handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载注解handler"><span class="nav-number">5.5.</span> <span class="nav-text">加载注解handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试"><span class="nav-number">5.6.</span> <span class="nav-text">调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图解析器"><span class="nav-number">6.</span> <span class="nav-text">视图解析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析（了解）"><span class="nav-number">7.</span> <span class="nav-text">源码分析（了解）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 1998 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xwmm</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("qk1gLKS0AJOBMCXNfEzeI1It-gzGzoHsz", "frKNCpELR6p7InuJcNh9XQD3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

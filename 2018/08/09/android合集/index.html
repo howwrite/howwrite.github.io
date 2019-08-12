@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="android,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="android多线程runOnUiThread这个可以直接在子线程中调用，并且修改ui12345678public void change(final String a)&amp;#123;    runOnUiThread(new Runnable() &amp;#123;        @Override        public void run() &amp;#123;            tv.setTex">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android合集">
+<meta property="og:url" content="https://xwmm.github.io/2018/08/09/android合集/index.html">
+<meta property="og:site_name" content="菜鸟小码农">
+<meta property="og:description" content="android多线程runOnUiThread这个可以直接在子线程中调用，并且修改ui12345678public void change(final String a)&amp;#123;    runOnUiThread(new Runnable() &amp;#123;        @Override        public void run() &amp;#123;            tv.setTex">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-12T06:32:45.926Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android合集">
+<meta name="twitter:description" content="android多线程runOnUiThread这个可以直接在子线程中调用，并且修改ui12345678public void change(final String a)&amp;#123;    runOnUiThread(new Runnable() &amp;#123;        @Override        public void run() &amp;#123;            tv.setTex">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键词搜索","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"共找到 ${hits} 篇文章,花了 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xwmm.github.io/2018/08/09/android合集/">
+
+
+
+
+
+  <title>android合集 | 菜鸟小码农</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3ef70ce895a5b3a5f9eae294ced01ec5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">菜鸟小码农</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快写一行代码雅俗共赏</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xwmm.github.io/2018/08/09/android合集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xwmm">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="菜鸟小码农">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">android合集</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-09T22:36:06+08:00">
+                2018-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/09/android合集/" class="leancloud_visitors" data-flag-title="android合集">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="android多线程"><a href="#android多线程" class="headerlink" title="android多线程"></a>android多线程</h2><h3 id="runOnUiThread"><a href="#runOnUiThread" class="headerlink" title="runOnUiThread"></a>runOnUiThread</h3><p>这个可以直接在子线程中调用，并且修改ui<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">final</span> String a)</span></span>&#123;</span><br><span class="line">    runOnUiThread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            tv.setText(a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>多线程调用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        change(<span class="string">"aaaaaaaaaaaa"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure></p>
+<p>实现了五秒后更新</p>
+<h3 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h3><p>现在主线程中创建一个handler<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> Handler handler = <span class="keyword">new</span> Handler()&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message message)</span></span>&#123;</span><br><span class="line">        tv.setText(<span class="string">""</span>+message.what);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">然后在子线程中调用handler.sendEmptyMessage(<span class="number">1</span>);就能调用上面的handlemessage方法，传入的<span class="number">1</span>是传入message的what属性,handler.sendMessage(message)方法发送这个message到主线程中的那个回调</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        handler.sendEmptyMessage(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure></p>
+<h2 id="android-retrofit2的基本使用-搭配rxjava"><a href="#android-retrofit2的基本使用-搭配rxjava" class="headerlink" title="android retrofit2的基本使用,搭配rxjava"></a>android retrofit2的基本使用,搭配rxjava</h2><p>依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">implementation &apos;com.google.code.gson:gson:2.6.1&apos;</span><br><span class="line">implementation &apos;com.orhanobut:logger:2.1.0&apos;</span><br><span class="line">implementation &apos;com.squareup.okhttp3:okhttp:3.11.0&apos;</span><br><span class="line">implementation &apos;com.squareup.okhttp3:logging-interceptor:3.11.0&apos;</span><br><span class="line">implementation &apos;com.squareup.retrofit2:retrofit:2.4.0&apos;</span><br><span class="line">implementation &apos;com.squareup.retrofit2:converter-gson:2.4.0&apos;</span><br><span class="line">implementation &apos;io.reactivex.rxjava2:rxandroid:2.1.0&apos;</span><br><span class="line">implementation &apos;io.reactivex.rxjava2:rxjava:2.2.3&apos;</span><br><span class="line">implementation &apos;com.squareup.retrofit2:adapter-rxjava:2.4.0&apos;</span><br><span class="line">implementation &apos;com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0&apos;</span><br></pre></td></tr></table></figure></p>
+<h3 id="最简单的使用"><a href="#最简单的使用" class="headerlink" title="最简单的使用:"></a>最简单的使用:</h3><p>先创建接口:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">WeatherService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GET</span>(<span class="string">"s6/weather/now"</span>)</span><br><span class="line">    <span class="function">Observable&lt;WeatherEntity&gt; <span class="title">getWeather</span><span class="params">(@Query(<span class="string">"key"</span>)</span> String key, @<span class="title">Query</span><span class="params">(<span class="string">"location"</span>)</span> String location)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GET</span>(<span class="string">"/"</span>)</span><br><span class="line">    <span class="function">Call&lt;ResponseBody&gt; <span class="title">baidu</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>两个get</p>
+<h3 id="使用异步获取返回的原生字符串"><a href="#使用异步获取返回的原生字符串" class="headerlink" title="使用异步获取返回的原生字符串"></a>使用异步获取返回的原生字符串</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">OkHttpClient client = <span class="keyword">new</span> OkHttpClient.Builder().</span><br><span class="line">        connectTimeout(<span class="number">1</span>, TimeUnit.SECONDS).</span><br><span class="line">        readTimeout(<span class="number">60</span>, TimeUnit.SECONDS).</span><br><span class="line">        writeTimeout(<span class="number">60</span>, TimeUnit.SECONDS).build();</span><br><span class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">        .baseUrl(<span class="string">"https://badu.com"</span>)</span><br><span class="line">        .client(client)</span><br><span class="line">        .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())</span><br><span class="line">        .build();</span><br><span class="line"></span><br><span class="line">Call&lt;ResponseBody&gt; stringvalue = retrofit.create(WeatherService.class).baidu();</span><br><span class="line">stringvalue.enqueue(<span class="keyword">new</span> Callback&lt;ResponseBody&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call&lt;ResponseBody&gt; call, retrofit2.Response&lt;ResponseBody&gt; response)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//访问成功时调用,调用方法是response.body.string()</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"onResponse: "</span>+response.body().string());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call&lt;ResponseBody&gt; call, Throwable t)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//如果访问失败的调用</span></span><br><span class="line">        Log.d(TAG, <span class="string">"onFailure: "</span>+<span class="string">"失败了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="使用rxjava"><a href="#使用rxjava" class="headerlink" title="使用rxjava"></a>使用rxjava</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个连接对象,设置连接超时时间,读超时时间,写超时</span></span><br><span class="line">OkHttpClient.Builder client = <span class="keyword">new</span> OkHttpClient.Builder().</span><br><span class="line">        connectTimeout(<span class="number">1</span>, TimeUnit.SECONDS).</span><br><span class="line">        readTimeout(<span class="number">60</span>, TimeUnit.SECONDS).</span><br><span class="line">        writeTimeout(<span class="number">60</span>, TimeUnit.SECONDS);</span><br><span class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">        .baseUrl(<span class="string">"https://free-api.heweather.com"</span>)</span><br><span class="line">        .client(client.build())</span><br><span class="line">        .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())</span><br><span class="line">        .build();</span><br><span class="line">WeatherService weatherService = retrofit.create(WeatherService.class);</span><br><span class="line">weatherService.getWeather(<span class="string">"xxxxx"</span>, <span class="string">"郑州"</span>)</span><br><span class="line">        .subscribeOn(Schedulers.io())</span><br><span class="line">        .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">        .subscribe(<span class="keyword">new</span> Observer&lt;WeatherEntity&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSubscribe</span><span class="params">(Disposable d)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(WeatherEntity weatherEntity)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//响应解析的序列一个个进来</span></span><br><span class="line">                weatherEntities.add(weatherEntity);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//出错了时候</span></span><br><span class="line">                mView.dataError(e);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onComplete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="comment">//响应解析的所有东西都完成了调用</span></span><br><span class="line">                mView.setData(weatherEntities);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="打印log"><a href="#打印log" class="headerlink" title="打印log"></a>打印log</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HttpLoggingInterceptor logInterceptor = <span class="keyword">new</span> HttpLoggingInterceptor();</span><br><span class="line"><span class="keyword">if</span>(BuildConfig.DEBUG)&#123;</span><br><span class="line">    <span class="comment">//显示日志</span></span><br><span class="line">    logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    logInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);</span><br><span class="line">&#125;</span><br><span class="line">client.addInterceptor(logInterceptor);</span><br></pre></td></tr></table></figure>
+<p>让一个okhttp.builder对象client添加以下这个log解析器就ok</p>
+<h3 id="自定义结果解析器"><a href="#自定义结果解析器" class="headerlink" title="自定义结果解析器"></a>自定义结果解析器</h3><p>自己解析返回的结果GsonConverFactory.create，点进去这个方法，主要看responseBodyConverter方法，这个是处理返回请求的，他是调用了GsonResponseBodyConverter来处理请求，点进去这个类，public T convert(ResponseBody value)这个方法就是返回要构造的对象，参数value就是返回的response的body值，可以通过value.string();得到具体的字符串，在这个方法里解析可以通过throw的方式调用观察者的onError方法</p>
+<p>所以重写结果解析器需要复制出来GsonConverFactory这个类，并且复制GsonResponseBodyConverter和GsonRequestBodyConverter这两个类，并且重新写一下GsonResponseBodyConverter这个类的convert方法对结果进行解析</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">convert</span><span class="params">(ResponseBody value)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String response = value.string();</span><br><span class="line">    Log.d(<span class="string">"tag"</span>, <span class="string">"convert: "</span> + response);</span><br><span class="line">    <span class="comment">//抛出异常，通过观察者的onError回掉接收结果</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="number">1</span> == <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> JsonIOException(<span class="string">"抛出异常"</span>);</span><br><span class="line">    JsonReader jsonReader = gson.newJsonReader(value.charStream());</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        T result = adapter.read(jsonReader);</span><br><span class="line">        <span class="keyword">if</span> (jsonReader.peek() != JsonToken.END_DOCUMENT) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> JsonIOException(<span class="string">"JSON document was not fully consumed."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        value.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="rxjava和rxAndroid"><a href="#rxjava和rxAndroid" class="headerlink" title="rxjava和rxAndroid"></a>rxjava和rxAndroid</h2><h3 id="rxJava"><a href="#rxJava" class="headerlink" title="rxJava"></a>rxJava</h3><p>RxJava 有四个基本概念：Observable (可观察者，即被观察者)、 Observer (观察者)、 subscribe (订阅)、事件。Observable 和 Observer 通过 subscribe() 方法实现订阅关系，从而 Observable 可以在需要的时候发出事件来通知 Observer。</p>
+<p>基本创建:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; oble = Observable.create(<span class="keyword">new</span> ObservableOnSubscribe&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(@NonNull ObservableEmitter&lt;String&gt; e)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        e.onNext(<span class="string">"hello"</span>);</span><br><span class="line">        e.onComplete();</span><br><span class="line">        e.onNext(<span class="string">"hello2"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Observer&lt;String&gt; oser = <span class="keyword">new</span> Observer&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSubscribe</span><span class="params">(@NonNull Disposable d)</span> </span>&#123;</span><br><span class="line">        Log.w(<span class="string">""</span>,<span class="string">"onSubscribe"</span>);</span><br><span class="line">    &#125;            <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(@NonNull String s)</span> </span>&#123;</span><br><span class="line">        Log.w(<span class="string">""</span>,<span class="string">"onNext = "</span>+s);</span><br><span class="line">    &#125;            <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(@NonNull Throwable e)</span> </span>&#123;</span><br><span class="line">        Log.w(<span class="string">""</span>,<span class="string">"onError"</span> + e);</span><br><span class="line">    &#125;            <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onComplete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Log.w(<span class="string">""</span>,<span class="string">"onComplete"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Log.w(<span class="string">""</span>,<span class="string">"subscribe"</span>);</span><br><span class="line">oble.subscribe(oser);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>subscribe<br>onSubscribe<br>onNext = hello<br>onComplete</p>
+</blockquote>
+<p>其中oble是一个被观察者，oser是一个观察者，被观察者可以调用onNext向观察者发送内容，此时观察者就能通过重写的onNext获取到数据，执行相应的操作</p>
+<p>另外观察者还有oncomplete和onerror，如果执行了onComplete方法，那么就会断开联系，所以hello2没有显示出来，如果发生了错误会调用了onerror也会立马断开联系。</p>
+<h3 id="另一些使用方法"><a href="#另一些使用方法" class="headerlink" title="另一些使用方法"></a>另一些使用方法</h3><h4 id="简写被观察者"><a href="#简写被观察者" class="headerlink" title="简写被观察者"></a>简写被观察者</h4><p>上面的例子是create一个最基本的被观察者，当如果被观察者只有一个动作的时候就不需要那么复杂的操作，可以用一个just<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; observable = Observable.just(<span class="string">"hello"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>这样就是只执行一个onNext（’hello’);</p>
+<h4 id="简写观察者"><a href="#简写观察者" class="headerlink" title="简写观察者"></a>简写观察者</h4><p>当然对于观察者也是一样，如果不用考虑oncomplete和onerror也可以简写，创建一个consumer对象，重写accept方法就行，然后通过被观察者.subscribe(观察者)来建立联系<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; observable = Observable.just(<span class="string">"hello"</span>);</span><br><span class="line">Consumer&lt;String&gt; consumer = <span class="keyword">new</span> Consumer&lt;String&gt;() &#123;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       System.out.println(s);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br><span class="line">observable.subscribe(consumer);</span><br></pre></td></tr></table></figure></p>
+<h3 id="创建完成或者错误的另一些方法"><a href="#创建完成或者错误的另一些方法" class="headerlink" title="创建完成或者错误的另一些方法"></a>创建完成或者错误的另一些方法</h3><p>可以创建一个action对象来处理oncomplete的事件，用一个consumer来处理onnext和onerror事件，最后重载subscribe的一些方法达到建立关系的目的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;String&gt; observable = Observable.just(<span class="string">"hello"</span>);</span><br><span class="line">    Action onCompleteAction = <span class="keyword">new</span> Action() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            Log.i(<span class="string">"kaelpu"</span>, <span class="string">"complete"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    Consumer&lt;String&gt; onNextConsumer = <span class="keyword">new</span> Consumer&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            Log.i(<span class="string">"kaelpu"</span>, s);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    Consumer&lt;Throwable&gt; onErrorConsumer = <span class="keyword">new</span> Consumer&lt;Throwable&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(Throwable throwable)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            Log.i(<span class="string">"kaelpu"</span>, <span class="string">"error"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    observable.subscribe(onNextConsumer, onErrorConsumer, onCompleteAction);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>public final Disposable subscribe() {}<br>public final Disposable subscribe(Consumer&lt;? super T&gt; onNext) {}<br>public final Disposable subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError) {}<br>public final Disposable subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError, Action onComplete) {}<br>public final Disposable subscribe(Consumer&lt;? super T&gt; onNext, Consumer&lt;? super Throwable&gt; onError, Action onComplete, Consumer&lt;? super Disposable&gt; onSubscribe) {}<br>public final void subscribe(Observer&lt;? super T&gt; observer) {}</p>
+</blockquote>
+<p>上面是subscribe一些重载方法</p>
+<h3 id="线程调度"><a href="#线程调度" class="headerlink" title="线程调度"></a>线程调度</h3><p>rxJava最大的好处就是能够在多线程的情况下去实现，主要能应用在Android更新UI上。。</p>
+<p>在建立关系subscribe的时候会有一些方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Integer&gt; observable = Observable.create(<span class="keyword">new</span> ObservableOnSubscribe&lt;Integer&gt;() &#123;        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(ObservableEmitter&lt;Integer&gt; emitter)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            Log.d(<span class="string">"kaelpu"</span>, <span class="string">"Observable thread is : "</span> + Thread.currentThread().getName());</span><br><span class="line">            Log.d(<span class="string">"kaelpu"</span>, <span class="string">"emitter 1"</span>);</span><br><span class="line">            emitter.onNext(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    Consumer&lt;Integer&gt; consumer = <span class="keyword">new</span> Consumer&lt;Integer&gt;() &#123;        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(Integer integer)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            Log.d(<span class="string">"kaelpu"</span>, <span class="string">"Observer thread is :"</span> + Thread.currentThread().getName());</span><br><span class="line">            Log.d(<span class="string">"kaelpu"</span>, <span class="string">"onNext: "</span> + integer);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    observable.subscribeOn(Schedulers.newThread())</span><br><span class="line">            .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">            .subscribe(consumer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后那个建立关系的意思是让被监听者在Schedulers.newThread()这个新线程上，然后让观察者在AndroidSchedulers.mainThread()这个主线程上，就实现了主线程更新UI的操作，主要就是subscribeOn是让被观察者运行的线程，observeOn是观察者运行的线程</p>
+<h3 id="操作符的使用和Android的一些扩展可以看原文"><a href="#操作符的使用和Android的一些扩展可以看原文" class="headerlink" title="操作符的使用和Android的一些扩展可以看原文"></a>操作符的使用和Android的一些扩展可以看原文</h3><p>作者：蒲文辉<br>链接：<a href="https://www.jianshu.com/p/7eb5ccf5ab1e" target="_blank" rel="noopener">https://www.jianshu.com/p/7eb5ccf5ab1e</a><br>來源：简书<br>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
+<h2 id="android中webview的交互"><a href="#android中webview的交互" class="headerlink" title="android中webview的交互"></a>android中webview的交互</h2><h3 id="webview中js调用Java代码"><a href="#webview中js调用Java代码" class="headerlink" title="webview中js调用Java代码"></a>webview中js调用Java代码</h3><p>大概思路是写一个Java类,然后通过webview的addJavascriptInterface方法把那个类传到页面中,然后页面就能直接通过指定的名字调用方法</p>
+<p>布局就是上面一个webview下面一个textView</p>
+<ul>
+<li>mainactivity.Java<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">JsBridje</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WebView mWebView;</span><br><span class="line">    <span class="keyword">private</span> TextView mTextView;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        mWebView = (WebView)findViewById(R.id.wv_webview);</span><br><span class="line">        mTextView = (TextView)findViewById(R.id.tv_result);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//允许webview加载js</span></span><br><span class="line">        mWebView.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//2.创建一个js接口类,jsinterface</span></span><br><span class="line">        <span class="comment">//3.创建一个就是接口类传递到webview中,第一个参数是Java接口类对象,第二个是传入到js中的名称</span></span><br><span class="line">        mWebView.addJavascriptInterface(<span class="keyword">new</span> JsInterface(<span class="keyword">this</span>),<span class="string">"javaslei"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//加载要显示的html</span></span><br><span class="line">        mWebView.loadUrl(<span class="string">"file:///android_asset/index.html"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//重写一个jsbridje接口,让jsinterface类能够调用,改变UI</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setvalue</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">        mTextView.setText(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以看到调用的addjavascriptinterface方法第一个参数是传入了一个对象,第二个参数是一个字符串,在js中直接调用字符串.方法即可</p>
+<ul>
+<li>JsInterface.java<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsInterface</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"JsInterface"</span>;</span><br><span class="line">    <span class="keyword">private</span> JsBridje jsBridje;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JsInterface</span><span class="params">(JsBridje jsBridje)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.jsBridje = jsBridje;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 从js中调用的方法,这个方法不在主线程中执行,所以不能在这里改变UI</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@JavascriptInterface</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setvalue</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">        jsBridje.setvalue(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>js调用的方法一定要加上@JavascriptInterface</p>
+<p>因为要改变页面内容,所以引入了一个什么设计模式实现一jsbridje接口</p>
+<ul>
+<li>JsBridje.java<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">JsBridje</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setvalue</span><span class="params">(String value)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>webview<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        function oclick()&#123;</span></span><br><span class="line"><span class="undefined">            var inputEle = document.getElementById('uservalue');</span></span><br><span class="line"><span class="undefined">            if(window.javaslei)&#123;</span></span><br><span class="line"><span class="undefined">                javaslei.setvalue(inputEle.value);</span></span><br><span class="line"><span class="undefined">            &#125;else&#123;</span></span><br><span class="line"><span class="undefined">                alert('没找到Java对象');</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>webview<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>请输入要传递的值<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"uservalue"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">onclick</span>=<span class="string">"oclick()"</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到,在html中直接调用javaslei(mainactivity传入的名字).setvalue方法就能调用了jsinterface类中的方法,然后这个方法通过调用jsbridje的接口方法去调用mainactivity.java的setvalue方法改变textview的值</p>
+<h3 id="java中调用js代码"><a href="#java中调用js代码" class="headerlink" title="java中调用js代码"></a>java中调用js代码</h3><p>其实就一行:mWebView.loadUrl(“javascript:要执行的命令”);</p>
+<p>布局文件是webview和一个edittext和一个button</p>
+<ul>
+<li>mainactivity.java<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WebView mWebView;</span><br><span class="line">    <span class="keyword">private</span> EditText meditview;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        mWebView = (WebView)findViewById(R.id.wv_webview);</span><br><span class="line">        meditview = (EditText) findViewById(R.id.tv_value);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//允许webview加载js</span></span><br><span class="line">        mWebView.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//加载要显示的html</span></span><br><span class="line">        mWebView.loadUrl(<span class="string">"file:///android_asset/index.html"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onclick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        String value = meditview.getText().toString();</span><br><span class="line">        mWebView.loadUrl(<span class="string">"javascript:if(window.remote)&#123;window.remote('"</span>+value+<span class="string">"')&#125;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以看到直接调用了js中的remote方法传入了一个字符串参数,注意那个字符串参数前后要加上单引号</p>
+<p>html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>webview<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        function remote(str)&#123;</span></span><br><span class="line"><span class="undefined">            document.write(str);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>html中就一个remote方法,就是把获取到的值写到界面中</p>
+<h3 id="使用chrome调试APP中的网页"><a href="#使用chrome调试APP中的网页" class="headerlink" title="使用chrome调试APP中的网页"></a>使用chrome调试APP中的网页</h3><p>先启用调试mWebView.setWebContentsDebuggingEnabled(true);</p>
+<p>然后chrome访问chrome://inspect/</p>
+<p>然后就能看到相应的inspect,点进去就能调试,不过肯定打不开,因为需要翻墙.或者下载离线包</p>
+<p>解决了上面的内容就能够像调试网页的方式一样去调试APP中的html代码</p>
+<h3 id="一些常见的错误"><a href="#一些常见的错误" class="headerlink" title="一些常见的错误"></a>一些常见的错误</h3><p>当js调用java 代码出现了throw,此时APP并不会崩溃,但是会在html的控制台中抛出一个错误</p>
+<p>如果js没有判断是否有相应的方法就去调用会出现找不到方法的错误</p>
+<p>参数类型错误,常见的有数组和对象里面的问题,因为js是弱类型语言,而Java是强类型,,所以如果类型有错误会导致程序出错</p>
+<p>字符串为空值的时候会传入一个字符串类型的undefined,解决办法就是当要传入的对象为空值的时候,传一个””就行</p>
+<h2 id="android调用相机和相册"><a href="#android调用相机和相册" class="headerlink" title="android调用相机和相册"></a>android调用相机和相册</h2><h3 id="android调用相机拍照"><a href="#android调用相机拍照" class="headerlink" title="android调用相机拍照"></a>android调用相机拍照</h3><p>实现点击按钮开始调用相机拍照,并且返回拍照的照片</p>
+<ul>
+<li>mainactivity.java<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ImageView imageView;</span><br><span class="line">    <span class="keyword">private</span> Uri imageuri;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TAKE_PHOTO=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        imageView = (ImageView)findViewById(R.id.picture);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">one</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        File outputImage = <span class="keyword">new</span> File(getExternalCacheDir(),<span class="string">"output_image.jpg"</span>);</span><br><span class="line">        <span class="keyword">if</span>(outputImage.exists())&#123;</span><br><span class="line">            outputImage.delete();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            outputImage.createNewFile();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(Build.VERSION.SDK_INT&gt;=<span class="number">24</span>)&#123;</span><br><span class="line">            imageuri = FileProvider.getUriForFile(MainActivity.<span class="keyword">this</span>,<span class="string">"com.example.cameraalbumtest.fileprovider"</span>,outputImage);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            imageuri = Uri.fromFile(outputImage);</span><br><span class="line">        &#125;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(<span class="string">"android.media.action.IMAGE_CAPTURE"</span>);</span><br><span class="line">        intent.putExtra(MediaStore.EXTRA_OUTPUT,imageuri);</span><br><span class="line">        startActivityForResult(intent,TAKE_PHOTO);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span>(requestCode)&#123;</span><br><span class="line">            <span class="keyword">case</span> TAKE_PHOTO:</span><br><span class="line">                <span class="keyword">if</span>(resultCode==RESULT_OK)&#123;</span><br><span class="line">                    <span class="keyword">try</span>&#123;</span><br><span class="line">                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageuri));</span><br><span class="line">                        imageView.setImageBitmap(bitmap);</span><br><span class="line">                    &#125;<span class="keyword">catch</span>(FileNotFoundException e)&#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>布局文件activity_main.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">".MainActivity"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"one"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:onClick</span>=<span class="string">"one"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/picture"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在sdk24以后还需要需要一个内容提供器,现在清单文件下注册<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">"cn.xwmdream.myapplication"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">        <span class="attr">.......</span></span></span><br><span class="line">        &lt;provider</span><br><span class="line">            android:name="android.support.v4.content.FileProvider"</span><br><span class="line">            android:authorities="com.exaample.cameraalibumtest.fileprovider"</span><br><span class="line">            android:exported="false"</span><br><span class="line">            android:grantUriPermissions="true"&gt;</span><br><span class="line">            <span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:name</span>=<span class="string">"android.support.FILE_PROVIDER_PATHS"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:resource</span>=<span class="string">"@xml/file_paths"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">provider</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>res/xml/file_paths.xml<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">pahts</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">external-path</span> <span class="attr">name</span>=<span class="string">"my_images"</span> <span class="attr">path</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">pahts</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="android调用相册"><a href="#android调用相册" class="headerlink" title="android调用相册"></a>android调用相册</h3><ul>
+<li>MainActivity.java<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ImageView imageView;</span><br><span class="line">    <span class="keyword">private</span> Uri imageuri;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CHOOSE_PHOTO = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        imageView = (ImageView) findViewById(R.id.picture);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (requestCode) &#123;</span><br><span class="line">            <span class="keyword">case</span> CHOOSE_PHOTO:</span><br><span class="line">                <span class="keyword">if</span>(resultCode==RESULT_OK)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(Build.VERSION.SDK_INT&gt;=<span class="number">19</span>)&#123;</span><br><span class="line">                        handleImageOnKitKat(data);</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        handleImageBeforeKitKat(data);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handleImageBeforeKitKat</span><span class="params">(Intent data)</span> </span>&#123;</span><br><span class="line">        Uri uri = data.getData();</span><br><span class="line">        String imagePath = getImagePath(uri,<span class="keyword">null</span>);</span><br><span class="line">        displayImage(imagePath);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handleImageOnKitKat</span><span class="params">(Intent data)</span> </span>&#123;</span><br><span class="line">        String imagePath = <span class="keyword">null</span>;</span><br><span class="line">        Uri uri = data.getData();</span><br><span class="line">        <span class="keyword">if</span>(DocumentsContract.isDocumentUri(<span class="keyword">this</span>,uri))&#123;</span><br><span class="line">            String docId = DocumentsContract.getDocumentId(uri);</span><br><span class="line">            <span class="keyword">if</span>(<span class="string">"com.android.providers.media.documents"</span>.equals(uri.getAuthority()))&#123;</span><br><span class="line">                String id = docId.split(<span class="string">":"</span>)[<span class="number">1</span>];</span><br><span class="line">                String selection = MediaStore.Images.Media._ID+<span class="string">"="</span>+id;</span><br><span class="line">                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,selection);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"com.android.providers.downloads.documents"</span>.equals(uri.getAuthority()))&#123;</span><br><span class="line">                Uri contentUri = ContentUris.withAppendedId(Uri.parse(<span class="string">"content://downloads/public_downloads"</span>),Long.valueOf(docId));</span><br><span class="line">                imagePath = getImagePath(contentUri,<span class="keyword">null</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"content"</span>.equalsIgnoreCase(uri.getScheme()))&#123;</span><br><span class="line">            imagePath = getImagePath(uri,<span class="keyword">null</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"file"</span>.equalsIgnoreCase(uri.getScheme()))&#123;</span><br><span class="line">            imagePath = uri.getPath();</span><br><span class="line">        &#125;</span><br><span class="line">        displayImage(imagePath);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">displayImage</span><span class="params">(String imagePath)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(imagePath!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);</span><br><span class="line">            imageView.setImageBitmap(bitmap);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            Toast.makeText(<span class="keyword">this</span>,<span class="string">"打开图片错误"</span>,Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getImagePath</span><span class="params">(Uri uri, String selection)</span> </span>&#123;</span><br><span class="line">        String path = <span class="keyword">null</span>;</span><br><span class="line">        Cursor cursor = getContentResolver().query(uri,<span class="keyword">null</span>,selection,<span class="keyword">null</span>,<span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">if</span>(cursor != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(cursor.moveToFirst())&#123;</span><br><span class="line">                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));</span><br><span class="line">            &#125;</span><br><span class="line">            cursor.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> path;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">two</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ContextCompat.checkSelfPermission(MainActivity.<span class="keyword">this</span>, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line">            ActivityCompat.requestPermissions(MainActivity.<span class="keyword">this</span>, <span class="keyword">new</span> String[]&#123;Manifest.permission.WRITE_EXTERNAL_STORAGE&#125;, <span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            openAlbum();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">openAlbum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(<span class="string">"android.intent.action.GET_CONTENT"</span>);</span><br><span class="line">        intent.setType(<span class="string">"image/*"</span>);</span><br><span class="line">        startActivityForResult(intent, CHOOSE_PHOTO);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRequestPermissionsResult</span><span class="params">(<span class="keyword">int</span> requestCode, @NonNull String[] permissions, @NonNull <span class="keyword">int</span>[] grantResults)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (requestCode) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">if</span> (grantResults.length &gt; <span class="number">0</span> &amp;&amp; grantResults[<span class="number">0</span>] == PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line">                    openAlbum();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    Toast.makeText(<span class="keyword">this</span>, <span class="string">"没有权限"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>布局文件xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">".MainActivity"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:onClick</span>=<span class="string">"two"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"two"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/picture"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>其中涉及到针对sdk大于19的各个方法验证</p>
+<p>还有动态申请权限等问题</p>
+<p>当然如果项目中用到的话还需要对于图片文件压缩,否则会内存泄漏</p>
+<h2 id="android通知的使用"><a href="#android通知的使用" class="headerlink" title="android通知的使用"></a>android通知的使用</h2><h3 id="普通通知"><a href="#普通通知" class="headerlink" title="普通通知"></a>普通通知</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建通知管理</span></span><br><span class="line">NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);</span><br><span class="line"><span class="comment">//构建一个通知</span></span><br><span class="line">NotificationCompat.Builder builder = <span class="keyword">new</span> NotificationCompat.Builder(<span class="keyword">this</span>,<span class="string">"通知分组"</span>);</span><br><span class="line"><span class="comment">//点击通知相应的intent</span></span><br><span class="line">Intent mIntent = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW, Uri.parse(<span class="string">"https://xwmdream.cn"</span>));</span><br><span class="line">PendingIntent pendingIntent = PendingIntent.getActivity(<span class="keyword">this</span>, <span class="number">0</span>, mIntent, <span class="number">0</span>);</span><br><span class="line">builder.setContentIntent(pendingIntent);</span><br><span class="line"><span class="comment">//在状态栏中的小图标,只显示alpha</span></span><br><span class="line">builder.setSmallIcon(R.drawable.ic_launcher_background);</span><br><span class="line"><span class="comment">//通知标题</span></span><br><span class="line">builder.setContentTitle(<span class="string">"标题"</span>);</span><br><span class="line"><span class="comment">//点击了此标题是否自动划掉此通知</span></span><br><span class="line">builder.setAutoCancel(<span class="keyword">true</span>);</span><br><span class="line"><span class="comment">//通知里是否显示时间</span></span><br><span class="line">builder.setShowWhen(<span class="keyword">true</span>);</span><br><span class="line"><span class="comment">//什么时候发送通知,系统毫秒数</span></span><br><span class="line">builder.setWhen(System.currentTimeMillis());</span><br><span class="line"><span class="comment">//状态栏划过的摘要</span></span><br><span class="line">builder.setTicker(<span class="string">"状态栏显示的摘要"</span>);</span><br><span class="line"><span class="comment">//是否进行中,如果是进行中,则没法清除</span></span><br><span class="line">builder.setOngoing(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加一些默认值</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">NotificationCompat.DEFAULT_SOUND   添加默认声音提醒</span></span><br><span class="line"><span class="comment">NotificationCompat.DEFAULT_VIBRATE 添加默认震动提醒</span></span><br><span class="line"><span class="comment">NotificationCompat.DEFAULT_LIGHTS  添加默认呼吸灯提醒</span></span><br><span class="line"><span class="comment">NotificationCompat.DEFAULT_ALL 同时添加以上三种默认提醒</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line">builder.setDefaults(NotificationCompat.DEFAULT_ALL);</span><br><span class="line"><span class="comment">//设置震动停止1000,震100,停400,震500,如果设置了默认值,这个就不管用了</span></span><br><span class="line">builder.setVibrate(<span class="keyword">new</span> <span class="keyword">long</span>[]&#123;<span class="number">1000</span>, <span class="number">100</span>, <span class="number">400</span>, <span class="number">500</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*优先级  描述</span></span><br><span class="line"><span class="comment">NotificationCompat.PRIORITY_MAX    重要而紧急的通知，通知用户这个事件是时间上紧迫的或者需要立即处理的。</span></span><br><span class="line"><span class="comment">NotificationCompat.PRIORITY_HIGH   高优先级用于重要的通信内容，例如短消息或者聊天，这些都是对用户来说比较有兴趣的</span></span><br><span class="line"><span class="comment">NotificationCompat.PRIORITY_DEFAULT    默认优先级用于没有特殊优先级分类的通知</span></span><br><span class="line"><span class="comment">NotificationCompat.PRIORITY_LOW    低优先级可以通知用户但又不是很紧急的事件。只显示状态栏图标</span></span><br><span class="line"><span class="comment">NotificationCompat.PRIORITY_MIN    用于后台消息 (例如天气或者位置信息)。只有用户下拉通知抽屉才能看到内容,不会通知和响铃</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">builder.setPriority(NotificationCompat.PRIORITY_HIGH);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*锁屏时显示,好像没用</span></span><br><span class="line"><span class="comment">setVisibility() 方法共有三个选值：</span></span><br><span class="line"><span class="comment">1.VISIBILITY_PRIVATE : 显示基本信息，如通知的图标，但隐藏通知的全部内容；</span></span><br><span class="line"><span class="comment">2.VISIBILITY_PUBLIC : 显示通知的全部内容；</span></span><br><span class="line"><span class="comment">3.VISIBILITY_SECRET : 不显示任何内容，包括图标。*/</span></span><br><span class="line">builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面是显示进度条</span></span><br><span class="line"><span class="keyword">int</span> max = <span class="number">100</span>; <span class="comment">// 进度最大值</span></span><br><span class="line"><span class="keyword">int</span> progress = <span class="number">50</span>;  <span class="comment">// 当前进度</span></span><br><span class="line"><span class="keyword">boolean</span> indeterminate = <span class="keyword">false</span>; <span class="comment">// 是否是不明确的进度条,为true就是模糊的进度条,就那种花纹一直动的进度条</span></span><br><span class="line">builder.setProgress(max, progress, indeterminate);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//消息中的内容</span></span><br><span class="line">builder.setContentText(<span class="string">"小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容小内容"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置长文本,默认的是一行,多余的是省略号,这个是有多少就显示多少,如果启用这个,就不会显示小内容</span></span><br><span class="line">builder.setStyle(<span class="keyword">new</span> NotificationCompat.BigTextStyle().bigText(<span class="string">"长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容长内容"</span>));</span><br><span class="line"><span class="comment">//显示大图,如果设置这个,会显示一行小内容,然后显示大图片</span></span><br><span class="line">Bitmap aBigBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);</span><br><span class="line">builder.setStyle(<span class="keyword">new</span> NotificationCompat.BigPictureStyle().bigPicture(aBigBitmap));</span><br><span class="line"></span><br><span class="line"><span class="comment">//构建一个通知实体</span></span><br><span class="line">Notification notification = builder.build();</span><br><span class="line"><span class="comment">//通过消息管理器发送,第一个参数是消息id参数,要不一样,如果一样就视为同一个通知不会重复发送</span></span><br><span class="line">notificationManager.notify(num++, notification);</span><br><span class="line"><span class="comment">//管理器取消的通知,其中的id是上面发送里面的id</span></span><br><span class="line"><span class="comment">//notificationManager.cancel(0);</span></span><br><span class="line"><span class="comment">//清除所有通知</span></span><br><span class="line"><span class="comment">//notificationManager.cancelAll();</span></span><br></pre></td></tr></table></figure>
+<h3 id="自定义通知"><a href="#自定义通知" class="headerlink" title="自定义通知"></a>自定义通知</h3><p>先创建布局文件</p>
+<ul>
+<li>message.xml<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span> <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:gravity</span>=<span class="string">"center"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/iv"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:src</span>=<span class="string">"@mipmap/ic_launcher"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/tv"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:gravity</span>=<span class="string">"center"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"仗剑走天涯"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/btn1"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"播放"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/btn2"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"下一首"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Java代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);</span><br><span class="line">NotificationCompat.Builder builder = <span class="keyword">new</span> NotificationCompat.Builder(<span class="keyword">this</span>,<span class="string">"通知分组"</span>);</span><br><span class="line">builder.setSmallIcon(R.mipmap.ic_launcher);</span><br><span class="line"></span><br><span class="line"><span class="comment">//加载布局</span></span><br><span class="line">RemoteViews rv = <span class="keyword">new</span> RemoteViews(getPackageName(), R.layout.message);</span><br><span class="line"></span><br><span class="line">rv.setTextViewText(R.id.tv, <span class="string">"泡沫"</span>);<span class="comment">//修改自定义View中的歌名</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//通过pendingIntent发送广播的方式来设置监听事件</span></span><br><span class="line">Intent button1I = <span class="keyword">new</span> Intent(<span class="string">"btn1"</span>);</span><br><span class="line">PendingIntent button1PI = PendingIntent.getBroadcast(<span class="keyword">this</span>, <span class="number">0</span>, button1I, <span class="number">0</span>);</span><br><span class="line">rv.setOnClickPendingIntent(R.id.btn1,button1PI);</span><br><span class="line"></span><br><span class="line"><span class="comment">//修改自定义View中的图片(两种方法)</span></span><br><span class="line"><span class="comment">//        rv.setImageViewResource(R.id.iv,R.mipmap.ic_launcher);</span></span><br><span class="line">rv.setImageViewBitmap(R.id.iv, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));</span><br><span class="line">builder.setContent(rv);</span><br><span class="line">Notification notification = builder.build();</span><br><span class="line">notificationManager.notify(num++, notification);</span><br></pre></td></tr></table></figure></p>
+<h2 id="android内容提供者以及观察者"><a href="#android内容提供者以及观察者" class="headerlink" title="android内容提供者以及观察者"></a>android内容提供者以及观察者</h2><h3 id="内容提供者"><a href="#内容提供者" class="headerlink" title="内容提供者"></a>内容提供者</h3><p>内容提供器作为Android四大组建之一.感觉没啥太大用途.</p>
+<p>感觉就是一个应用程序创建一个可以被别的程序访问的数据库</p>
+<h4 id="访问其他程序中的数据"><a href="#访问其他程序中的数据" class="headerlink" title="访问其他程序中的数据"></a>访问其他程序中的数据</h4><p>如果想要访问别的内容提供器中的共享数据,就要借助ContentResolver类,可以通过Context中的getContentResolver方法得到,它提供了一些列对数据的crud操作,操作和sqlitedatabase很相似,但是ContentResolver没有库和表,而是用一个uri代替,如’content://com.xxx.xxxx.xxx/aaa’表示访问包名是com.xxx.xxxx.xxx程序的aaa表,然后进行curd操作</p>
+<h5 id="查询"><a href="#查询" class="headerlink" title="查询:"></a>查询:</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">getContentResolver().query(uri,projection,selection,selectionArgs,sortOrder);</span><br><span class="line"><span class="comment">//uri:看上面</span></span><br><span class="line"><span class="comment">//projection 指定的列名,相当于select的列名</span></span><br><span class="line"><span class="comment">//selection 查询条件,相当于where语句</span></span><br><span class="line"><span class="comment">//selectionArgs 查询条件中?的参数</span></span><br><span class="line"><span class="comment">//sortOrder 排序条件</span></span><br></pre></td></tr></table></figure>
+<p>返回的是一个cursor结果集,和sqlite用法一样</p>
+<ul>
+<li>查询手机上所有的联系人<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>);</span><br><span class="line"><span class="keyword">if</span>(cursor!=<span class="keyword">null</span>)&#123;</span><br><span class="line">    <span class="keyword">while</span>(cursor.moveToNext())&#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"onCreate: "</span>+cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)));</span><br><span class="line">        Log.d(TAG, <span class="string">"onCreate: "</span>+cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其中的参数都是系统预设的</p>
+<ul>
+<li><p>查询手机上电话为10086的联系人的名字</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Cursor cursor = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,<span class="keyword">new</span> String[]&#123;ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME&#125;,ContactsContract.CommonDataKinds.Phone.NUMBER+<span class="string">" = ?"</span>,<span class="keyword">new</span> String[]&#123;<span class="string">"10086"</span>&#125;,<span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">if</span>(cursor!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="comment">//找到了这个联系人</span></span><br><span class="line">        <span class="keyword">while</span>(cursor.moveToNext())&#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"onCreate: "</span>+cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//没找到这个联系人</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>插入联系人(参考)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">addContact(<span class="string">"zhangphil"</span>, <span class="string">"12345678901"</span>,<span class="string">"asdf@aa.com"</span>);</span><br><span class="line"><span class="comment">// 一个添加联系人信息的例子</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addContact</span><span class="params">(String name, String phoneNumber,String email)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个空的ContentValues</span></span><br><span class="line">    ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向RawContacts.CONTENT_URI空值插入，</span></span><br><span class="line">    <span class="comment">// 先获取Android系统返回的rawContactId</span></span><br><span class="line">    <span class="comment">// 后面要基于此id插入值</span></span><br><span class="line">    Uri rawContactUri = getContentResolver().insert(RawContacts.CONTENT_URI, values);</span><br><span class="line">    <span class="keyword">long</span> rawContactId = ContentUris.parseId(rawContactUri);</span><br><span class="line">    values.clear();</span><br><span class="line"></span><br><span class="line">    values.put(Data.RAW_CONTACT_ID, rawContactId);</span><br><span class="line">    <span class="comment">// 内容类型</span></span><br><span class="line">    values.put(Data.MIMETYPE, StructuredName.CONTENT_ITEM_TYPE);</span><br><span class="line">    <span class="comment">// 联系人名字</span></span><br><span class="line">    values.put(StructuredName.GIVEN_NAME, name);</span><br><span class="line">    <span class="comment">// 向联系人URI添加联系人名字</span></span><br><span class="line">    getContentResolver().insert(Data.CONTENT_URI, values);</span><br><span class="line">    values.clear();</span><br><span class="line"></span><br><span class="line">    values.put(Data.RAW_CONTACT_ID, rawContactId);</span><br><span class="line">    values.put(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE);</span><br><span class="line">    <span class="comment">// 联系人的电话号码</span></span><br><span class="line">    values.put(Phone.NUMBER, phoneNumber);</span><br><span class="line">    <span class="comment">// 电话类型</span></span><br><span class="line">    values.put(Phone.TYPE, Phone.TYPE_MOBILE);</span><br><span class="line">    <span class="comment">// 向联系人电话号码URI添加电话号码</span></span><br><span class="line">    getContentResolver().insert(Data.CONTENT_URI, values);</span><br><span class="line">    values.clear();</span><br><span class="line"></span><br><span class="line">    values.put(Data.RAW_CONTACT_ID, rawContactId);</span><br><span class="line">    values.put(Data.MIMETYPE, Email.CONTENT_ITEM_TYPE);</span><br><span class="line">    <span class="comment">// 联系人的Email地址</span></span><br><span class="line">    values.put(Email.DATA, email);</span><br><span class="line">    <span class="comment">// 电子邮件的类型</span></span><br><span class="line">    values.put(Email.TYPE, Email.TYPE_HOME);</span><br><span class="line">    <span class="comment">// 向联系人Email URI添加Email数据</span></span><br><span class="line">    getContentResolver().insert(Data.CONTENT_URI, values);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="内容观察者"><a href="#内容观察者" class="headerlink" title="内容观察者"></a>内容观察者</h3><p>内容观察者就是要观察一个uri,当这个uri下内容发生改变的时候执行的操作,类似于数据库的触发器<br>内容观察者要继承ContentObserver类,有一个handler参数用于多线程更新UI<br>主要方法是onChange(boolean self) 这个方法是当观察的uri发生改变的时候调用的方法</p>
+<h4 id="注册内容观察者"><a href="#注册内容观察者" class="headerlink" title="注册内容观察者"></a>注册内容观察者</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getContentResolver().registerContentObserver(uri,notifyForDescendents,ContentResolver);</span><br></pre></td></tr></table></figure>
+<p>uri是要监听的地址uri</p>
+<ul>
+<li>notifyForDescendents表示是否模糊匹配,例如一个uri为aa.bb.cc/dd,当notifyForDescendents为true的时候即模糊匹配,此时aa.bb.cc/ff发生变化时也会触发此观察者</li>
+</ul>
+<p>为false时只有aa.bb.cc/dd发生变化时触发</p>
+<p>ContentResolver是内容观察者对象</p>
+<h4 id="注销内容观察者"><a href="#注销内容观察者" class="headerlink" title="注销内容观察者"></a>注销内容观察者</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getContentResolver().unregisterContentObserver(ContentResolver);</span><br></pre></td></tr></table></figure>
+<h3 id="创建内容观察者"><a href="#创建内容观察者" class="headerlink" title="创建内容观察者"></a>创建内容观察者</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyContentResolver</span> <span class="keyword">extends</span> <span class="title">ContentObserver</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyContentResolver</span><span class="params">(Handler handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(handler);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onChange</span><span class="params">(<span class="keyword">boolean</span> selfChange)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onChange(selfChange);</span><br><span class="line">        Log.d(<span class="string">"onChange: "</span>,<span class="string">"发生了变化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/28/java操作数据库以及使用c3p0/" rel="next" title="java操作数据库以及使用c3p0">
+                <i class="fa fa-chevron-left"></i> java操作数据库以及使用c3p0
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/22/android的广播/" rel="prev" title="android的广播">
+                android的广播 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="xwmm">
+            
+              <p class="site-author-name" itemprop="name">xwmm</p>
+              <p class="site-description motion-element" itemprop="description">快写一行代码雅俗共赏</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xwmm" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/xwmdream" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xwmdream@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#android多线程"><span class="nav-number">1.</span> <span class="nav-text">android多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#runOnUiThread"><span class="nav-number">1.1.</span> <span class="nav-text">runOnUiThread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Handler"><span class="nav-number">1.2.</span> <span class="nav-text">Handler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android-retrofit2的基本使用-搭配rxjava"><span class="nav-number">2.</span> <span class="nav-text">android retrofit2的基本使用,搭配rxjava</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最简单的使用"><span class="nav-number">2.1.</span> <span class="nav-text">最简单的使用:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用异步获取返回的原生字符串"><span class="nav-number">2.2.</span> <span class="nav-text">使用异步获取返回的原生字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用rxjava"><span class="nav-number">2.3.</span> <span class="nav-text">使用rxjava</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印log"><span class="nav-number">2.4.</span> <span class="nav-text">打印log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义结果解析器"><span class="nav-number">2.5.</span> <span class="nav-text">自定义结果解析器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rxjava和rxAndroid"><span class="nav-number">3.</span> <span class="nav-text">rxjava和rxAndroid</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rxJava"><span class="nav-number">3.1.</span> <span class="nav-text">rxJava</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#另一些使用方法"><span class="nav-number">3.2.</span> <span class="nav-text">另一些使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简写被观察者"><span class="nav-number">3.2.1.</span> <span class="nav-text">简写被观察者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简写观察者"><span class="nav-number">3.2.2.</span> <span class="nav-text">简写观察者</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建完成或者错误的另一些方法"><span class="nav-number">3.3.</span> <span class="nav-text">创建完成或者错误的另一些方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程调度"><span class="nav-number">3.4.</span> <span class="nav-text">线程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作符的使用和Android的一些扩展可以看原文"><span class="nav-number">3.5.</span> <span class="nav-text">操作符的使用和Android的一些扩展可以看原文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android中webview的交互"><span class="nav-number">4.</span> <span class="nav-text">android中webview的交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webview中js调用Java代码"><span class="nav-number">4.1.</span> <span class="nav-text">webview中js调用Java代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java中调用js代码"><span class="nav-number">4.2.</span> <span class="nav-text">java中调用js代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用chrome调试APP中的网页"><span class="nav-number">4.3.</span> <span class="nav-text">使用chrome调试APP中的网页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些常见的错误"><span class="nav-number">4.4.</span> <span class="nav-text">一些常见的错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android调用相机和相册"><span class="nav-number">5.</span> <span class="nav-text">android调用相机和相册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#android调用相机拍照"><span class="nav-number">5.1.</span> <span class="nav-text">android调用相机拍照</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#android调用相册"><span class="nav-number">5.2.</span> <span class="nav-text">android调用相册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android通知的使用"><span class="nav-number">6.</span> <span class="nav-text">android通知的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#普通通知"><span class="nav-number">6.1.</span> <span class="nav-text">普通通知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义通知"><span class="nav-number">6.2.</span> <span class="nav-text">自定义通知</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android内容提供者以及观察者"><span class="nav-number">7.</span> <span class="nav-text">android内容提供者以及观察者</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内容提供者"><span class="nav-number">7.1.</span> <span class="nav-text">内容提供者</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#访问其他程序中的数据"><span class="nav-number">7.1.1.</span> <span class="nav-text">访问其他程序中的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查询"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">查询:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内容观察者"><span class="nav-number">7.2.</span> <span class="nav-text">内容观察者</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注册内容观察者"><span class="nav-number">7.2.1.</span> <span class="nav-text">注册内容观察者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注销内容观察者"><span class="nav-number">7.2.2.</span> <span class="nav-text">注销内容观察者</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建内容观察者"><span class="nav-number">7.3.</span> <span class="nav-text">创建内容观察者</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 1998 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xwmm</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("qk1gLKS0AJOBMCXNfEzeI1It-gzGzoHsz", "frKNCpELR6p7InuJcNh9XQD3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

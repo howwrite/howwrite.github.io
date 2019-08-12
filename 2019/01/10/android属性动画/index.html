@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="android,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="参考:Android 属性动画：这是一篇很详细的 属性动画 总结&amp;amp;攻略如果想深入学习属性动画建议去看原帖，我写的只是我理解的一些内容，没有原帖全 普通动画只是改变视觉效果，没有改变属性属性动画就是不断修改一些属性得到的动画 ValueAnimator类 定义：属性动画机制中 最核心的一个类 实现动画的原理：通过不断控制 值 的变化，再不断 手动 赋给对象的属性，从而实现动画效果  Valu">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android属性动画">
+<meta property="og:url" content="https://xwmm.github.io/2019/01/10/android属性动画/index.html">
+<meta property="og:site_name" content="菜鸟小码农">
+<meta property="og:description" content="参考:Android 属性动画：这是一篇很详细的 属性动画 总结&amp;amp;攻略如果想深入学习属性动画建议去看原帖，我写的只是我理解的一些内容，没有原帖全 普通动画只是改变视觉效果，没有改变属性属性动画就是不断修改一些属性得到的动画 ValueAnimator类 定义：属性动画机制中 最核心的一个类 实现动画的原理：通过不断控制 值 的变化，再不断 手动 赋给对象的属性，从而实现动画效果  Valu">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-22T23:02:49.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android属性动画">
+<meta name="twitter:description" content="参考:Android 属性动画：这是一篇很详细的 属性动画 总结&amp;amp;攻略如果想深入学习属性动画建议去看原帖，我写的只是我理解的一些内容，没有原帖全 普通动画只是改变视觉效果，没有改变属性属性动画就是不断修改一些属性得到的动画 ValueAnimator类 定义：属性动画机制中 最核心的一个类 实现动画的原理：通过不断控制 值 的变化，再不断 手动 赋给对象的属性，从而实现动画效果  Valu">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键词搜索","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"共找到 ${hits} 篇文章,花了 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xwmm.github.io/2019/01/10/android属性动画/">
+
+
+
+
+
+  <title>android属性动画 | 菜鸟小码农</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3ef70ce895a5b3a5f9eae294ced01ec5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">菜鸟小码农</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快写一行代码雅俗共赏</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xwmm.github.io/2019/01/10/android属性动画/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xwmm">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="菜鸟小码农">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">android属性动画</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T11:47:15+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/01/10/android属性动画/" class="leancloud_visitors" data-flag-title="android属性动画">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考:<a href="https://www.jianshu.com/p/2412d00a0ce4" target="_blank" rel="noopener">Android 属性动画：这是一篇很详细的 属性动画 总结&amp;攻略</a><br>如果想深入学习属性动画建议去看原帖，我写的只是我理解的一些内容，没有原帖全</p>
+<p>普通动画只是改变视觉效果，没有改变属性<br>属性动画就是不断修改一些属性得到的动画</p>
+<h2 id="ValueAnimator类"><a href="#ValueAnimator类" class="headerlink" title="ValueAnimator类"></a>ValueAnimator类</h2><ul>
+<li>定义：属性动画机制中 最核心的一个类</li>
+<li>实现动画的原理：通过不断控制 值 的变化，再不断 手动 赋给对象的属性，从而实现动画效果</li>
+</ul>
+<h3 id="ValueAnimator-ofInt-int-values"><a href="#ValueAnimator-ofInt-int-values" class="headerlink" title="ValueAnimator.ofInt(int values)"></a>ValueAnimator.ofInt(int values)</h3><p>作用：将初始值 以整型数值的形式 过渡到结束值</p>
+<blockquote>
+<p>即估值器是整型估值器 - IntEvaluator <a href="https://www.jianshu.com/p/2f19fe1e3ca1" target="_blank" rel="noopener">估值器</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">textView = (TextView) findViewById(R.id.tv_hello);</span><br><span class="line"><span class="comment">// 创建动画作用对象：此处以Button为例</span></span><br><span class="line"><span class="comment">// 步骤1：设置属性数值的初始值 &amp; 结束值</span></span><br><span class="line">ValueAnimator valueAnimator = ValueAnimator.ofInt(textView.getLayoutParams().width, <span class="number">500</span>);</span><br><span class="line"><span class="comment">// ofInt（）作用有两个</span></span><br><span class="line"><span class="comment">// 1. 创建动画实例</span></span><br><span class="line"><span class="comment">// 2. 将传入的多个Int参数进行平滑过渡:此处传入0和1,表示将值从0平滑过渡到1</span></span><br><span class="line"><span class="comment">// 如果传入了3个Int参数 a,b,c ,则是先从a平滑过渡到b,再从b平滑过渡到C，以此类推</span></span><br><span class="line"><span class="comment">// ValueAnimator.ofInt()内置了整型估值器,直接采用默认的.不需要设置，即默认设置了如何从初始值 过渡到 结束值</span></span><br><span class="line"><span class="comment">// 初始值 = 当前按钮的宽度</span></span><br><span class="line"><span class="comment">// 结束值 = 500</span></span><br><span class="line"><span class="comment">// 即默认设置了如何从初始值150 过渡到 结束值500</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 步骤2：设置动画的播放各种属性</span></span><br><span class="line">valueAnimator.setDuration(<span class="number">2000</span>);</span><br><span class="line"><span class="comment">// 设置动画运行的时长2s</span></span><br><span class="line">valueAnimator.setStartDelay(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// 设置动画延迟播放时间</span></span><br><span class="line">valueAnimator.setRepeatCount(<span class="number">3</span>);</span><br><span class="line"><span class="comment">// 设置动画重复播放次数 = 重放次数+1</span></span><br><span class="line"><span class="comment">// 动画播放次数 = infinite时,动画无限重复</span></span><br><span class="line">valueAnimator.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line"><span class="comment">// 设置重复播放动画模式</span></span><br><span class="line"><span class="comment">// ValueAnimator.RESTART(默认):正序重放</span></span><br><span class="line"><span class="comment">// ValueAnimator.REVERSE:倒序回放</span></span><br><span class="line"><span class="comment">// 步骤3：将改变的值手动赋值给对象的属性值：通过动画的更新监听器</span></span><br><span class="line"><span class="comment">// 设置 值的更新监听器</span></span><br><span class="line"><span class="comment">// 即：值每次改变、变化一次,该方法就会被调用一次</span></span><br><span class="line">valueAnimator.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animator)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> currentValue = (Integer) animator.getAnimatedValue();</span><br><span class="line">        <span class="comment">// 获得每次变化后的属性值</span></span><br><span class="line">        textView.getLayoutParams().width = currentValue;</span><br><span class="line">        <span class="comment">// 每次值变化时，将值手动赋值给对象的属性</span></span><br><span class="line">        <span class="comment">// 即将每次变化后的值 赋 给按钮的宽度，这样就实现了按钮宽度属性的动态变化</span></span><br><span class="line">        <span class="comment">// 步骤4：刷新视图，即重新绘制，从而实现动画效果</span></span><br><span class="line">        textView.requestLayout();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">valueAnimator.start();</span><br><span class="line"><span class="comment">// 启动动画</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<ul>
+<li>也就是一个在一定时间内变化的整数，使用addUpdateListener监听这个整数变化从而根据这个值进行不同的操作</li>
+<li>使用了默认的估值器，估值器是在不同的时间返回不同的值，默认估值器的值是匀速变化</li>
+<li>上面把每次更新的值通过改变textview的形式展现出来</li>
+</ul>
+<h3 id="ValueAnimator-ofFloat-float-values"><a href="#ValueAnimator-ofFloat-float-values" class="headerlink" title="ValueAnimator.ofFloat(float values)"></a>ValueAnimator.ofFloat(float values)</h3><ul>
+<li>和ofInt一样，只不过参数类型成了float</li>
+<li>ValueAnimator.oFloat（）采用默认的浮点型估值器 (FloatEvaluator)</li>
+<li>ValueAnimator.ofInt（）采用默认的整型估值器（IntEvaluator）<br>在使用上完全没有区别，此处对ValueAnimator.oFloat（）的使用就不作过多描述。</li>
+</ul>
+<h3 id="ValueAnimator-ofObject"><a href="#ValueAnimator-ofObject" class="headerlink" title="ValueAnimator.ofObject"></a>ValueAnimator.ofObject</h3><p>先说说动画中很重要的两个概念<br>插值器和估值器 <a href="https://www.jianshu.com/p/2f19fe1e3ca1" target="_blank" rel="noopener">插值器和估值器详解</a></p>
+<ul>
+<li>总的来说插值器就是给当时间进行到百分之多少的时候动画执行百分之多少</li>
+<li>估值器是给你初始值和结束值还有动画执行百分比，返回这个百分比下应该取什么值</li>
+</ul>
+<p>ValueAnimator.ofObject需要重写一个估值器</p>
+<ol>
+<li><p>先设置一个装值的类Point.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> x;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> y;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Point&#123;"</span> +</span><br><span class="line">                <span class="string">"x="</span> + x +</span><br><span class="line">                <span class="string">", y="</span> + y +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Point</span><span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.x = x;</span><br><span class="line">        <span class="keyword">this</span>.y = y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getX</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getY</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写一个估值器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PointEvaluator</span> <span class="keyword">implements</span> <span class="title">TypeEvaluator</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 复写evaluate（）</span></span><br><span class="line">    <span class="comment">// 在evaluate（）里写入对象动画过渡的逻辑</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">evaluate</span><span class="params">(<span class="keyword">float</span> fraction, Object startValue, Object endValue)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将动画初始值startValue 和 动画结束值endValue 强制类型转换成Point对象</span></span><br><span class="line">        Point startPoint = (Point) startValue;</span><br><span class="line">        Point endPoint = (Point) endValue;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 根据fraction来计算当前动画的x和y的值</span></span><br><span class="line">        <span class="keyword">float</span> x = startPoint.getX() + fraction * (endPoint.getX() - startPoint.getX());</span><br><span class="line">        <span class="keyword">float</span> y = startPoint.getY() + fraction * (endPoint.getY() - startPoint.getY());</span><br><span class="line">        <span class="comment">// 将计算后的坐标封装到一个新的Point对象中并返回</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Point(x, y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>这个估值器匀速改变x和y的值</li>
+</ul>
+<ol start="3">
+<li>调用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ValueAnimator anim = ValueAnimator.ofObject(<span class="keyword">new</span> PointEvaluator(), <span class="keyword">new</span> Point(<span class="number">0</span>,<span class="number">0</span>), <span class="keyword">new</span> Point(<span class="number">100</span>,<span class="number">100</span>));</span><br><span class="line">anim.setDuration(<span class="number">5000</span>);</span><br><span class="line">anim.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animation)</span> </span>&#123;</span><br><span class="line">        Point currentPoint = (Point) animation.getAnimatedValue();</span><br><span class="line">        Log.d(TAG, <span class="string">"onAnimationUpdate: "</span>+currentPoint);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">anim.start();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其他方法和上面一样</p>
+<ul>
+<li>从上面可以看出，其实ValueAnimator.ofObject（）的本质还是操作值，只是是采用将 多个值 封装到一个对象里的方式 同时对多个值一起操作而已</li>
+</ul>
+<h2 id="ObjectAnimator类"><a href="#ObjectAnimator类" class="headerlink" title="ObjectAnimator类"></a>ObjectAnimator类</h2><h3 id="实现动画的原理"><a href="#实现动画的原理" class="headerlink" title="实现动画的原理"></a>实现动画的原理</h3><p>直接对对象的属性值进行改变操作，从而实现动画效果</p>
+<ul>
+<li>如直接改变 View的 alpha 属性 从而实现透明度的动画效果</li>
+<li><p>继承自ValueAnimator类，即底层的动画实现机制是基于ValueAnimator类</p>
+</li>
+<li><p>ValueAnimator 类是先改变值，然后 手动赋值 给对象的属性从而实现动画；是 间接 对对象属性进行操作；</p>
+</li>
+<li>ObjectAnimator 类是先改变值，然后 自动赋值 给对象的属性从而实现动画；是 直接 对对象属性进行操作；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator animator = ObjectAnimator.ofFloat(Object object, String property, <span class="keyword">float</span> ....values);</span><br><span class="line"><span class="comment">// ofFloat()作用有两个</span></span><br><span class="line"><span class="comment">// 1. 创建动画实例</span></span><br><span class="line"><span class="comment">// 2. 参数设置：参数说明如下</span></span><br><span class="line"><span class="comment">// Object object：需要操作的对象</span></span><br><span class="line"><span class="comment">// String property：需要操作的对象的属性</span></span><br><span class="line"><span class="comment">// float ....values：动画初始值 &amp; 结束值（不固定长度）</span></span><br><span class="line"><span class="comment">// 若是两个参数a,b，则动画效果则是从属性的a值到b值</span></span><br><span class="line"><span class="comment">// 若是三个参数a,b,c，则则动画效果则是从属性的a值到b值再到c值</span></span><br><span class="line"><span class="comment">// 以此类推</span></span><br><span class="line"><span class="comment">// 至于如何从初始值 过渡到 结束值，同样是由估值器决定，此处ObjectAnimator.ofFloat（）是有系统内置的浮点型估值器FloatEvaluator，同ValueAnimator讲解</span></span><br><span class="line"></span><br><span class="line">anim.setDuration(<span class="number">500</span>);</span><br><span class="line"><span class="comment">// 设置动画运行的时长</span></span><br><span class="line"></span><br><span class="line">anim.setStartDelay(<span class="number">500</span>);</span><br><span class="line"><span class="comment">// 设置动画延迟播放时间</span></span><br><span class="line"></span><br><span class="line">anim.setRepeatCount(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// 设置动画重复播放次数 = 重放次数+1</span></span><br><span class="line"><span class="comment">// 动画播放次数 = infinite时,动画无限重复</span></span><br><span class="line"></span><br><span class="line">anim.setRepeatMode(ValueAnimator.RESTART);</span><br><span class="line"><span class="comment">// 设置重复播放动画模式</span></span><br><span class="line"><span class="comment">// ValueAnimator.RESTART(默认):正序重放</span></span><br><span class="line"><span class="comment">// ValueAnimator.REVERSE:倒序回放</span></span><br><span class="line">animator.start();</span><br><span class="line"><span class="comment">// 启动动画</span></span><br></pre></td></tr></table></figure>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//透明度</span></span><br><span class="line">textView = (TextView) findViewById(R.id.tv_hello);</span><br><span class="line">ObjectAnimator animator = ObjectAnimator.ofFloat(textView, <span class="string">"alpha"</span>, <span class="number">1f</span>, <span class="number">0f</span>, <span class="number">1f</span>);</span><br><span class="line"><span class="comment">// 表示的是:</span></span><br><span class="line"><span class="comment">// 动画作用对象是mButton</span></span><br><span class="line"><span class="comment">// 动画作用的对象的属性是透明度alpha</span></span><br><span class="line"><span class="comment">// 动画效果是:常规 - 全透明 - 常规</span></span><br><span class="line">animator.setDuration(<span class="number">5000</span>);</span><br><span class="line">animator.start();</span><br><span class="line"></span><br><span class="line"><span class="comment">//旋转</span></span><br><span class="line">ObjectAnimator animator = ObjectAnimator.ofFloat(textView, <span class="string">"rotation"</span>, <span class="number">0f</span>, <span class="number">360f</span>);</span><br><span class="line"><span class="comment">// 表示的是:</span></span><br><span class="line"><span class="comment">// 动画作用对象是mButton</span></span><br><span class="line"><span class="comment">// 动画作用的对象的属性是旋转alpha</span></span><br><span class="line"><span class="comment">// 动画效果是:0 - 360</span></span><br><span class="line">animator.setDuration(<span class="number">5000</span>);</span><br><span class="line">animator.start();</span><br><span class="line"></span><br><span class="line"><span class="comment">//平移</span></span><br><span class="line"><span class="keyword">float</span> curTranslationX = mButton.getTranslationX();</span><br><span class="line"><span class="comment">// 获得当前按钮的位置</span></span><br><span class="line">ObjectAnimator animator = ObjectAnimator.ofFloat(mButton, <span class="string">"translationX"</span>, curTranslationX, <span class="number">300</span>,curTranslationX);</span><br><span class="line"><span class="comment">// 表示的是:</span></span><br><span class="line"><span class="comment">// 动画作用对象是mButton</span></span><br><span class="line"><span class="comment">// 动画作用的对象的属性是X轴平移（在Y轴上平移同理，采用属性"translationY"</span></span><br><span class="line"><span class="comment">// 动画效果是:从当前位置平移到 x=1500 再平移到初始位置</span></span><br><span class="line">animator.setDuration(<span class="number">5000</span>);</span><br><span class="line">animator.start();</span><br><span class="line"></span><br><span class="line"><span class="comment">//缩放</span></span><br><span class="line">ObjectAnimator animator = ObjectAnimator.ofFloat(mButton, <span class="string">"scaleX"</span>, <span class="number">1f</span>, <span class="number">3f</span>, <span class="number">1f</span>);</span><br><span class="line"><span class="comment">// 表示的是:</span></span><br><span class="line"><span class="comment">// 动画作用对象是mButton</span></span><br><span class="line"><span class="comment">// 动画作用的对象的属性是X轴缩放</span></span><br><span class="line"><span class="comment">// 动画效果是:放大到3倍,再缩小到初始大小</span></span><br><span class="line">animator.setDuration(<span class="number">5000</span>);</span><br><span class="line">animator.start();</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">作用</th>
+<th style="text-align:left">数值类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Alpha</td>
+<td style="text-align:left">控制View的透明度</td>
+<td style="text-align:left">float</td>
+</tr>
+<tr>
+<td style="text-align:left">TranslationX</td>
+<td style="text-align:left">控制X方向的位移</td>
+<td style="text-align:left">float</td>
+</tr>
+<tr>
+<td style="text-align:left">TranslationY</td>
+<td style="text-align:left">控制Y方向的位移</td>
+<td style="text-align:left">float</td>
+</tr>
+<tr>
+<td style="text-align:left">ScaleX</td>
+<td style="text-align:left">控制X方向的缩放倍数</td>
+<td style="text-align:left">float</td>
+</tr>
+<tr>
+<td style="text-align:left">ScaleY</td>
+<td style="text-align:left">控制Y方向的缩放倍数</td>
+<td style="text-align:left">float</td>
+</tr>
+<tr>
+<td style="text-align:left">Rotation</td>
+<td style="text-align:left">控制以屏幕方向为轴的旋转度数</td>
+<td style="text-align:left">float</td>
+</tr>
+<tr>
+<td style="text-align:left">RotationX</td>
+<td style="text-align:left">控制以X轴为轴的旋转度数</td>
+<td style="text-align:left">float</td>
+</tr>
+<tr>
+<td style="text-align:left">RotationY</td>
+<td style="text-align:left">控制以Y轴为轴的旋转度数</td>
+<td style="text-align:left">float</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ObjectAnimator自定义属性值"><a href="#ObjectAnimator自定义属性值" class="headerlink" title="ObjectAnimator自定义属性值"></a>ObjectAnimator自定义属性值</h3><ul>
+<li>其实每一个属性都是对应的set和get方法，ObjectAnimator每次都会对被动画对象的set和get方法进行赋值，比如修改”color”属性，那么对象就有setColor和getColor方法</li>
+</ul>
+<ol>
+<li><p>自定义一个类,写一个set方法<br>MyView.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyView</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"myView"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAa</span><span class="params">(String color)</span> </span>&#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"setAa: "</span>+color);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写一个估值器,重写evaluate方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyEvaluator</span> <span class="keyword">implements</span> <span class="title">TypeEvaluator</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">evaluate</span><span class="params">(<span class="keyword">float</span> fraction, Object startValue, Object endValue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"s"</span>+fraction;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MyView textView = <span class="keyword">new</span> MyView();</span><br><span class="line">ObjectAnimator animator = ObjectAnimator.ofObject(textView, <span class="string">"aa"</span>, <span class="keyword">new</span> MyEvaluator(),</span><br><span class="line">        <span class="string">""</span>, <span class="string">""</span>);</span><br><span class="line">animator.setDuration(<span class="number">5000</span>);</span><br><span class="line">animator.start();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>注意ObjectAnimator.ofObject第二个参数除了第一个字母可以忽略大小写，后面的字母一定要和set方法的大小写对应</li>
+</ul>
+<h2 id="额外的使用方法"><a href="#额外的使用方法" class="headerlink" title="额外的使用方法"></a>额外的使用方法</h2><h3 id="组合动画AnimatorSet"><a href="#组合动画AnimatorSet" class="headerlink" title="组合动画AnimatorSet"></a>组合动画AnimatorSet</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AnimatorSet.play(Animator anim)   <span class="comment">//：播放当前动画</span></span><br><span class="line">AnimatorSet.after(<span class="keyword">long</span> delay)   <span class="comment">//：将现有动画延迟x毫秒后执行</span></span><br><span class="line">AnimatorSet.with(Animator anim)   <span class="comment">//：将现有动画和传入的动画同时执行</span></span><br><span class="line">AnimatorSet.after(Animator anim)   <span class="comment">//：将现有动画插入到传入的动画之后执行</span></span><br><span class="line">AnimatorSet.before(Animator anim) <span class="comment">//：  将现有动画插入到传入的动画之前执行</span></span><br></pre></td></tr></table></figure>
+<p>例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 步骤1：设置需要组合的动画效果</span></span><br><span class="line">ObjectAnimator translation = ObjectAnimator.ofFloat(mButton, <span class="string">"translationX"</span>, curTranslationX, <span class="number">300</span>,curTranslationX);</span><br><span class="line"><span class="comment">// 平移动画</span></span><br><span class="line">ObjectAnimator rotate = ObjectAnimator.ofFloat(mButton, <span class="string">"rotation"</span>, <span class="number">0f</span>, <span class="number">360f</span>);</span><br><span class="line"><span class="comment">// 旋转动画</span></span><br><span class="line">ObjectAnimator alpha = ObjectAnimator.ofFloat(mButton, <span class="string">"alpha"</span>, <span class="number">1f</span>, <span class="number">0f</span>, <span class="number">1f</span>);</span><br><span class="line"><span class="comment">// 透明度动画</span></span><br><span class="line"><span class="comment">// 步骤2：创建组合动画的对象</span></span><br><span class="line">AnimatorSet animSet = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line"><span class="comment">// 步骤3：根据需求组合动画</span></span><br><span class="line">animSet.play(translation).with(rotate).before(alpha);</span><br><span class="line">animSet.setDuration(<span class="number">5000</span>);</span><br><span class="line"><span class="comment">// 步骤4：启动动画</span></span><br><span class="line">animSet.start();</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>实现效果是平移动画和旋转动画同时进行，他们结束后执行透明度动画</li>
+</ul>
+<h3 id="ViewPropertyAnimator"><a href="#ViewPropertyAnimator" class="headerlink" title="ViewPropertyAnimator"></a>ViewPropertyAnimator</h3><ul>
+<li>从上面可以看出，属性动画的本质是对值操作</li>
+<li>但Java是面向对象的，所以 Google 团队添加面向对象操作的属性动画使用 - ViewPropertyAnimator类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用解析</span></span><br><span class="line">View.animate().xxx().xxx();</span><br><span class="line"><span class="comment">// ViewPropertyAnimator的功能建立在animate()上</span></span><br><span class="line"><span class="comment">// 调用animate()方法返回值是一个ViewPropertyAnimator对象,之后的调用的所有方法都是通过该实例完成</span></span><br><span class="line"><span class="comment">// 调用该实例的各种方法来实现动画效果</span></span><br><span class="line"><span class="comment">// ViewPropertyAnimator所有接口方法都使用连缀语法来设计，每个方法的返回值都是它自身的实例</span></span><br><span class="line"><span class="comment">// 因此调用完一个方法后可直接连缀调用另一方法,即可通过一行代码就完成所有动画效果</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下是例子</span></span><br><span class="line">mButton = (Button) findViewById(R.id.Button);</span><br><span class="line"><span class="comment">// 创建动画作用对象：此处以Button为例</span></span><br><span class="line"></span><br><span class="line">mButton.animate().alpha(<span class="number">0f</span>);</span><br><span class="line"><span class="comment">// 单个动画设置:将按钮变成透明状态</span></span><br><span class="line">mButton.animate().alpha(<span class="number">0f</span>).setDuration(<span class="number">5000</span>).setInterpolator(<span class="keyword">new</span> BounceInterpolator());</span><br><span class="line"><span class="comment">// 单个动画效果设置 &amp; 参数设置</span></span><br><span class="line">mButton.animate().alpha(<span class="number">0f</span>).x(<span class="number">500</span>).y(<span class="number">500</span>);</span><br><span class="line"><span class="comment">// 组合动画:将按钮变成透明状态再移动到(500,500)处</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 特别注意:</span></span><br><span class="line"><span class="comment">// 动画自动启动,无需调用start()方法.因为新的接口中使用了隐式启动动画的功能，只要我们将动画定义完成后，动画就会自动启动</span></span><br><span class="line"><span class="comment">// 该机制对于组合动画也同样有效，只要不断地连缀新的方法，那么动画就不会立刻执行，等到所有在ViewPropertyAnimator上设置的方法都执行完毕后，动画就会自动启动</span></span><br><span class="line"><span class="comment">// 如果不想使用这一默认机制，也可以显式地调用start()方法来启动动画</span></span><br></pre></td></tr></table></figure>
+<h3 id="监听动画"><a href="#监听动画" class="headerlink" title="监听动画"></a>监听动画</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Animation.addListener(<span class="keyword">new</span> AnimatorListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animation animation)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//动画开始时执行</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationRepeat</span><span class="params">(Animation animation)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//动画重复时执行</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationCancel</span><span class="params">()</span><span class="params">(Animation animation)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//动画取消时执行</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animation animation)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//动画结束时执行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 特别注意：每次监听必须4个方法都重写。</span></span><br></pre></td></tr></table></figure>
+<h5 id="动画适配器"><a href="#动画适配器" class="headerlink" title="动画适配器"></a>动画适配器</h5><ul>
+<li>背景：有些时候我们并不需要监听动画的所有时刻</li>
+<li>问题：但addListener(new AnimatorListener())监听器是必须重写4个时刻方法，这使得接口方法重写太累赘</li>
+<li>解决方案：采用动画适配器（AnimatorListenerAdapter），解决</li>
+<li>实现接口繁琐 的问题<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">anim.addListener(<span class="keyword">new</span> AnimatorListenerAdapter() &#123;</span><br><span class="line"><span class="comment">// 向addListener()方法中传入适配器对象AnimatorListenerAdapter()</span></span><br><span class="line"><span class="comment">// 由于AnimatorListenerAdapter中已经实现好每个接口</span></span><br><span class="line"><span class="comment">// 所以这里不实现全部方法也不会报错</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 如想只想监听动画开始时刻，就只需要单独重写该方法就可以</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>作者：Carson_Ho<br>链接：<a href="https://www.jianshu.com/p/2412d00a0ce4" target="_blank" rel="noopener">https://www.jianshu.com/p/2412d00a0ce4</a><br>來源：简书<br>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/02/RecyclerView分割线附上顶吸/" rel="next" title="RecyclerView分割线附上顶吸">
+                <i class="fa fa-chevron-left"></i> RecyclerView分割线附上顶吸
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/12/spring入门-Bean/" rel="prev" title="spring入门-Bean">
+                spring入门-Bean <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="xwmm">
+            
+              <p class="site-author-name" itemprop="name">xwmm</p>
+              <p class="site-description motion-element" itemprop="description">快写一行代码雅俗共赏</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xwmm" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/xwmdream" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xwmdream@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ValueAnimator类"><span class="nav-number">1.</span> <span class="nav-text">ValueAnimator类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ValueAnimator-ofInt-int-values"><span class="nav-number">1.1.</span> <span class="nav-text">ValueAnimator.ofInt(int values)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ValueAnimator-ofFloat-float-values"><span class="nav-number">1.2.</span> <span class="nav-text">ValueAnimator.ofFloat(float values)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ValueAnimator-ofObject"><span class="nav-number">1.3.</span> <span class="nav-text">ValueAnimator.ofObject</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ObjectAnimator类"><span class="nav-number">2.</span> <span class="nav-text">ObjectAnimator类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现动画的原理"><span class="nav-number">2.1.</span> <span class="nav-text">实现动画的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">2.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ObjectAnimator自定义属性值"><span class="nav-number">2.3.</span> <span class="nav-text">ObjectAnimator自定义属性值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#额外的使用方法"><span class="nav-number">3.</span> <span class="nav-text">额外的使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组合动画AnimatorSet"><span class="nav-number">3.1.</span> <span class="nav-text">组合动画AnimatorSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ViewPropertyAnimator"><span class="nav-number">3.2.</span> <span class="nav-text">ViewPropertyAnimator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监听动画"><span class="nav-number">3.3.</span> <span class="nav-text">监听动画</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#动画适配器"><span class="nav-number">3.3.0.1.</span> <span class="nav-text">动画适配器</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 1998 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xwmm</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("qk1gLKS0AJOBMCXNfEzeI1It-gzGzoHsz", "frKNCpELR6p7InuJcNh9XQD3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
