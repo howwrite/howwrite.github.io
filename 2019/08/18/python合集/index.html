@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="python爬虫入门JANUARY 23, 2018学习mooc:https://www.icourse163.org/learn/BIT-1001870001 第一天:requests库的基本使用方法requests有七个基本方法,分别是    方法 说明     requests.request() 构造一个请求，支撑以下各方法的基础方法   requests.get() 获取HTML网页的主">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python合集">
+<meta property="og:url" content="https://xwmm.github.io/2019/08/18/python合集/index.html">
+<meta property="og:site_name" content="菜鸟小码农">
+<meta property="og:description" content="python爬虫入门JANUARY 23, 2018学习mooc:https://www.icourse163.org/learn/BIT-1001870001 第一天:requests库的基本使用方法requests有七个基本方法,分别是    方法 说明     requests.request() 构造一个请求，支撑以下各方法的基础方法   requests.get() 获取HTML网页的主">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://xwmm.github.io/upload/1516670086306701.png">
+<meta property="og:updated_time" content="2019-08-18T08:11:06.814Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python合集">
+<meta name="twitter:description" content="python爬虫入门JANUARY 23, 2018学习mooc:https://www.icourse163.org/learn/BIT-1001870001 第一天:requests库的基本使用方法requests有七个基本方法,分别是    方法 说明     requests.request() 构造一个请求，支撑以下各方法的基础方法   requests.get() 获取HTML网页的主">
+<meta name="twitter:image" content="https://xwmm.github.io/upload/1516670086306701.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键词搜索","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"共找到 ${hits} 篇文章,花了 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xwmm.github.io/2019/08/18/python合集/">
+
+
+
+
+
+  <title>python合集 | 菜鸟小码农</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3ef70ce895a5b3a5f9eae294ced01ec5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">菜鸟小码农</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">快写一行代码雅俗共赏</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xwmm.github.io/2019/08/18/python合集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xwmm">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="菜鸟小码农">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python合集</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-18T15:47:30+08:00">
+                2019-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/18/python合集/" class="leancloud_visitors" data-flag-title="python合集">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="python爬虫入门"><a href="#python爬虫入门" class="headerlink" title="python爬虫入门"></a>python爬虫入门</h2><p>JANUARY 23, 2018<br>学习mooc:<a href="https://www.icourse163.org/learn/BIT-1001870001" target="_blank" rel="noopener">https://www.icourse163.org/learn/BIT-1001870001</a></p>
+<p>第一天:requests库的基本使用方法<br>requests有七个基本方法,分别是</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">requests.request()</td>
+<td style="text-align:left">构造一个请求，支撑以下各方法的基础方法</td>
+</tr>
+<tr>
+<td style="text-align:left">requests.get()</td>
+<td style="text-align:left">获取HTML网页的主要方法，对应于HTTP的GET</td>
+</tr>
+<tr>
+<td style="text-align:left">requests.head()</td>
+<td style="text-align:left">获取HTML网页头信息的方法，对应于HTTP的HEAD</td>
+</tr>
+<tr>
+<td style="text-align:left">requests.post()</td>
+<td style="text-align:left">向HTML网页提交POST请求的方法，对应于HTTP的POST</td>
+</tr>
+<tr>
+<td style="text-align:left">requests.put()</td>
+<td style="text-align:left">向HTML网页提交PUT请求的方法，对应于HTTP的PUT</td>
+</tr>
+<tr>
+<td style="text-align:left">requests.patch()</td>
+<td style="text-align:left">向HTML网页提交局部修改请求，对应于HTTP的PATCH</td>
+</tr>
+<tr>
+<td style="text-align:left">requests.delete()</td>
+<td style="text-align:left">向HTML页面提交删除请求，对应于HTTP的DELETE</td>
+</tr>
+</tbody>
+</table>
+<p>除了第一个另外六个是对应的http协议对资源的操作,但是看源码可以发现,第二个到底七个方法都是调用的第一个方法,也可以说requests只有一个request方法<br><img src="/upload/1516670086306701.png" alt="图片丢失"></p>
+<p>返回值是一个Response对象</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">r.status_code</td>
+<td style="text-align:left">http请求的返回状态码,200表示成功,其他表示失败</td>
+</tr>
+<tr>
+<td style="text-align:left">r.text</td>
+<td style="text-align:left">HTTP响应内容的字符串形式，即，url对应的页面内容</td>
+</tr>
+<tr>
+<td style="text-align:left">r.encoding</td>
+<td style="text-align:left">从HTTP header中猜测的响应内容编码方式</td>
+</tr>
+<tr>
+<td style="text-align:left">r.apparent_encoding</td>
+<td style="text-align:left">从内容中分析出的响应内容编码方式（备选编码方式）</td>
+</tr>
+<tr>
+<td style="text-align:left">r.content</td>
+<td style="text-align:left">HTTP响应内容的二进制形式</td>
+</tr>
+</tbody>
+</table>
+<p>其中r.encoding是从请求头中得到的编码信息,如果header中不存在charset，则认为编码为ISO‐8859‐1, r.text根据r.encoding显示网页内容,可能不准确,r.apparent_encoding是从具体内容中分析出来的编码信息,可能更加准确</p>
+<h3 id="Requests异常"><a href="#Requests异常" class="headerlink" title="Requests异常"></a>Requests异常</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">异常</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">requests.ConnectionError</td>
+<td style="text-align:left">网络连接错误异常，如DNS查询失败、拒绝连接等</td>
+</tr>
+<tr>
+<td style="text-align:left">requests.HTTPError</td>
+<td style="text-align:left">HTTP错误异常</td>
+</tr>
+<tr>
+<td style="text-align:left">requests.URLRequired</td>
+<td style="text-align:left">URL缺失异常</td>
+</tr>
+<tr>
+<td style="text-align:left">requests.TooManyRedirects</td>
+<td style="text-align:left">超过最大重定向次数，产生重定向异常</td>
+</tr>
+<tr>
+<td style="text-align:left">requests.ConnectTimeout</td>
+<td style="text-align:left">连接远程服务器超时异常</td>
+</tr>
+<tr>
+<td style="text-align:left">requests.Timeout</td>
+<td style="text-align:left">请求URL超时，产生超时异常</td>
+</tr>
+</tbody>
+</table>
+<p>requests有一个专门处理异常的方法<br>r.raise_for_status()如果不是200，产生异常 requests.HTTPError</p>
+<h3 id="requests的爬虫基本框架"><a href="#requests的爬虫基本框架" class="headerlink" title="requests的爬虫基本框架"></a>requests的爬虫基本框架</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHtmlText</span><span class="params">(url)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        r=requests.get(url)</span><br><span class="line">        r.raise_for_status()</span><br><span class="line">        r.encoding=r.apparent_encoding</span><br><span class="line">        <span class="keyword">return</span> r.text</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'产生异常'</span></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    url=<span class="string">'http://www.baidu.com'</span></span><br><span class="line">    print(getHtmlText(url))</span><br></pre></td></tr></table></figure>
+<h3 id="requests方法详解"><a href="#requests方法详解" class="headerlink" title="requests方法详解"></a>requests方法详解</h3><p>requests.request(method, url, **kwargs)<br>method : 请求方式，对应get/put/post等7种<br>url : 拟获取页面的url链接<br>**kwargs: 控制访问的参数，共13个</p>
+<p>∙ method : 请求方式<br>r = requests.request(‘GET’, url, **kwargs)<br>r = requests.request(‘HEAD’, url, **kwargs)<br>r = requests.request(‘POST’, url,**kwargs)<br>r = requests.request(‘PUT’, url, **kwargs)<br>r = requests.request(‘PATCH’, url, **kwargs)<br>r = requests.request(‘delete’, url, **kwargs)<br>r = requests.request(‘OPTIONS’, url, **kwargs)<br>∙ **kwargs: 控制访问的参数均为可选项<br>params : 字典或字节序列，作为参数增加到url中</p>
+<blockquote>
+<p>kv = {‘key1’: ‘value1’, ‘key2’: ‘value2’}<br>r = requests.request(‘GET’, ‘<a href="http://python123.io/ws&#39;" target="_blank" rel="noopener">http://python123.io/ws&#39;</a>, params=kv)<br>print(r.url)<br><a href="http://python123.io/ws?key1=value1&amp;key2=value2" target="_blank" rel="noopener">http://python123.io/ws?key1=value1&amp;key2=value2</a></p>
+</blockquote>
+<p>data : 字典、字节序列或文件对象，作为Request的内容</p>
+<blockquote>
+<p>kv = {‘key1’: ‘value1’, ‘key2’: ‘value2’}<br>r = requests.request(‘POST’, ‘<a href="http://python123.io/ws&#39;" target="_blank" rel="noopener">http://python123.io/ws&#39;</a>, data=kv)<br>body = ‘主体内容’<br>r = requests.request(‘POST’, ‘<a href="http://python123.io/ws&#39;" target="_blank" rel="noopener">http://python123.io/ws&#39;</a>, data=body)</p>
+</blockquote>
+<p>json : JSON格式的数据，作为Request的内容</p>
+<blockquote>
+<p>kv = {‘key1’: ‘value1’}<br>r = requests.request(‘POST’, ‘<a href="http://python123.io/ws&#39;" target="_blank" rel="noopener">http://python123.io/ws&#39;</a>, json=kv)</p>
+</blockquote>
+<p>headers : 字典，HTTP定制头</p>
+<blockquote>
+<p>hd = {‘user‐agent’: ‘Chrome/10’}<br>r = requests.request(‘POST’, ‘<a href="http://python123.io/ws&#39;" target="_blank" rel="noopener">http://python123.io/ws&#39;</a>, headers=hd)</p>
+</blockquote>
+<p>cookies : 字典或CookieJar，Request中的cookie<br>auth : 元组，支持HTTP认证功能</p>
+<p>files : 字典类型，传输文件</p>
+<blockquote>
+<p>fs = {‘file’: open(‘data.xls’, ‘rb’)}<br>r = requests.request(‘POST’, ‘<a href="http://python123.io/ws&#39;" target="_blank" rel="noopener">http://python123.io/ws&#39;</a>, files=fs)</p>
+</blockquote>
+<p>timeout : 设定超时时间，秒为单位</p>
+<blockquote>
+<p>r = requests.request(‘GET’, ‘<a href="http://www.baidu.com&#39;" target="_blank" rel="noopener">http://www.baidu.com&#39;</a>, timeout=10)</p>
+</blockquote>
+<p>proxies : 字典类型，设定访问代理服务器，可以增加登录认证</p>
+<blockquote>
+<p>pxs = { ‘http’: ‘<a href="http://user:pass@10.10.10.1:1234&#39;,&#39;https&#39;" target="_blank" rel="noopener">http://user:pass@10.10.10.1:1234&#39;,&#39;https&#39;</a>: ‘<a href="https://10.10.10.1:4321&#39;" target="_blank" rel="noopener">https://10.10.10.1:4321&#39;</a> }<br>r = requests.request(‘GET’, ‘<a href="http://www.baidu.com&#39;" target="_blank" rel="noopener">http://www.baidu.com&#39;</a>, proxies=pxs)<br>allow_redirects : True/False，默认为True，重定向开关<br>stream : True/False，默认为True，获取内容立即下载开关<br>verify : True/False，默认为True，认证SSL证书开关<br>cert : 本地SSL证书路径</p>
+</blockquote>
+<h2 id="python读取ini文件"><a href="#python读取ini文件" class="headerlink" title="python读取ini文件"></a>python读取ini文件</h2><p>DECEMBER 19, 2017<br>ini是一个保存程序设置的好东西<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> configparser</span><br><span class="line">cfg=configparser.ConfigParser()</span><br><span class="line">cfg.read(<span class="string">'test.ini'</span>)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">[database]</span></span><br><span class="line"><span class="string">sql_url=123.206.26</span></span><br><span class="line"><span class="string">sql_port=80</span></span><br><span class="line"><span class="string">sql_user=root</span></span><br><span class="line"><span class="string">sql_pass=123</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[server]</span></span><br><span class="line"><span class="string">url=xwmdream.cn</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#读取所有的节</span></span><br><span class="line">cfg.sections()</span><br><span class="line"><span class="comment">#['database', 'server']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#列出节database下的元素</span></span><br><span class="line">cfg.items(<span class="string">'database'</span>)</span><br><span class="line"><span class="comment">#[('sql_url', '123.206.26'), ('sql_port', '80'), ('sql_user', 'root'), ('sql_pass', '123')]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取database节下的sql_url的值</span></span><br><span class="line">cfg.get(<span class="string">'database'</span>,<span class="string">'sql_url'</span>)</span><br><span class="line"><span class="comment">#'123.206.26'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置database节下的test的值为456</span></span><br><span class="line">cfg.set(<span class="string">'database'</span>,<span class="string">'test'</span>,<span class="string">'456'</span>)</span><br><span class="line"></span><br><span class="line">cfg.items(<span class="string">'database'</span>)</span><br><span class="line"><span class="comment">#[('sql_url', '123.206.26'), ('sql_port', '80'), ('sql_user', 'root'), ('sql_pass', '123'), ('test', '456')]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除database节下的sql_pass的值</span></span><br><span class="line">cfg.remove_option(<span class="string">'database'</span>,<span class="string">'sql_pass'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除database节</span></span><br><span class="line">cfg.remove_section(<span class="string">'database'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#保存到文件</span></span><br><span class="line">f=open(<span class="string">'new.ini'</span>,<span class="string">'w'</span>)</span><br><span class="line">cfg.write(f)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line"><span class="comment">#最后new.ini的结果</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">[server]</span></span><br><span class="line"><span class="string">url = xwmdream.cn</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="python发送邮件-大全汇总"><a href="#python发送邮件-大全汇总" class="headerlink" title="python发送邮件 大全汇总"></a>python发送邮件 大全汇总</h2><p>DECEMBER 18, 2017<br>参考菜鸟教程</p>
+<h3 id="发送只有文字的邮件"><a href="#发送只有文字的邮件" class="headerlink" title="发送只有文字的邮件"></a>发送只有文字的邮件</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</span><br><span class="line"></span><br><span class="line">sender = <span class="string">'xxxxxx@xxx.com'</span><span class="comment">#发件人的邮件地址</span></span><br><span class="line">password=<span class="string">'xxxxxx'</span><span class="comment">#发件人的客户端密码</span></span><br><span class="line">host=<span class="string">'smtp.xxx.com'</span><span class="comment">#发件人用的邮件服务器</span></span><br><span class="line">host_port = <span class="number">25</span><span class="comment">#发件人用的服务器端口,默认是25</span></span><br><span class="line">receivers = [<span class="string">'xxxxxx@xxx.com'</span>,<span class="string">'xxxxxxx@xx.com'</span>]  <span class="comment"># 接收邮件，可设置为你的QQ邮箱或者其他邮箱</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 三个参数：第一个为文本内容，第二个 plain 设置文本格式，第三个 utf-8 设置编码</span></span><br><span class="line">message = MIMEText(<span class="string">'文本内容~'</span>, <span class="string">'plain'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">message[<span class="string">'From'</span>] = Header(<span class="string">"发件人哦~"</span>, <span class="string">'utf-8'</span>)<span class="comment">#内容中显示的发件人</span></span><br><span class="line">message[<span class="string">'To'</span>] =  Header(<span class="string">"收件人哦~"</span>, <span class="string">'utf-8'</span>)<span class="comment">#内容中显示的收件人</span></span><br><span class="line">message[<span class="string">'Subject'</span>] = Header(<span class="string">'邮件内容的标题~'</span>, <span class="string">'utf-8'</span>)<span class="comment">#邮件的题目</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    smtpObj = smtplib.SMTP_SSL(host,host_port)<span class="comment">#这个点要注意</span></span><br><span class="line">    smtpObj.login(sender,password) <span class="comment">#邮箱登录</span></span><br><span class="line">    smtpObj.sendmail(sender, receivers, message.as_string())</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"邮件发送成功"</span>)</span><br><span class="line"><span class="keyword">except</span> smtplib.SMTPException <span class="keyword">as</span> e:</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"Error: 发送邮件产生错误"</span>)</span><br><span class="line">    print(e)</span><br><span class="line">smtpObj.close()</span><br></pre></td></tr></table></figure>
+<h3 id="发送网页邮件"><a href="#发送网页邮件" class="headerlink" title="发送网页邮件"></a>发送网页邮件</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</span><br><span class="line"></span><br><span class="line">sender = <span class="string">'xxxxxx@xx.com'</span><span class="comment">#发件人的邮件地址</span></span><br><span class="line">password=<span class="string">'xxxxx'</span><span class="comment">#发件人的客户端密码</span></span><br><span class="line">host=<span class="string">'smtp.xxx.com'</span><span class="comment">#发件人用的邮件服务器</span></span><br><span class="line">host_port = <span class="number">25</span><span class="comment">#发件人用的服务器端口,默认是25</span></span><br><span class="line">receivers = [<span class="string">'xxxxxx@xxx.com'</span>]  <span class="comment"># 接收邮件，可设置为你的QQ邮箱或者其他邮箱</span></span><br><span class="line"></span><br><span class="line">meg_text=<span class="string">'''</span></span><br><span class="line"><span class="string">&lt;h1&gt;这个是大标题&lt;/h1&gt;</span></span><br><span class="line"><span class="string">&lt;a href=https://xwmdream.cn&gt;这个是链接&lt;/a&gt;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment"># 三个参数：第一个为文本内容，第二个 plain 设置文本格式，第三个 utf-8 设置编码</span></span><br><span class="line">message = MIMEText(meg_text, <span class="string">'html'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">message[<span class="string">'From'</span>] = Header(<span class="string">"发件人哦~"</span>, <span class="string">'utf-8'</span>)<span class="comment">#内容中显示的发件人</span></span><br><span class="line">message[<span class="string">'To'</span>] =  Header(<span class="string">"收件人哦~"</span>, <span class="string">'utf-8'</span>)<span class="comment">#内容中显示的收件人</span></span><br><span class="line">message[<span class="string">'Subject'</span>] = Header(<span class="string">'邮件内容的标题~'</span>, <span class="string">'utf-8'</span>)<span class="comment">#邮件的题目</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">        smtpObj = smtplib.SMTP_SSL(host,host_port)<span class="comment">#这个点要注意</span></span><br><span class="line">    smtpObj.login(sender,password) <span class="comment">#邮箱登录</span></span><br><span class="line">    smtpObj.sendmail(sender, receivers, message.as_string())</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"邮件发送成功"</span>)</span><br><span class="line"><span class="keyword">except</span> smtplib.SMTPException <span class="keyword">as</span> e:</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"Error: 发送邮件产生错误"</span>)</span><br><span class="line">    print(e)</span><br><span class="line">smtpObj.close()</span><br></pre></td></tr></table></figure>
+<h3 id="发送带有附件的邮件"><a href="#发送带有附件的邮件" class="headerlink" title="发送带有附件的邮件:"></a>发送带有附件的邮件:</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.mime.multipart <span class="keyword">import</span> MIMEMultipart</span><br><span class="line"></span><br><span class="line">sender = <span class="string">'xxxxxx@xx.com'</span><span class="comment">#发件人的邮件地址</span></span><br><span class="line">password=<span class="string">'xxxxx'</span><span class="comment">#发件人的客户端密码</span></span><br><span class="line">host=<span class="string">'smtp.xxx.com'</span><span class="comment">#发件人用的邮件服务器</span></span><br><span class="line">host_port = <span class="number">25</span><span class="comment">#发件人用的服务器端口,默认是25</span></span><br><span class="line">receivers = [<span class="string">'xxxxxx@xxx.com'</span>]  <span class="comment"># 接收邮件，可设置为你的QQ邮箱或者其他邮箱</span></span><br><span class="line"></span><br><span class="line">meg_text=<span class="string">'''</span></span><br><span class="line"><span class="string">&lt;h1&gt;这个是大标题&lt;/h1&gt;</span></span><br><span class="line"><span class="string">&lt;a href=https://xwmdream.cn&gt;这个是链接&lt;/a&gt;</span></span><br><span class="line"><span class="string">&lt;p&gt;这个邮件有附件&lt;/p&gt;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment"># 三个参数：第一个为文本内容，第二个 plain 设置文本格式，第三个 utf-8 设置编码</span></span><br><span class="line">message = MIMEMultipart()</span><br><span class="line"><span class="comment">#邮件正文内容</span></span><br><span class="line">message.attach(MIMEText(meg_text, <span class="string">'html'</span>, <span class="string">'utf-8'</span>))</span><br><span class="line">message[<span class="string">'From'</span>] = Header(<span class="string">"发件人哦~"</span>, <span class="string">'utf-8'</span>)<span class="comment">#内容中显示的发件人</span></span><br><span class="line">message[<span class="string">'To'</span>] =  Header(<span class="string">"收件人哦~"</span>, <span class="string">'utf-8'</span>)<span class="comment">#内容中显示的收件人</span></span><br><span class="line">message[<span class="string">'Subject'</span>] = Header(<span class="string">'邮件内容的标题~'</span>, <span class="string">'utf-8'</span>)<span class="comment">#邮件的题目</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造附件1，传送当前目录下的 test.txt 文件</span></span><br><span class="line">att1 = MIMEText(open(<span class="string">'test/test.txt'</span>, <span class="string">'rb'</span>).read(), <span class="string">'base64'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">att1[<span class="string">"Content-Type"</span>] = <span class="string">'application/octet-stream'</span></span><br><span class="line"><span class="comment"># 这里的filename可以任意写，写什么名字，邮件中显示什么名字</span></span><br><span class="line">att1[<span class="string">"Content-Disposition"</span>] = <span class="string">'attachment; filename="first.txt"'</span></span><br><span class="line">message.attach(att1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造附件2，传送当前目录下的 runoob.txt 文件</span></span><br><span class="line">att2 = MIMEText(open(<span class="string">'test/test.mp3'</span>, <span class="string">'rb'</span>).read(), <span class="string">'base64'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">att2[<span class="string">"Content-Type"</span>] = <span class="string">'application/octet-stream'</span></span><br><span class="line">att2[<span class="string">"Content-Disposition"</span>] = <span class="string">'attachment; filename="two.mp3"'</span></span><br><span class="line">message.attach(att2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">        smtpObj = smtplib.SMTP_SSL(host,host_port)<span class="comment">#这个点要注意</span></span><br><span class="line">    smtpObj.login(sender,password) <span class="comment">#邮箱登录</span></span><br><span class="line">    smtpObj.sendmail(sender, receivers, message.as_string())</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"邮件发送成功"</span>)</span><br><span class="line"><span class="keyword">except</span> smtplib.SMTPException <span class="keyword">as</span> e:</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"Error: 发送邮件产生错误"</span>)</span><br><span class="line">    print(e)</span><br><span class="line">smtpObj.close()</span><br></pre></td></tr></table></figure>
+<h3 id="发送网页中带有图片的邮件"><a href="#发送网页中带有图片的邮件" class="headerlink" title="发送网页中带有图片的邮件"></a>发送网页中带有图片的邮件</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.mime.multipart <span class="keyword">import</span> MIMEMultipart</span><br><span class="line"><span class="keyword">from</span> email.mime.image <span class="keyword">import</span> MIMEImage</span><br><span class="line"></span><br><span class="line">sender = <span class="string">'xxxxx@xxxx.com'</span><span class="comment">#发件人的邮件地址</span></span><br><span class="line">password=<span class="string">'xxxxxx'</span><span class="comment">#发件人的客户端密码</span></span><br><span class="line">host=<span class="string">'smtp.xxx.com'</span><span class="comment">#发件人用的邮件服务器</span></span><br><span class="line">host_port = <span class="number">25</span><span class="comment">#发件人用的服务器端口,默认是25</span></span><br><span class="line">receivers = [<span class="string">'xxxxxxxx@xx.com'</span>]  <span class="comment"># 接收邮件，可设置为你的QQ邮箱或者其他邮箱</span></span><br><span class="line"></span><br><span class="line">meg_text=<span class="string">'''</span></span><br><span class="line"><span class="string">&lt;h1&gt;这个是大标题&lt;/h1&gt;</span></span><br><span class="line"><span class="string">&lt;a href=https://xwmdream.cn&gt;这个是链接&lt;/a&gt;</span></span><br><span class="line"><span class="string">&lt;p&gt;这个邮件有附件&lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;img src="cid:image1"&gt;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment"># 三个参数：第一个为文本内容，第二个 plain 设置文本格式，第三个 utf-8 设置编码</span></span><br><span class="line">message = MIMEMultipart()</span><br><span class="line"><span class="comment">#邮件正文内容</span></span><br><span class="line">message.attach(MIMEText(meg_text, <span class="string">'html'</span>, <span class="string">'utf-8'</span>))</span><br><span class="line">message[<span class="string">'From'</span>] = Header(<span class="string">"发件人哦~"</span>, <span class="string">'utf-8'</span>)<span class="comment">#内容中显示的发件人</span></span><br><span class="line">message[<span class="string">'To'</span>] =  Header(<span class="string">"收件人哦~"</span>, <span class="string">'utf-8'</span>)<span class="comment">#内容中显示的收件人</span></span><br><span class="line">message[<span class="string">'Subject'</span>] = Header(<span class="string">'邮件内容的标题~'</span>, <span class="string">'utf-8'</span>)<span class="comment">#邮件的题目</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定图片为当前目录</span></span><br><span class="line">fp = open(<span class="string">'test/test.jpg'</span>, <span class="string">'rb'</span>)</span><br><span class="line">msgImage = MIMEImage(fp.read())</span><br><span class="line">fp.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义图片 ID，在 HTML 文本中引用</span></span><br><span class="line">msgImage.add_header(<span class="string">'Content-ID'</span>, <span class="string">'&lt;image1&gt;'</span>)</span><br><span class="line">message.attach(msgImage)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">        smtpObj = smtplib.SMTP_SSL(host,host_port)<span class="comment">#这个点要注意</span></span><br><span class="line">    smtpObj.login(sender,password) <span class="comment">#邮箱登录</span></span><br><span class="line">    smtpObj.sendmail(sender, receivers, message.as_string())</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"邮件发送成功"</span>)</span><br><span class="line"><span class="keyword">except</span> smtplib.SMTPException <span class="keyword">as</span> e:</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"Error: 发送邮件产生错误"</span>)</span><br><span class="line">    print(e)</span><br><span class="line">smtpObj.close()</span><br></pre></td></tr></table></figure>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>上面的方法,发过去会显示由<a href="mailto:xxxx@qq.com" target="_blank" rel="noopener">xxxx@qq.com</a>代发</p>
+<p>解决这个问题需要先引入<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> email <span class="keyword">import</span> encoders</span><br><span class="line"><span class="keyword">from</span> email.utils <span class="keyword">import</span> formataddr,parseaddr</span><br><span class="line">然后写入一个函数</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_format_addr</span><span class="params">(s)</span>:</span></span><br><span class="line">    name, addr = parseaddr(s)</span><br><span class="line">    <span class="keyword">return</span> formataddr((Header(name, <span class="string">'utf-8'</span>).encode(), addr))</span><br></pre></td></tr></table></figure></p>
+<p>然后将原本的<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">message[<span class="string">'From'</span>] = Header(<span class="string">"发件人哦~"</span>, <span class="string">'utf-8'</span>)<span class="comment">#内容中显示的发件人</span></span><br><span class="line">message[<span class="string">'To'</span>] =  Header(<span class="string">"收件人哦~"</span>, <span class="string">'utf-8'</span>)<span class="comment">#内容中显示的收件人</span></span><br></pre></td></tr></table></figure></p>
+<p>换成<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">message[<span class="string">'From'</span>] = _format_addr(<span class="string">'发件人 &lt;%s&gt;'</span>%sender)</span><br><span class="line">message[<span class="string">'To'</span>] =  _format_addr(<span class="string">'收件人 &lt;%s&gt;'</span>%receivers)</span><br></pre></td></tr></table></figure></p>
+<h2 id="网页和python的握手"><a href="#网页和python的握手" class="headerlink" title="网页和python的握手"></a>网页和python的握手</h2><p>DECEMBER 7, 2017<br>使用websocket握手</p>
+<p>网上找的例子,进行了优化</p>
+<p>python代码:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tornado.web</span><br><span class="line"><span class="keyword">import</span> tornado.websocket</span><br><span class="line"><span class="keyword">import</span> tornado.httpserver</span><br><span class="line"><span class="keyword">import</span> tornado.ioloop</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebSocketHandler</span><span class="params">(tornado.websocket.WebSocketHandler)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">check_origin</span><span class="params">(self, origin)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'有人连接上我了'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_message</span><span class="params">(self, message)</span>:</span></span><br><span class="line">        print(<span class="string">'接收到消息:'</span>+message)</span><br><span class="line">        self.sendhh(message)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_close</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'有人下线了'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sendhh</span><span class="params">(self,mem)</span>:</span></span><br><span class="line">        print(<span class="string">'我发送了消息:'</span>+mem)</span><br><span class="line">        self.write_message(<span class="string">u""</span>+mem)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Application</span><span class="params">(tornado.web.Application)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        handlers = [</span><br><span class="line">            (<span class="string">r'/'</span>, WebSocketHandler)</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        settings = &#123; <span class="string">"template_path"</span>: <span class="string">"."</span>&#125;</span><br><span class="line">        tornado.web.Application.__init__(self, handlers, **settings)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    ws_app = Application()</span><br><span class="line">    server = tornado.httpserver.HTTPServer(ws_app)</span><br><span class="line">    server.listen(<span class="number">1234</span>)</span><br><span class="line">    tornado.ioloop.IOLoop.instance().start()</span><br></pre></td></tr></table></figure></p>
+<p>html代码:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Tornado Websocket<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    var ws=null;</span></span><br><span class="line"><span class="undefined">    function setmem(hh)&#123;</span></span><br><span class="line"><span class="xml">        document.getElementById('mem').innerHTML+=('<span class="tag">&lt;<span class="name">br</span>/&gt;</span>'+hh);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    function onLoad()&#123;</span></span><br><span class="line"><span class="undefined">        ws = new WebSocket("ws://localhost:1234");</span></span><br><span class="line"><span class="undefined">        ws.onerror = function(e)&#123;</span></span><br><span class="line"><span class="undefined">            setmem('服务器连接失败');</span></span><br><span class="line"><span class="undefined">            ws.close();</span></span><br><span class="line"><span class="undefined">            ws=null;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">        ws.onmessage = function(e)&#123;</span></span><br><span class="line"><span class="undefined">            setmem('服务器说:'+e.data);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    function sendMsg()&#123;</span></span><br><span class="line"><span class="undefined">        if(ws==null)&#123;</span></span><br><span class="line"><span class="undefined">            document.getElementById('mem').style.color='red';</span></span><br><span class="line"><span class="undefined">            return;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">        ha=document.getElementById('msg').value;</span></span><br><span class="line"><span class="undefined">        ws.send(ha);</span></span><br><span class="line"><span class="undefined">        setmem('我说:'+ha);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    window.onunload =function()&#123;</span></span><br><span class="line"><span class="undefined">        if(ws!=null)&#123;</span></span><br><span class="line"><span class="undefined">            ws.close();</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">'onLoad();'</span>&gt;</span></span><br><span class="line">    Message to send:   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"msg"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"sendMsg();"</span> <span class="attr">value</span>=<span class="string">"发送"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"mem"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="python使用tcp通讯"><a href="#python使用tcp通讯" class="headerlink" title="python使用tcp通讯"></a>python使用tcp通讯</h2><p>DECEMBER 5, 2017<br>python通过tcp通讯，</p>
+<p>使用了简单的多线程</p>
+<p>一个接收端最多允许两个发送端同时连接</p>
+<p>上代码：</p>
+<h3 id="接收端"><a href="#接收端" class="headerlink" title="接收端"></a>接收端</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> _thread</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line">num=<span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(cona,acd)</span>:</span></span><br><span class="line">    print(<span class="string">'来自地址:'</span>,acd)</span><br><span class="line">    <span class="keyword">global</span> num</span><br><span class="line">    conn.sendall(<span class="string">'你好'</span>.encode())</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            data=cona.recv(<span class="number">1024</span>)</span><br><span class="line">            data=data.decode()</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            print(<span class="string">'有个人掉线了'</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        print(<span class="string">'接受到的数据是:'</span>,data)</span><br><span class="line">        cona.sendall(str(<span class="string">'你好'</span>+data).encode())</span><br><span class="line">    conn.close()</span><br><span class="line">    print(<span class="string">'一个人走了'</span>,num)</span><br><span class="line">    num-=<span class="number">1</span></span><br><span class="line">HOST=<span class="string">''</span></span><br><span class="line">PORT=<span class="number">5000</span></span><br><span class="line">s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">s.bind((HOST,PORT))</span><br><span class="line">s.listen(<span class="number">2</span>)</span><br><span class="line">print(<span class="string">'监听端口:'</span>+str(PORT))</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    conn,addr=s.accept()</span><br><span class="line">    <span class="keyword">if</span> num&gt;=<span class="number">2</span>:</span><br><span class="line">        conn.sendall(<span class="string">'当前连接过多，稍后再试'</span>.encode())</span><br><span class="line">        conn.close()</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    num+=<span class="number">1</span></span><br><span class="line">    _thread.start_new_thread(main,(conn,addr))</span><br><span class="line">s.close()</span><br></pre></td></tr></table></figure>
+<h3 id="发送端"><a href="#发送端" class="headerlink" title="发送端:"></a>发送端:</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line">HOST=<span class="string">'127.0.0.1'</span></span><br><span class="line">PORT=<span class="number">5000</span></span><br><span class="line">s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    s.connect((HOST,PORT))</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    print(<span class="string">'没有连接上'</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    data=s.recv(<span class="number">1024</span>)</span><br><span class="line">    data=data.decode()</span><br><span class="line">    print(<span class="string">'服务器说:'</span>+data)</span><br><span class="line">    c=input(<span class="string">'输入:'</span>)</span><br><span class="line">    <span class="keyword">if</span> c.lower()==<span class="string">'bye'</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    s.sendall(c.encode())</span><br><span class="line">s.close()</span><br></pre></td></tr></table></figure>
+<h2 id="python正则表达式"><a href="#python正则表达式" class="headerlink" title="python正则表达式"></a>python正则表达式</h2><p>NOVEMBER 28, 2017<br>python的re模块是用来匹配正则表达式的</p>
+<p>re.compile(表达式)方法是根据正则表达式生成一个pattern对象,</p>
+<p>pattern.match(str)生成一个match对象,这个对象包含了匹配到的结果</p>
+<p>也可以直接使用re.match(表达式,str),直接生成一个match结果对象</p>
+<p>具体更多的方法,<a href="http://www.runoob.com/python/python-reg-expressions.html" target="_blank" rel="noopener">http://www.runoob.com/python/python-reg-expressions.html</a></p>
+<p>常用正则表达式:</p>
+<p>[\u4e00-\u9fa5]匹配utf-8中文字符</p>
+<p>^-?\d+$匹配整数形式字符串</p>
+<p>[0-9]<em>[1-9][0-9]</em>匹配正整数形式字符串</p>
+<p>附上一个自己写的爬取必应每日一图的代码<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> schedule</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> strftime</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> localtime</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getbing</span><span class="params">()</span>:</span></span><br><span class="line">    req=urllib.request.urlopen(<span class="string">'https://cn.bing.com'</span>)</span><br><span class="line">    buf=req.read()</span><br><span class="line">    an=re.findall(<span class="string">r'/az/hpr.+?.jpg'</span>,str(buf))</span><br><span class="line">    url=<span class="string">'https://cn.bing.com'</span>+an[<span class="number">0</span>]</span><br><span class="line">    req=urllib.request.urlopen(url)</span><br><span class="line">    buf=req.read()</span><br><span class="line">    f=open(<span class="string">"/home/wwwroot/default/bing/bing.jpg"</span>,<span class="string">'wb'</span>)</span><br><span class="line">    f.write(buf)</span><br><span class="line">    f.close()</span><br><span class="line">    print(strftime(<span class="string">'%Y%m%d'</span>,localtime(time())),<span class="string">'获取成功'</span>)</span><br><span class="line"></span><br><span class="line">schedule.every().day.at(<span class="string">'06:00'</span>).do(getbing)</span><br><span class="line">getbing()</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    schedule.run_pending()</span><br></pre></td></tr></table></figure></p>
+<h2 id="linux下搭建安装python3"><a href="#linux下搭建安装python3" class="headerlink" title="linux下搭建安装python3"></a>linux下搭建安装python3</h2><p>NOVEMBER 23, 2017<br>转自:<a href="http://blog.csdn.net/liang19890820/article/details/51079633" target="_blank" rel="noopener">http://blog.csdn.net/liang19890820/article/details/51079633</a></p>
+<p>简述<br>CentOS 7 中默认安装了 Python，版本比较低（2.7.5），为了使用新版 3.x，需要对旧版本进行升级。</p>
+<p>由于很多基本的命令、软件包都依赖旧版本，比如：yum。所以，在更新 Python 时，建议不要删除旧版本（新旧版本可以共存）。</p>
+<p>版权所有：一去丶二三里，转载请注明出处：<a href="http://blog.csdn.net/liang19890820" target="_blank" rel="noopener">http://blog.csdn.net/liang19890820</a></p>
+<p>查看 Python 版本号<br>当 Linux 上安装 Python 后（默认安装），只需要输入简单的命令，就可以查看 Python 的版本号：</p>
+<p>python -V</p>
+<h3 id="写在前面：一定要先安装openssl！！！"><a href="#写在前面：一定要先安装openssl！！！" class="headerlink" title="写在前面：一定要先安装openssl！！！"></a>写在前面：一定要先安装openssl！！！</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install openssl-devel</span><br></pre></td></tr></table></figure>
+<h3 id="下载新版本"><a href="#下载新版本" class="headerlink" title="下载新版本"></a>下载新版本</h3><p>进入 Python下载页面，选择需要的版本。</p>
+<p>这里，我选择的版本是 3.5.2 。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz</span><br></pre></td></tr></table></figure></p>
+<p>下载完成之后，进行解压缩：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf Python-3.5.2.tgz</span><br></pre></td></tr></table></figure></p>
+<p>安装配置<br>进入解压缩后的目录，安装配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> Python-3.5.2/</span><br><span class="line">./configure --with-ssl --prefix=/usr/python3</span><br></pre></td></tr></table></figure>
+<p>执行 ./configure 时，如果报错：</p>
+<p>configure: error: no acceptable C compiler found in $PATH</p>
+<p>说明没有安装合适的编译器。这时，需要安装/升级 gcc 及其它依赖包。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install make gcc gcc-c++</span><br></pre></td></tr></table></figure></p>
+<p>完成之后，重新执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-ssl --prefix=/usr/python3</span><br></pre></td></tr></table></figure></p>
+<h3 id="编译-amp-安装"><a href="#编译-amp-安装" class="headerlink" title="编译 &amp; 安装"></a>编译 &amp; 安装</h3><p>配置完成之后，就可以编译了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure></p>
+<p>漫长的等待……完成后，安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+<p>错误:<br> can’t decompress data; zlib not available</p>
+<p>解决办法：yum -y install zlib*</p>
+<p>ModuleNotFoundError: No module named ‘_ctypes’</p>
+<p>解决办法#yum install libffi-devel -y</p>
+<h3 id="设置-3-x-为默认版本"><a href="#设置-3-x-为默认版本" class="headerlink" title="设置 3.x 为默认版本"></a>设置 3.x 为默认版本</h3><p>查看 Python 的路径，在 /usr/bin 下面。可以看到 python 链接的是 python 2.7，所以，执行 python 就相当于执行 python 2.7。</p>
+<p>备份原来的python<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv /usr/bin/python /usr/bin/python.bak</span><br></pre></td></tr></table></figure></p>
+<p>将 python 链接至 python3，创建pip链接：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/python3/bin/python3 /usr/bin/python</span><br><span class="line">ln -s /usr/python3/bin/pip3 /usr/bin/pip</span><br></pre></td></tr></table></figure></p>
+<p>这时，再查看 Python 的版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -VPython 3.5.2</span><br></pre></td></tr></table></figure></p>
+<p>输出的是 3.x，说明已经使用的是 python3了。</p>
+<h3 id="配置-yum"><a href="#配置-yum" class="headerlink" title="配置 yum"></a>配置 yum</h3><p>升级 Python 之后，由于将默认的 python 指向了 python3，yum 不能正常使用，需要编辑 yum 的配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/bin/yum</span><br></pre></td></tr></table></figure>
+<p>同时修改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/libexec/urlgrabber-ext-down</span><br></pre></td></tr></table></figure>
+<p>将 #!/usr/bin/python 改为 #!/usr/bin/python2.7，保存退出即可。</p>
+<p>版权声明：进步始于交流，收获源于分享！纯正开源之美，有趣、好玩、靠谱。。。作者：一去丶二三里 博客地址：<a href="http://blog.csdn.net/liang19890820" target="_blank" rel="noopener">http://blog.csdn.net/liang19890820</a></p>
+<h2 id="Python主要第三方模块和类-持续更新"><a href="#Python主要第三方模块和类-持续更新" class="headerlink" title="Python主要第三方模块和类(持续更新)"></a>Python主要第三方模块和类(持续更新)</h2><p>NOVEMBER 12, 2017<br>random模块<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#random模块主要随机..</span></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment">#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span></span><br><span class="line"><span class="comment">#random.random()方法主要生成0-1的随机数</span></span><br><span class="line">print(random.random())</span><br><span class="line"><span class="comment">#0.3245447 0-1的随机数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span></span><br><span class="line"><span class="comment">#random.uniform(a,b)主要是生成在a-b区间的浮点数</span></span><br><span class="line">print(random.uniform(<span class="number">10</span>,<span class="number">20</span>))</span><br><span class="line"><span class="comment">#13.1025687422363 10-20的浮点数</span></span><br><span class="line">print(random.uniform(<span class="number">20</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment">#19.68574558</span></span><br><span class="line"><span class="comment">#如果a&gt;b 那么 b&lt;=结果&lt;=a</span></span><br><span class="line"><span class="comment">#如果a&lt;b 那么 a&lt;=结果&lt;=b</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span></span><br><span class="line"><span class="comment">#random.randint(a,b)主要生成随即整数 a&lt;=结果&lt;=b 其中a必须小于等于b</span></span><br><span class="line"><span class="keyword">print</span> (random.randint(<span class="number">10</span>, <span class="number">20</span>))</span><br><span class="line"><span class="comment">#17  10&lt;=结果&lt;=20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (random.randint(<span class="number">20</span>, <span class="number">20</span>))</span><br><span class="line"><span class="comment">#20  结果永远是20</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#print(random.randint(20,10))会报错 a必须小于等于b</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span></span><br><span class="line"><span class="comment">#random.choice(sequence) 从有序类型sequence中随机选出一个值 这个类型可以是列表,元组,字符串. 注意,字典和集合不能</span></span><br><span class="line">print(random.choice(<span class="string">'abcd'</span>))</span><br><span class="line"><span class="comment">#c 在字符串abcd中随机选一个</span></span><br><span class="line"></span><br><span class="line">print(random.choice((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)))</span><br><span class="line"><span class="comment">#4 在元组(1,2,3,4)中随机选出一个值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span></span><br><span class="line"><span class="comment">#random.shuffle()的函数原型为：random.shuffle(x[, random])，用于将一个列表中的元素打乱。如:</span></span><br><span class="line">p = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,<span class="number">4</span>,<span class="string">'python'</span>]</span><br><span class="line">random.shuffle(p)</span><br><span class="line">print(p)</span><br><span class="line"><span class="comment">#[2, 'python', 3, 4, 1] 会改变p的值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span></span><br><span class="line"><span class="comment">#random.sample(sequence, k)从指定序列中随机获取指定长度的片断。sample函数不会修改原有序列。适用于集合,字符串,列表,元组.不适用于字典 生成的只有列表, 原类型不会改变</span></span><br><span class="line">list = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>)</span><br><span class="line">slice = random.sample(list, <span class="number">5</span>)  <span class="comment">#从list中随机获取5个元素，作为一个片断返回</span></span><br><span class="line">print(slice)</span><br><span class="line"><span class="comment">#[7,10,6,2,9] 随机取了5个数字 生成的只是列表</span></span><br><span class="line"></span><br><span class="line">print(list)</span><br><span class="line"><span class="comment">#(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)原有序列并没有改变 元组类型也不会改变</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="python的内置函数-持续更新"><a href="#python的内置函数-持续更新" class="headerlink" title="python的内置函数(持续更新)"></a>python的内置函数(持续更新)</h2><p>NOVEMBER 11, 2017</p>
+<h3 id="print函数"><a href="#print函数" class="headerlink" title="print函数"></a>print函数</h3><p>print作为python的基本输出语句,在格式化输出中与c语言有很多相似的地方,但是要比c语言强大得多<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式化输出与c语言大差不差,只是前面在双引号里 用%进行占位,后面用%隔开,用元组进行解释</span></span><br><span class="line">age=<span class="number">12</span></span><br><span class="line">PI=<span class="number">3.1415926</span></span><br><span class="line">print(<span class="string">"age is %d pi = %.3f"</span>%(age,PI))</span><br><span class="line"><span class="comment">#age is 12 pi = 3.142 用百分号隔开,后面是元组用于解释</span></span><br><span class="line">print(<span class="string">"pi = %.*f"</span>%(<span class="number">4</span>,PI))</span><br><span class="line"><span class="comment">#pi = 3.1416 动态设置保留小数位数</span></span><br><span class="line"><span class="string">'''d,i                 带符号的十进制整数</span></span><br><span class="line"><span class="string">o                   不带符号的八进制</span></span><br><span class="line"><span class="string">u                   不带符号的十进制</span></span><br><span class="line"><span class="string">x                    不带符号的十六进制（小写）</span></span><br><span class="line"><span class="string">X                   不带符号的十六进制（大写）</span></span><br><span class="line"><span class="string">e                   科学计数法表示的浮点数（小写）</span></span><br><span class="line"><span class="string">E                   科学计数法表示的浮点数（大写）</span></span><br><span class="line"><span class="string">f,F                 十进制浮点数</span></span><br><span class="line"><span class="string">g                   如果指数大于-4或者小于精度值则和e相同，其他情况和f相同</span></span><br><span class="line"><span class="string">G                  如果指数大于-4或者小于精度值则和E相同，其他情况和F相同</span></span><br><span class="line"><span class="string">C                  单字符（接受整数或者单字符字符串）</span></span><br><span class="line"><span class="string">r                    字符串（使用repr转换任意python对象)</span></span><br><span class="line"><span class="string">s                   字符串（使用str转换任意python对象）'''</span></span><br><span class="line"></span><br><span class="line">a=<span class="number">1</span></span><br><span class="line">b=<span class="number">2</span></span><br><span class="line">c=<span class="number">3</span></span><br><span class="line">print(a,b,c)</span><br><span class="line"><span class="comment">#1 2 3默认中间是一个空格,结尾一个换行</span></span><br><span class="line">print(a,b,c,end=<span class="string">'ending'</span>,sep=<span class="string">'*'</span>)</span><br><span class="line"><span class="comment">#1*2*3ending sep可以设置元素中间隔字符 end设置结尾输出</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"format输出:a=&#123;0&#125; b=&#123;1&#125; c=&#123;2&#125;"</span>.format(a,b,c))</span><br><span class="line"><span class="comment">#format输出:a=1 b=2 c=3 format输出用&#123;0&#125;,&#123;1&#125;占位</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"format输出:a=&#123;2&#125; b=&#123;1&#125; c=&#123;2&#125;"</span>.format(a,b,c))</span><br><span class="line"><span class="comment">#format输出:a=3 b=2 c=3 &#123;&#125;里面的数字是后面元组元素的序列,可以只用到部分元素,但是不能越界,注意序列从0开始</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"&#123;0:.3f&#125;"</span>.format(<span class="number">1.2345</span>))</span><br><span class="line"><span class="comment">#1.235</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="count"><a href="#count" class="headerlink" title="count"></a>count</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#count可以判断列表,元组,字符串含有多少个要查询的元素,注意集合,字典不能使用,他们可以用in判断是否含有某元素</span></span><br><span class="line">a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">print(a.count(<span class="number">1</span>))</span><br><span class="line"><span class="comment">#2</span></span><br><span class="line">a=(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="string">'1'</span>)</span><br><span class="line">print(a.count(<span class="number">1</span>))</span><br><span class="line"><span class="comment">#2</span></span><br><span class="line">a=<span class="string">'121'</span></span><br><span class="line">print(a.count(<span class="string">'1'</span>))</span><br><span class="line"><span class="comment">#2</span></span><br><span class="line">a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">print(a.count(<span class="number">3</span>))</span><br><span class="line"><span class="comment">#0</span></span><br><span class="line">a=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">print(<span class="number">1</span> <span class="keyword">in</span> a)</span><br><span class="line"><span class="comment">#True</span></span><br><span class="line">print(<span class="number">5</span> <span class="keyword">in</span> a)</span><br><span class="line"><span class="comment">#False</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串相关函数str"><a href="#字符串相关函数str" class="headerlink" title="字符串相关函数str"></a>字符串相关函数str</h3><p>split:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#split函数能够将一个字符串根据某部分字符串分成多个部分放在列表里</span></span><br><span class="line">a=<span class="string">'123-456-789'</span></span><br><span class="line">print(a.split(<span class="string">'-'</span>))</span><br><span class="line"><span class="comment">#['123', '456', '789']</span></span><br><span class="line"></span><br><span class="line">print(a.split(<span class="string">'-4'</span>))</span><br><span class="line"><span class="comment">#['123', '56-789']</span></span><br><span class="line"></span><br><span class="line">print(a.split(<span class="string">'hh'</span>))</span><br><span class="line"><span class="comment">#['123-456-789'] 如果字符串中没有该部分字符串,那么生成序列只有一个原字符串</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="map函数"><a href="#map函数" class="headerlink" title="map函数"></a>map函数</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#map() 会根据提供的函数对指定序列做映射。第一个参数 function 以参数序列中的每一个元素调用 function 函数，返回包含每次 function 函数返回值的新列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">square</span><span class="params">(x)</span> :</span>            <span class="comment"># 计算平方数</span></span><br><span class="line">     <span class="keyword">return</span> x ** <span class="number">2</span></span><br><span class="line">map(square, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])   <span class="comment"># 计算列表和：1+2+3+4+5</span></span><br><span class="line"><span class="comment">#[1, 4, 9, 16, 25] 注意函数参数的个数要和后面序列的个数一样</span></span><br><span class="line"></span><br><span class="line">map(<span class="keyword">lambda</span> x: x ** <span class="number">2</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])  <span class="comment"># 使用 lambda 匿名函数</span></span><br><span class="line"><span class="comment">#[1, 4, 9, 16, 25]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#map(square,[1,2,3],[4,5,6])</span></span><br><span class="line"><span class="comment">#square接受一个参数,后面有两个序列,会报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提供了两个列表，对相同位置的列表数据进行相加</span></span><br><span class="line">map(<span class="keyword">lambda</span> x, y: x + y, [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>])</span><br><span class="line"><span class="comment">#[3, 7, 11, 15, 19]</span></span><br><span class="line"></span><br><span class="line">map(<span class="keyword">lambda</span> x, y: x + y, [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>,<span class="number">12</span>])</span><br><span class="line"><span class="comment">#[3, 7, 11, 15, 19] 如果多个列表个数不一样,按照少的算</span></span><br><span class="line"></span><br><span class="line">map(<span class="keyword">lambda</span> x,y,z:x+y+z,&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,(<span class="number">4</span>,<span class="number">5</span>),&#123;<span class="number">6</span>:<span class="number">10</span>&#125;)</span><br><span class="line"><span class="comment">#[11] 元组集合字典都可以</span></span><br></pre></td></tr></table></figure>
+<h3 id="isinstance"><a href="#isinstance" class="headerlink" title="isinstance()"></a>isinstance()</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#isinstance(object,class-or-type-or-tuple)-bool</span></span><br><span class="line"><span class="comment">#能判断一个值是不是某个类,类型</span></span><br><span class="line">a=<span class="number">3</span></span><br><span class="line">print(isinstance(a,int))</span><br><span class="line"><span class="comment">#True</span></span><br><span class="line"></span><br><span class="line">a=<span class="number">3.3</span></span><br><span class="line">print(isinstance(a,int))</span><br><span class="line"><span class="comment">#False</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">car=Car()</span><br><span class="line">print(isinstance(car,Car))</span><br><span class="line"><span class="comment">#True car是Car类的对象</span></span><br></pre></td></tr></table></figure>
+<h2 id="python汇总-持续更新"><a href="#python汇总-持续更新" class="headerlink" title="python汇总(持续更新)"></a>python汇总(持续更新)</h2><p>NOVEMBER 10, 2017</p>
+<h3 id="生成素数列"><a href="#生成素数列" class="headerlink" title="生成素数列:"></a>生成素数列:</h3><p>用列表推导式生成 :<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> &gt;&gt;&gt; [p <span class="keyword">for</span> p <span class="keyword">in</span> range(2,100) <span class="keyword">if</span> 0 not <span class="keyword">in</span>[p%d <span class="keyword">for</span> d <span class="keyword">in</span> range(2,int(sqrt(p))+1)]]</span><br><span class="line">[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73,79, 83, 89, 97]</span><br></pre></td></tr></table></figure></p>
+<p>用生成器推导式生成:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">primer</span><span class="params">(n=<span class="number">100</span>)</span>:</span></span><br><span class="line">    <span class="string">'''大于1小于等于n的素数推导式'''</span></span><br><span class="line">    a=<span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> a&lt;=n:</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> <span class="keyword">not</span> <span class="keyword">in</span> [a%d <span class="keyword">for</span> d <span class="keyword">in</span> range(<span class="number">2</span>,int(sqrt(a)+<span class="number">1</span>))]:</span><br><span class="line">            <span class="keyword">yield</span> a</span><br><span class="line">        a+=<span class="number">1</span></span><br><span class="line">a=primer(<span class="number">100</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(a)</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>, <span class="number">19</span>, <span class="number">23</span>, <span class="number">29</span>, <span class="number">31</span>, <span class="number">37</span>, <span class="number">41</span>, <span class="number">43</span>, <span class="number">47</span>, <span class="number">53</span>, <span class="number">59</span>, <span class="number">61</span>, <span class="number">67</span>, <span class="number">71</span>, <span class="number">73</span>, <span class="number">79</span>, <span class="number">83</span>, <span class="number">89</span>, <span class="number">97</span>]</span><br></pre></td></tr></table></figure></p>
+<h3 id="序列解包-穿插print的用法"><a href="#序列解包-穿插print的用法" class="headerlink" title="序列解包(穿插print的用法):"></a>序列解包(穿插print的用法):</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#序列解包</span></span><br><span class="line">x,y,z=<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br><span class="line">print(<span class="string">"x=%d y=%d z=%d"</span> % (x,y,z),end=<span class="string">'\thello end\n'</span>)</span><br><span class="line"><span class="comment">#x=1 y=2 z=3     hello end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#通过一个元组赋多个值</span></span><br><span class="line">t_tuple=(<span class="number">1</span>,<span class="number">3.1415926</span>,<span class="string">'i am string'</span>)</span><br><span class="line">a,b,c=t_tuple</span><br><span class="line">print(<span class="string">"a=%d b=%.*f c=%s"</span> %(a,<span class="number">3</span>,b,c))</span><br><span class="line"><span class="comment">#a=1 b=3.142 c=i am string 其中b的值保留了三位小数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#字典解包</span></span><br><span class="line">s=&#123;<span class="string">'x'</span>:<span class="number">1</span>,<span class="string">'y'</span>:<span class="number">2</span>,<span class="string">'z'</span>:<span class="number">3</span>&#125;</span><br><span class="line">a,b,c=s</span><br><span class="line">print(a,b,c,sep=<span class="string">'间隔'</span>)</span><br><span class="line"><span class="comment">#x间隔y间隔z 只对字典解包等于字典的key sep是print函数输出元素中间的间隔字符</span></span><br><span class="line"></span><br><span class="line">a,b,c=s.items()</span><br><span class="line">print(a,b,c)</span><br><span class="line"><span class="comment">#('x', 1) ('y', 2) ('z', 3) items()方法把字典的key和value当成一个元组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#注意解包前后的变量数量要一致，否则报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#星号(*)解包,对元组()序列[]集合&#123;&#125;都可以</span></span><br><span class="line">a=(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">print(*a)</span><br><span class="line"><span class="comment">#1 2 3 4</span></span><br><span class="line"></span><br><span class="line">print(*range(<span class="number">4</span>),<span class="number">4</span>,*&#123;<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>&#125;)</span><br><span class="line"><span class="comment">#0 1 2 3 4 5 6 7 8</span></span><br></pre></td></tr></table></figure>
+<h3 id="函数参数的解包"><a href="#函数参数的解包" class="headerlink" title="函数参数的解包:"></a>函数参数的解包:</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#函数中可变长度的参数</span></span><br><span class="line"><span class="comment">#参数前加一个星号 那么参数会成为一个元组</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(*p)</span>:</span></span><br><span class="line">    print(p)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> p:</span><br><span class="line">        print(i,end=<span class="string">','</span>)</span><br><span class="line"></span><br><span class="line">demo(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)<span class="comment">#调用的时候不能有关键参数,也就是不能出现 x=1 的参数</span></span><br><span class="line">print()</span><br><span class="line"><span class="comment">#(1, 2, 3)</span></span><br><span class="line"><span class="comment">#1,2,3,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#参数前两个星号 那么参数会成为一个字典</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">two</span><span class="params">(**p)</span>:</span></span><br><span class="line">    print(p)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> p.items():</span><br><span class="line">        print(i,end=<span class="string">'\t'</span>)</span><br><span class="line">two(x=<span class="number">1</span>,y=<span class="number">2</span>,c=<span class="number">3</span>)<span class="comment">#参数必须是关键参数 就是 x=1这种格式的参数</span></span><br><span class="line"><span class="comment">#&#123;'x': 1, 'y': 2, 'c': 3&#125;</span></span><br><span class="line"><span class="comment">#('x', 1)        ('y', 2)        ('c', 3)</span></span><br></pre></td></tr></table></figure>
+<p>传递参数时的序列解包:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(a,b,c)</span>:</span></span><br><span class="line">    print(a+b+c)</span><br><span class="line">a=(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">demo(*a)</span><br><span class="line"><span class="comment">#6</span></span><br><span class="line"></span><br><span class="line">dic=&#123;<span class="string">'a'</span>:<span class="number">1</span>,<span class="string">'b'</span>:<span class="number">2</span>,<span class="string">'c'</span>:<span class="number">3</span>&#125;</span><br><span class="line">demo(*dic)</span><br><span class="line"><span class="comment">#abc</span></span><br><span class="line"></span><br><span class="line">demo(*dic.items())</span><br><span class="line"><span class="comment">#('a', 1, 'b', 2, 'c', 3)</span></span><br><span class="line"></span><br><span class="line">demo(*dic.values())</span><br><span class="line"><span class="comment">#6</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="python3链接mysql数据库"><a href="#python3链接mysql数据库" class="headerlink" title="python3链接mysql数据库"></a>python3链接mysql数据库</h3><p>用mysqlconnector<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mysql-connector</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/30/lambda学习/" rel="next" title="lambda学习">
+                <i class="fa fa-chevron-left"></i> lambda学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="xwmm">
+            
+              <p class="site-author-name" itemprop="name">xwmm</p>
+              <p class="site-description motion-element" itemprop="description">快写一行代码雅俗共赏</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xwmm" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/xwmdream" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xwmdream@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python爬虫入门"><span class="nav-number">1.</span> <span class="nav-text">python爬虫入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Requests异常"><span class="nav-number">1.1.</span> <span class="nav-text">Requests异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests的爬虫基本框架"><span class="nav-number">1.2.</span> <span class="nav-text">requests的爬虫基本框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests方法详解"><span class="nav-number">1.3.</span> <span class="nav-text">requests方法详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python读取ini文件"><span class="nav-number">2.</span> <span class="nav-text">python读取ini文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python发送邮件-大全汇总"><span class="nav-number">3.</span> <span class="nav-text">python发送邮件 大全汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#发送只有文字的邮件"><span class="nav-number">3.1.</span> <span class="nav-text">发送只有文字的邮件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送网页邮件"><span class="nav-number">3.2.</span> <span class="nav-text">发送网页邮件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送带有附件的邮件"><span class="nav-number">3.3.</span> <span class="nav-text">发送带有附件的邮件:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送网页中带有图片的邮件"><span class="nav-number">3.4.</span> <span class="nav-text">发送网页中带有图片的邮件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">3.5.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网页和python的握手"><span class="nav-number">4.</span> <span class="nav-text">网页和python的握手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python使用tcp通讯"><span class="nav-number">5.</span> <span class="nav-text">python使用tcp通讯</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#接收端"><span class="nav-number">5.1.</span> <span class="nav-text">接收端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送端"><span class="nav-number">5.2.</span> <span class="nav-text">发送端:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python正则表达式"><span class="nav-number">6.</span> <span class="nav-text">python正则表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux下搭建安装python3"><span class="nav-number">7.</span> <span class="nav-text">linux下搭建安装python3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面：一定要先安装openssl！！！"><span class="nav-number">7.1.</span> <span class="nav-text">写在前面：一定要先安装openssl！！！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载新版本"><span class="nav-number">7.2.</span> <span class="nav-text">下载新版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译-amp-安装"><span class="nav-number">7.3.</span> <span class="nav-text">编译 &amp; 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置-3-x-为默认版本"><span class="nav-number">7.4.</span> <span class="nav-text">设置 3.x 为默认版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-yum"><span class="nav-number">7.5.</span> <span class="nav-text">配置 yum</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python主要第三方模块和类-持续更新"><span class="nav-number">8.</span> <span class="nav-text">Python主要第三方模块和类(持续更新)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python的内置函数-持续更新"><span class="nav-number">9.</span> <span class="nav-text">python的内置函数(持续更新)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#print函数"><span class="nav-number">9.1.</span> <span class="nav-text">print函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count"><span class="nav-number">9.2.</span> <span class="nav-text">count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串相关函数str"><span class="nav-number">9.3.</span> <span class="nav-text">字符串相关函数str</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map函数"><span class="nav-number">9.4.</span> <span class="nav-text">map函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isinstance"><span class="nav-number">9.5.</span> <span class="nav-text">isinstance()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python汇总-持续更新"><span class="nav-number">10.</span> <span class="nav-text">python汇总(持续更新)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成素数列"><span class="nav-number">10.1.</span> <span class="nav-text">生成素数列:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列解包-穿插print的用法"><span class="nav-number">10.2.</span> <span class="nav-text">序列解包(穿插print的用法):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数参数的解包"><span class="nav-number">10.3.</span> <span class="nav-text">函数参数的解包:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python3链接mysql数据库"><span class="nav-number">10.4.</span> <span class="nav-text">python3链接mysql数据库</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 1998 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xwmm</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("qk1gLKS0AJOBMCXNfEzeI1It-gzGzoHsz", "frKNCpELR6p7InuJcNh9XQD3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
