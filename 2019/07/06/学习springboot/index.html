@@ -77,18 +77,18 @@
 
 
 
-<meta name="description" content="手动装配spring模式注解装配 定义：一种用于生命在应用中扮演“组件”角色的注解 举例：@Component,@Service,@Configuration等 装配: &amp;lt;context:component-scan&amp;gt;或者@ComponentScan   A stereotype annotation is an annotation that is used to declare t">
+<meta name="description" content="手动装配spring模式注解装配 定义：一种用于生命在应用中扮演”组件”角色的注解 举例：@Component,@Service,@Configuration等 装配: &amp;lt;context:component-scan&amp;gt;或者@ComponentScan   A stereotype annotation is an annotation that is used to declare t">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习springboot">
 <meta property="og:url" content="https://xwmm.github.io/2019/07/06/学习springboot/index.html">
 <meta property="og:site_name" content="菜鸟小码农">
-<meta property="og:description" content="手动装配spring模式注解装配 定义：一种用于生命在应用中扮演“组件”角色的注解 举例：@Component,@Service,@Configuration等 装配: &amp;lt;context:component-scan&amp;gt;或者@ComponentScan   A stereotype annotation is an annotation that is used to declare t">
+<meta property="og:description" content="手动装配spring模式注解装配 定义：一种用于生命在应用中扮演”组件”角色的注解 举例：@Component,@Service,@Configuration等 装配: &amp;lt;context:component-scan&amp;gt;或者@ComponentScan   A stereotype annotation is an annotation that is used to declare t">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-05T10:26:50.258Z">
+<meta property="og:updated_time" content="2019-08-19T01:50:44.325Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习springboot">
-<meta name="twitter:description" content="手动装配spring模式注解装配 定义：一种用于生命在应用中扮演“组件”角色的注解 举例：@Component,@Service,@Configuration等 装配: &amp;lt;context:component-scan&amp;gt;或者@ComponentScan   A stereotype annotation is an annotation that is used to declare t">
+<meta name="twitter:description" content="手动装配spring模式注解装配 定义：一种用于生命在应用中扮演”组件”角色的注解 举例：@Component,@Service,@Configuration等 装配: &amp;lt;context:component-scan&amp;gt;或者@ComponentScan   A stereotype annotation is an annotation that is used to declare t">
 
 
 
@@ -372,14 +372,14 @@
 
       
         <h2 id="手动装配"><a href="#手动装配" class="headerlink" title="手动装配"></a>手动装配</h2><h3 id="spring模式注解装配"><a href="#spring模式注解装配" class="headerlink" title="spring模式注解装配"></a>spring模式注解装配</h3><ul>
-<li>定义：一种用于生命在应用中扮演“组件”角色的注解</li>
+<li>定义：一种用于生命在应用中扮演”组件”角色的注解</li>
 <li>举例：@Component,@Service,@Configuration等</li>
 <li>装配: &lt;context:component-scan&gt;或者@ComponentScan</li>
 </ul>
 <blockquote>
 <p>A stereotype annotation is an annotation that is used to declare the role that a component plays within the application. For example, the @Repository annotation in the Spring Framework is a marker for any class that fulfills the role or stereotype of a repository (also known as Data Access Object or DAO).<br>@Component is a generic stereotype for any Spring-managed component. Any component annotated with @Component is a candidate for component scanning. Similarly, any component annotated with an annotation that is itself meta-annotated with @Component is also a candidate for component scanning. For example, @Service is meta-annotated with @Component .</p>
 </blockquote>
-<p>模式注解是一种用于声明在应用中扮演“组件”角色的注解。如 Spring Framework 中的 @Repository 标注在任何类上 ，用于扮演仓储角色的模式注解。<br>@Component 作为一种由 Spring 容器托管的通用模式组件，任何被 @Component 标准的组件均为组件扫描的候选对象。类似地，凡是被 @Component 元标注（meta-annotated）的注解，如 @Service ，当任何组件标注它时，也被视作组件扫描的候选对象</p>
+<p>模式注解是一种用于声明在应用中扮演”组件”角色的注解。如 Spring Framework 中的 @Repository 标注在任何类上 ，用于扮演仓储角色的模式注解。<br>@Component 作为一种由 Spring 容器托管的通用模式组件，任何被 @Component 标准的组件均为组件扫描的候选对象。类似地，凡是被 @Component 元标注（meta-annotated）的注解，如 @Service ，当任何组件标注它时，也被视作组件扫描的候选对象</p>
 <table>
 <thead>
 <tr>
@@ -417,8 +417,8 @@
 </tbody>
 </table>
 <h4 id="装配方式"><a href="#装配方式" class="headerlink" title="装配方式"></a>装配方式</h4><ul>
-<li><p>&lt;context:component-scan&gt; 方式</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/springcontext.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 激活注解驱动特性 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:annotation-config</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 找寻被 @Component 或者其派生 Annotation 标记的类（Class），将它们注册为 Spring Bean --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"cn.xwmdream.dive.in.spring.boot"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li><p>&lt;context:component-scan&gt;方式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring/context.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 激活注解驱动特性 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:annotation-config</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 找寻被 @Component 或者其派生 Annotation 标记的类（Class），将它们注册为 Spring Bean --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"cn.xwmdream.dive.in.spring.boot"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>@ComponentScan 方式</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ComponentScan</span>(basePackages = <span class="string">"cn.xwmdream.dive.in.spring.boot"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringConfiguration</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -439,7 +439,7 @@
 <li>距离：@EnableWebMvc,@EnableAutoConfiguration等</li>
 <li>实现：注解方式，编程方式</li>
 </ul>
-<p>Spring Framework 3.1 开始支持”@Enable 模块驱动”。所谓“模块”是指具备相同领域的功能组件集合， 组合所形成一个独立的单元。比如 Web MVC模块、AspectJ代理模块、Caching（缓存）模块、JMX（Java 管 理扩展）模块、Async（异步处理）模块等。</p>
+<p>Spring Framework 3.1 开始支持”@Enable 模块驱动”。所谓”模块”是指具备相同领域的功能组件集合， 组合所形成一个独立的单元。比如 Web MVC模块、AspectJ代理模块、Caching（缓存）模块、JMX（Java 管 理扩展）模块、Async（异步处理）模块等。</p>
 <h4 id="Enable注解模块举例"><a href="#Enable注解模块举例" class="headerlink" title="@Enable注解模块举例"></a>@Enable注解模块举例</h4><table>
 <thead>
 <tr>
@@ -726,7 +726,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -739,7 +739,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
