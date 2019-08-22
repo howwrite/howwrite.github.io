@@ -85,7 +85,7 @@
 <meta property="og:site_name" content="菜鸟小码农">
 <meta property="og:description" content="新建用户并禁用root远程登陆 创建新用户1useradd newname   并为新用户创建密码1passwd newname  禁用root登陆打开/etc/ssh/sshd_config找到1#PermitRootLogin yes   把前面注释去掉，yes改成no1PermitRootLogin no 重启 连接wifi：1.先启动NetworkManager：启动：1systemctl">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-22T23:02:49.497Z">
+<meta property="og:updated_time" content="2019-08-22T01:38:40.865Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos7最小安装版安装完操作">
 <meta name="twitter:description" content="新建用户并禁用root远程登陆 创建新用户1useradd newname   并为新用户创建密码1passwd newname  禁用root登陆打开/etc/ssh/sshd_config找到1#PermitRootLogin yes   把前面注释去掉，yes改成no1PermitRootLogin no 重启 连接wifi：1.先启动NetworkManager：启动：1systemctl">
@@ -436,7 +436,7 @@
 <p>改为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python2.7</span></span><br></pre></td></tr></table></figure></p>
 <p>保存退出即可。</p>
 <h2 id="安装mysql数据库"><a href="#安装mysql数据库" class="headerlink" title="安装mysql数据库"></a>安装mysql数据库</h2><ol>
-<li>先下载对应的rpm文件，<a href="https://mirrors.tuna.tsinghua.edu.cn/mysql/yum/mysql57-community-el7/" target="_blank" rel="noopener">清华大学镜像站</a>，我下载的是mysql57-community-release-el7-10.noarch.rpm，是mysql5.7的社区版本</li>
+<li>先下载对应的rpm文件，<a href="https://mirrors.tuna.tsinghua.edu.cn/mysql/yum/mysql57-community-el7/" target="_blank" rel="noopener">清华大学镜像站</a>，我下载的是mysql57-community-release-el7-10.noarch.rpm，是mysql5.7的社区版本，不知为何清华大学镜像站没有了，移步<a href="http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm" target="_blank" rel="noopener">官网下载</a></li>
 <li><p>把上面的文件放到centos里，执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh mysql57-community-release-el7-10.noarch.rpm</span><br></pre></td></tr></table></figure>
 </li>
@@ -444,8 +444,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mysql-server -y</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>修改配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#mysql服务</span></span><br><span class="line">[mysqld]</span><br><span class="line">character-set-client-handshake = FALSE</span><br><span class="line">character-set-server = utf8mb4</span><br><span class="line">collation-server = utf8mb4_unicode_ci</span><br><span class="line">init_connect=<span class="string">'SET NAMES utf8mb4'</span></span><br><span class="line"><span class="comment">#禁用密码强度检测插件</span></span><br><span class="line">validate_password=off</span><br><span class="line"><span class="comment">#mysql字符集</span></span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysql.server]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysql_safe]</span><br><span class="line">default-character-set=utf8</span><br><span class="line"><span class="comment">#客户端</span></span><br><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<ul>
+<li>配置到my.cnf，此文件一般会放在/etc/my.cnf，/etc/mysql/my.cnf，或者/usr/my.cnf<br>可以使用find / -name my.cnf查找具体位置<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#mysql服务</span></span><br><span class="line">[mysqld]</span><br><span class="line">character-set-client-handshake = FALSE</span><br><span class="line">character-set-server = utf8mb4</span><br><span class="line">collation-server = utf8mb4_unicode_ci</span><br><span class="line">init_connect=<span class="string">'SET NAMES utf8mb4'</span></span><br><span class="line"><span class="comment">#禁用密码强度检测插件</span></span><br><span class="line">validate_password=off</span><br><span class="line"><span class="comment">#mysql字符集</span></span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysql.server]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysql_safe]</span><br><span class="line">default-character-set=utf8</span><br><span class="line"><span class="comment">#客户端</span></span><br><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol start="5">
 <li><p>打开mysql服务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
 </li>
@@ -519,6 +524,9 @@
 <li><p>操作nginx<a href="http://www.cnblogs.com/codingcloud/p/5095066.html" target="_blank" rel="noopener">参考</a></p>
 </li>
 </ol>
+<ul>
+<li>运行的话到安装目录的sbin目录下，执行./nginx运行，或者相应的命令</li>
+</ul>
 
       
     </div>
