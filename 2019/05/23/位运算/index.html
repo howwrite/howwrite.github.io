@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="c语言,">
 
 
 
@@ -77,17 +77,18 @@
 
 
 
-<meta name="description" content="快写一行代码雅俗共赏">
-<meta name="keywords" content="android,Java,编程,三十九">
-<meta property="og:type" content="website">
-<meta property="og:title" content="菜鸟小码农">
-<meta property="og:url" content="https://xwmm.github.io/archives/index.html">
+<meta name="description" content="二进制计算机都是用的二级制运算的，别问为啥，问就是计算机只会01计算，算不到2具体二进制运算等一些操作可以百度一下，或者看一下这个，（我百度搜的） 比如21的二进制是10101 二进制运算 二进制运算和普通加减乘除运算差不多，都是几个数一顿操作最后得出另一个数，比如1+0=1，比如1&amp;amp;0=0  与运算（逻辑乘法） 与(&amp;amp;)运算：都1为1，否则为0  比如5&amp;amp;45:1014:">
+<meta name="keywords" content="c语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="位运算">
+<meta property="og:url" content="https://xwmm.github.io/2019/05/23/位运算/index.html">
 <meta property="og:site_name" content="菜鸟小码农">
-<meta property="og:description" content="快写一行代码雅俗共赏">
+<meta property="og:description" content="二进制计算机都是用的二级制运算的，别问为啥，问就是计算机只会01计算，算不到2具体二进制运算等一些操作可以百度一下，或者看一下这个，（我百度搜的） 比如21的二进制是10101 二进制运算 二进制运算和普通加减乘除运算差不多，都是几个数一顿操作最后得出另一个数，比如1+0=1，比如1&amp;amp;0=0  与运算（逻辑乘法） 与(&amp;amp;)运算：都1为1，否则为0  比如5&amp;amp;45:1014:">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-24T02:00:18.303Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="菜鸟小码农">
-<meta name="twitter:description" content="快写一行代码雅俗共赏">
+<meta name="twitter:title" content="位运算">
+<meta name="twitter:description" content="二进制计算机都是用的二级制运算的，别问为啥，问就是计算机只会01计算，算不到2具体二进制运算等一些操作可以百度一下，或者看一下这个，（我百度搜的） 比如21的二进制是10101 二进制运算 二进制运算和普通加减乘除运算差不多，都是几个数一顿操作最后得出另一个数，比如1+0=1，比如1&amp;amp;0=0  与运算（逻辑乘法） 与(&amp;amp;)运算：都1为1，否则为0  比如5&amp;amp;45:1014:">
 
 
 
@@ -117,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="https://xwmm.github.io/archives/">
+  <link rel="canonical" href="https://xwmm.github.io/2019/05/23/位运算/">
 
 
 
 
 
-  <title>归档 | 菜鸟小码农</title>
+  <title>位运算 | 菜鸟小码农</title>
   
 
 
@@ -152,7 +153,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -278,390 +279,209 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 43 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xwmm.github.io/2019/05/23/位运算/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xwmm">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="菜鸟小码农">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">位运算</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-23T18:02:54+08:00">
+                2019-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
+             <span id="/2019/05/23/位运算/" class="leancloud_visitors" data-flag-title="位运算">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/30/lambda学习/" itemprop="url">
-              
-                <span itemprop="name">lambda学习</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-30T13:30:09+08:00" content="2019-07-30">
-          07-30
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/22/nginx总结/" itemprop="url">
-              
-                <span itemprop="name">nginx总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-22T15:54:14+08:00" content="2019-07-22">
-          07-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/06/学习springboot/" itemprop="url">
-              
-                <span itemprop="name">学习springboot</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-06T13:03:26+08:00" content="2019-07-06">
-          07-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/23/redis安装和使用/" itemprop="url">
-              
-                <span itemprop="name">redis安装和使用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-23T10:13:27+08:00" content="2019-06-23">
-          06-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h2 id="二进制"><a href="#二进制" class="headerlink" title="二进制"></a>二进制</h2><p>计算机都是用的二级制运算的，别问为啥，问就是计算机只会01计算，算不到2<br>具体二进制运算等一些操作可以百度一下，或者<a href="https://blog.csdn.net/u014535295/article/details/80804777" target="_blank" rel="noopener">看一下这个</a>，（我百度搜的）</p>
+<p>比如21的二进制是10101</p>
+<h2 id="二进制运算"><a href="#二进制运算" class="headerlink" title="二进制运算"></a>二进制运算</h2><ul>
+<li>二进制运算和普通加减乘除运算差不多，都是几个数一顿操作最后得出另一个数，比如1+0=1，比如1&amp;0=0</li>
+</ul>
+<h3 id="与运算（逻辑乘法）"><a href="#与运算（逻辑乘法）" class="headerlink" title="与运算（逻辑乘法）"></a>与运算（逻辑乘法）</h3><ul>
+<li>与(&amp;)运算：都1为1，否则为0</li>
+</ul>
+<p>比如5&amp;4<br>5:101<br>4:100<br>=:100=4</p>
+<p>比如17&amp;21<br>11: 1011<br>21:10101<br>&amp;=:00001 =1<br>11的二进制是四位，21的二进制是五位，运算的时候后端对齐，前端补零(前面补多少个都可以，反正计算机也不会站起来打你)，所以11相当于01011</p>
+<h3 id="或（逻辑加法）"><a href="#或（逻辑加法）" class="headerlink" title="或（逻辑加法）"></a>或（逻辑加法）</h3><ul>
+<li>或(|)运算:都0为0，否则为1</li>
+</ul>
+<p>比如5&amp;4<br>5:101<br>4:100<br>=:101=5</p>
+<p>比如17&amp;21<br>11:01011<br>21:10101<br>|=:11111 =31</p>
+<h3 id="非运算（逻辑否定）"><a href="#非运算（逻辑否定）" class="headerlink" title="非运算（逻辑否定）"></a>非运算（逻辑否定）</h3><ul>
+<li>非(~)运算:0为1，1为0</li>
+</ul>
+<p>比如~5<br>5:101<br>~:<font color="red">010 =2</font></p>
+<p>但是你们在编译器上打出来绝对不会是2，实际上等于-6，因为还涉及到负数形式(<a href="https://www.baidu.com/s?ie=UTF-8&amp;wd=%E8%B4%9F%E6%95%B0%E4%BA%8C%E8%BF%9B%E5%88%B6" target="_blank" rel="noopener">负数相关操作</a>)</p>
+<ul>
+<li>此样例只是说明非运算是使0成1，1成0，不要被误导</li>
+</ul>
+<h3 id="lt-lt-左移运算"><a href="#lt-lt-左移运算" class="headerlink" title="&lt;&lt;左移运算"></a>&lt;&lt;左移运算</h3><ul>
+<li>左移运算就是向左移动</li>
+</ul>
+<p>21的二进制是10101<br>左移就是将他二进制整个向左移动<br>21&lt;&lt;1就是21的二进制10101向左移动1位:101010 = 42<br>42&lt;&lt;1就是42的二进制101010向左移动1位:1010100 = 84<br>21&lt;&lt;2就是21的二进制10101向左移动2位:1010100 = 84</p>
+<ul>
+<li>左移运算就是将整个二进制向左移动几位，右边增加的位置补0即可</li>
+<li>左移运算其实就是乘以2，所以在写代码的时候如果有乘以2，4，8…的情况可以用左移1，2，3…位来完成，因为位运算的执行效率比乘法高</li>
+</ul>
+<h3 id="gt-gt-右移运算"><a href="#gt-gt-右移运算" class="headerlink" title="&gt;&gt;右移运算"></a>&gt;&gt;右移运算</h3><ul>
+<li>右移运算就是向右移动</li>
+</ul>
+<p>21的二进制是10101<br>右移就是将他二进制整个向右移动<br>21&gt;&gt;1就是21的二进制10101向右移动1位:1010 = 10<br>10&gt;&gt;1就是42的二进制1010向右移动1位:101 = 5<br>21&gt;&gt;2就是21的二进制10101向右移动2位:101 = 5</p>
+<ul>
+<li>右移运算就是将整个二进制向右移动几位，减少的位置就减少了，相当于从后面砍了几位</li>
+<li>右移运算相当于除以2，所以…..</li>
+</ul>
+<h3 id="异或操作"><a href="#异或操作" class="headerlink" title="^异或操作"></a>^异或操作</h3><ul>
+<li>异或操作：相同为0，不同为1<br>21:10101<br>12:01100<br>=:11001 = 25</li>
+</ul>
+<h2 id="组合操作"><a href="#组合操作" class="headerlink" title="组合操作"></a>组合操作</h2><h3 id="判断eof"><a href="#判断eof" class="headerlink" title="判断eof"></a>判断eof</h3><p>c语言编程中多行输入通常用scanf(…)!=EOF来判定<br>其实在c语言源码中EOF的值是-1，所以上面那句话等同于scanf(…)!=-1<br>而-1的二进制是32个1，具体看负数运算，所以32个1取反就是32个0，等于0<br>所以while(scanf(…)!=EOF)可以改写成while(~scanf(…)!=0)，即while(~scanf(…)){…}</p>
+<h3 id="将某一位设置成某个数"><a href="#将某一位设置成某个数" class="headerlink" title="将某一位设置成某个数"></a>将某一位设置成某个数</h3><h4 id="将n的第i-从零开始-位设置为1"><a href="#将n的第i-从零开始-位设置为1" class="headerlink" title="将n的第i(从零开始)位设置为1"></a>将n的第i(从零开始)位设置为1</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">set1</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    n=n|(<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1&lt;&lt; i是让第i位为1，然后1或上任何数都是1，其他位上都是0，0或上任何数都让原数字保持不变</p>
+<h4 id="将n的第i-从零开始-位设置为0"><a href="#将n的第i-从零开始-位设置为0" class="headerlink" title="将n的第i(从零开始)位设置为0"></a>将n的第i(从零开始)位设置为0</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">set0</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    n =n&amp;(~(<span class="number">1</span>&lt;&lt;i));</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>~ (1&lt;&lt; i)操作让第i位为0，其他位为1，1与任何数都是任何数，0与任何数都是0</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">set1</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    n=n|(<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">set0</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    n =n&amp;(~(<span class="number">1</span>&lt;&lt;i));</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">5</span>;<span class="comment">//二进制是101</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,set1(a,<span class="number">1</span>));<span class="comment">//将第一位设置为1，即111为7</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,set1(a,<span class="number">2</span>));<span class="comment">//将第2位设置为1，因为第二位本来就是1，所以没变，即101为5</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,set0(a,<span class="number">0</span>));<span class="comment">//将第0位设置为0，即100为4</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,set0(a,<span class="number">1</span>));<span class="comment">//将第一位设置为0，没变，即101为5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/03/jvm学习/" itemprop="url">
-              
-                <span itemprop="name">jvm学习(持续更新)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-03T08:49:33+08:00" content="2019-06-03">
-          06-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/23/位运算/" itemprop="url">
-              
-                <span itemprop="name">位运算</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-23T18:02:54+08:00" content="2019-05-23">
-          05-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/26/mysql的zip安装方法/" itemprop="url">
-              
-                <span itemprop="name">mysql的zip安装方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-26T12:38:54+08:00" content="2019-04-26">
-          04-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/19/ajax以及跨域/" itemprop="url">
-              
-                <span itemprop="name">ajax以及跨域</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-19T01:04:51+08:00" content="2019-04-19">
-          04-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/19/sublime text3的配置代码/" itemprop="url">
-              
-                <span itemprop="name">sublime text3的配置代码</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-19T01:14:30+08:00" content="2019-03-19">
-          03-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/11/springboot入门/" itemprop="url">
-              
-                <span itemprop="name">springboot入门</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-11T22:43:33+08:00" content="2019-03-11">
-          03-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c语言/" rel="tag"># c语言</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/26/mysql的zip安装方法/" rel="next" title="mysql的zip安装方法">
+                <i class="fa fa-chevron-left"></i> mysql的zip安装方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/03/jvm学习/" rel="prev" title="jvm学习(持续更新)">
+                jvm学习(持续更新) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -669,6 +489,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -689,8 +513,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -765,6 +598,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二进制"><span class="nav-number">1.</span> <span class="nav-text">二进制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二进制运算"><span class="nav-number">2.</span> <span class="nav-text">二进制运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#与运算（逻辑乘法）"><span class="nav-number">2.1.</span> <span class="nav-text">与运算（逻辑乘法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#或（逻辑加法）"><span class="nav-number">2.2.</span> <span class="nav-text">或（逻辑加法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非运算（逻辑否定）"><span class="nav-number">2.3.</span> <span class="nav-text">非运算（逻辑否定）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-lt-左移运算"><span class="nav-number">2.4.</span> <span class="nav-text">&lt;&lt;左移运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gt-gt-右移运算"><span class="nav-number">2.5.</span> <span class="nav-text">&gt;&gt;右移运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异或操作"><span class="nav-number">2.6.</span> <span class="nav-text">^异或操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合操作"><span class="nav-number">3.</span> <span class="nav-text">组合操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判断eof"><span class="nav-number">3.1.</span> <span class="nav-text">判断eof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将某一位设置成某个数"><span class="nav-number">3.2.</span> <span class="nav-text">将某一位设置成某个数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#将n的第i-从零开始-位设置为1"><span class="nav-number">3.2.1.</span> <span class="nav-text">将n的第i(从零开始)位设置为1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将n的第i-从零开始-位设置为0"><span class="nav-number">3.2.2.</span> <span class="nav-text">将n的第i(从零开始)位设置为0</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -911,6 +760,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
